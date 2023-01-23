@@ -46,8 +46,9 @@ Provider:
             'providers' => [
                 ...
                 MainServiceProvider::class
-    
 
+
+php artisan vendor:publish --provider=MainNamespace\\\Providers\\MainServiceProvider
 
 ------------------------------------------------------------------------
 

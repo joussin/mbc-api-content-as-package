@@ -115,6 +115,18 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/package-config.php' => config_path('mbc-api-content-config.php'),
+            ], 'config');
+
+//            $this->commands([
+//                ExportCommand::class,
+//            ]);
+        }
+
+
         $router = RouterFacade::initCollections();
     }
 
