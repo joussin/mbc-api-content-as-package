@@ -60,7 +60,7 @@ class MainServiceProvider extends ServiceProvider
 
 
         $this->mergeConfigFrom(
-            base_path('laravel-package/config/package-config.php'),
+            __DIR__ . './../config/package-config.php',
             $this->package_name
         );
 
