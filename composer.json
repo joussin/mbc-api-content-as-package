@@ -38,7 +38,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MainNamespace\\Providers\\MainServiceProvider"
+                "MbcApiContent\\Providers\\MainServiceProvider"
             ]
         }
     },
@@ -49,7 +49,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "MainNamespace\\Tests\\": "tests"
+            "MbcApiContent\\Tests\\": "tests"
         }
     },
     "minimum-stability" : "dev",
