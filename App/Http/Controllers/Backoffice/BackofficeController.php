@@ -1,11 +1,11 @@
 <?php
 
-namespace MainNamespace\App\Http\Controllers\Backoffice;
+namespace MbcApiContent\App\Http\Controllers\Backoffice;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use MainNamespace\App\Facades\RouterFacade;
-use MainNamespace\App\Services\ApiService;
+use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Services\ApiService;
 use App\Http\Controllers\Controller;
 
 class BackofficeController extends Controller

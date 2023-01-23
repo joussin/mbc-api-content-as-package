@@ -1,8 +1,8 @@
 <?php
 
-namespace MainNamespace\App\Entity\Traits;
+namespace MbcApiContent\App\Entity\Traits;
 
-use MainNamespace\App\Models\Route as RouteModel;
+use MbcApiContent\App\Models\Route as RouteModel;
 
 trait RouteEntityTrait
 {

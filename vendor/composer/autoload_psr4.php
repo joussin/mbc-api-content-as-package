@@ -39,7 +39,7 @@ return array(
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'MbcApiContent\\' => array($baseDir . '/'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
-    'MainNamespace\\Tests\\' => array($baseDir . '/tests'),
+    'MbcApiContent\\Tests\\' => array($baseDir . '/tests'),
     'Illuminate\\View\\' => array($vendorDir . '/illuminate/view'),
     'Illuminate\\Support\\' => array($vendorDir . '/illuminate/collections', $vendorDir . '/illuminate/conditionable', $vendorDir . '/illuminate/macroable', $vendorDir . '/illuminate/support'),
     'Illuminate\\Session\\' => array($vendorDir . '/illuminate/session'),

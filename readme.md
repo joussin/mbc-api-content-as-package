@@ -38,7 +38,7 @@ You can install the package via composer:
 After the package is installed, you can optionally publish the config file, and public api doc dir
 
 ```bash
-php artisan vendor:publish --provider=MainNamespace\\\Providers\\MainServiceProvider
+php artisan vendor:publish --provider=MbcApiContent\\\Providers\\MainServiceProvider
 ```
 
 ## Configuration
@@ -64,7 +64,7 @@ Boot app : migrate db before
 
 [//]: # (use Illuminate\Support\ServiceProvider;)
 
-[//]: # (    use MainNamespace\App\Facades\RouterFacade;)
+[//]: # (    use MbcApiContent\App\Facades\RouterFacade;)
 
 [//]: # (    )
 [//]: # (    class AppServiceProvider extends ServiceProvider)
@@ -88,7 +88,7 @@ Boot app : migrate db before
 
 ```php
 use Illuminate\Support\ServiceProvider;
-    use MainNamespace\App\Bootstrap;
+    use MbcApiContent\App\Bootstrap;
     
     class AppServiceProvider extends ServiceProvider
     {

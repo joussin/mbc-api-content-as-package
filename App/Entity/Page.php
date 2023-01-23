@@ -1,13 +1,13 @@
 <?php
 
-namespace MainNamespace\App\Entity;
+namespace MbcApiContent\App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
-use MainNamespace\App\Entity\Interfaces\EntityInterface;
-use MainNamespace\App\Entity\Traits\HydrateEntityTrait;
-use MainNamespace\App\Entity\Traits\TemplateEntityParserTrait;
-use MainNamespace\App\Entity\Validators\ValidationRules;
-use MainNamespace\App\Models\Page as PageModel;
+use MbcApiContent\App\Entity\Interfaces\EntityInterface;
+use MbcApiContent\App\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\App\Entity\Traits\TemplateEntityParserTrait;
+use MbcApiContent\App\Entity\Validators\ValidationRules;
+use MbcApiContent\App\Models\Page as PageModel;
 
 
 class Page  implements EntityInterface

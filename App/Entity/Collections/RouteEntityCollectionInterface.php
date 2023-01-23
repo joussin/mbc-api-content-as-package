@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Entity\Collections;
+namespace MbcApiContent\App\Entity\Collections;
 
 use Illuminate\Support\Collection;
 

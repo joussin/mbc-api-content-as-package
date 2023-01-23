@@ -74,7 +74,7 @@ class ComposerStaticInita5e241f5589427777056c31fab3d091f
         array (
             'MbcApiContent\\' => 14,
             'Masterminds\\' => 12,
-            'MainNamespace\\Tests\\' => 20,
+            'MbcApiContent\\Tests\\' => 20,
         ),
         'I' => 
         array (
@@ -239,7 +239,7 @@ class ComposerStaticInita5e241f5589427777056c31fab3d091f
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
-        'MainNamespace\\Tests\\' => 
+        'MbcApiContent\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
         ),

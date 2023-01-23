@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Entity\Validators;
+namespace MbcApiContent\App\Entity\Validators;
 
 class ValidationRules
 {

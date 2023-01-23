@@ -1,12 +1,12 @@
 <?php
 
-namespace MainNamespace\App\Entity;
+namespace MbcApiContent\App\Entity;
 
 use Illuminate\Database\Eloquent\Model;
-use MainNamespace\App\Entity\Interfaces\EntityInterface;
-use MainNamespace\App\Entity\Traits\HydrateEntityTrait;
-use MainNamespace\App\Entity\Validators\ValidationRules;
-use MainNamespace\App\Models\Template as TemplateModel;
+use MbcApiContent\App\Entity\Interfaces\EntityInterface;
+use MbcApiContent\App\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\App\Entity\Validators\ValidationRules;
+use MbcApiContent\App\Models\Template as TemplateModel;
 
 
 class Template  implements EntityInterface

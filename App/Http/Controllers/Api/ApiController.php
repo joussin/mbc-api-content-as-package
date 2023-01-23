@@ -1,10 +1,10 @@
 <?php
 
-namespace MainNamespace\App\Http\Controllers\Api;
+namespace MbcApiContent\App\Http\Controllers\Api;
 
 
-use MainNamespace\App\Entity\Validators\ValidationRules;
-use MainNamespace\App\Services\ApiService;
+use MbcApiContent\App\Entity\Validators\ValidationRules;
+use MbcApiContent\App\Services\ApiService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
