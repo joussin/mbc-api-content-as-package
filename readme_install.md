@@ -119,7 +119,7 @@ Configurer les secrets dans le .env:
         DB_HOST=192.168.0.21
         DB_PORT=3094
         DB_USERNAME=root
-        DB_PASSWORD=wg2bAQhd36aJ
+        DB_PASSWORD=
 
 
 ------------------------------------------------------------------------
