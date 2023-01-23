@@ -1,0 +1,22 @@
+{
+    "name": "joussin/mbc-api-content-as-package",
+
+    "type": "package",
+    "require": {
+        "php": "^8.0.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "MainNamespace\\": "./"
+        }
+    },
+
+    "description": "base laravel project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Joussin Stéphane",
+            "email": "joussin@live.com"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+version: '3.5'
+
+services:
+
+    composer:
+        container_name: composer
+        restart: always
+        volumes:
+            - ./../../:/var/www
+        build:
+            context: .
+            dockerfile: php80.Dockerfile
+
+        entrypoint:
+            - composer
+            - dumpautoload
