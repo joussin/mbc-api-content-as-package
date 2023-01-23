@@ -126,8 +126,6 @@ class MainServiceProvider extends ServiceProvider
             ], 'public');
         }
 
-
-        $router = RouterFacade::initCollections();
     }
 
 
