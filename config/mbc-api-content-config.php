@@ -1,8 +1,23 @@
 <?php
 
 return [
-        'keys' => [
-            'value_1',
-            'value_2',
+
+    'api' => [
+        'routes' => [
+            'prefix' => 'api'
         ]
-    ];
+    ],
+    'backoffice' => [
+        'routes' => [
+            'prefix' => 'backoffice'
+        ]
+    ],
+
+    'static' => [
+        'export' => [
+            'paths' => [
+                '/'
+            ],
+        ]
+    ]
+];

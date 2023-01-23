@@ -54,97 +54,77 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-#### Configuration through code
+#### Boot app
 
-All configuration options that affect the exports contents are also exposed in the `Exporter` class. You can inject this class to modify the export settings through code.
+Boot app : migrate db before
+
+[//]: # (```php)
+
+[//]: # (use Illuminate\Support\ServiceProvider;)
+
+[//]: # (    use MainNamespace\App\Facades\RouterFacade;)
+
+[//]: # (    )
+[//]: # (    class AppServiceProvider extends ServiceProvider)
+
+[//]: # (    {)
+
+[//]: # (        public function boot&#40;&#41;)
+
+[//]: # (        {)
+
+[//]: # (        )
+[//]: # (            $router = RouterFacade::initCollections&#40;&#41;;)
+
+[//]: # ()
+[//]: # (        })
+
+[//]: # (    })
+
+[//]: # (```)
+
 
 ```php
 use Illuminate\Support\ServiceProvider;
-    use MainNamespace\App\Facades\RouterFacade;
+    use MainNamespace\App\Bootstrap;
     
     class AppServiceProvider extends ServiceProvider
     {
-        public function boot()
+        public function boot(Bootstrap $bootstrapMbcApiContent)
         {
         
-            $router = RouterFacade::initCollections();
+            $bootstrapMbcApiContent->init();
 
         }
     }
 ```
 
-
 ## Database
 
-Laravel create migration:
+migrate all:
 ``` bash
-php artisan make:migration add_page_route_relation --table --path=./laravel-package/Database/migrations/
+php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/
 ```
-
-Custom create table:
-
+migrate by filename:
 ``` bash
-php artisan  database:make  'table_name' --create
+php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213214_create_template_table.php
+php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213240_create_route_table.php
+php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213241_create_page_table.php
 ```
-
-
-Custom update table:
-
-``` bash
-php artisan  database:make  'table_name' --table
-```
-
-
-
-
-Migrate Tables:
-
-Laravel:
-``` bash
-php artisan migrate:refresh --path=./laravel-package/Database/migrations/
-php artisan migrate:refresh --path=./laravel-package/Database/migrations/2023_01_16_113911_add_page_route_relation.php
-```
-
-custom migrate all:
-``` bash
-php artisan database:migrate
-``` 
-
-custom migrate by filename:
-``` bash
-php artisan database:migrate --name=2023_01_04_213214_create_template_table.php
-php artisan database:migrate --name=2023_01_04_213241_create_page_table.php
-php artisan database:migrate --name=2023_01_04_213242_create_route_table.php
-```
-
-Seed Tables:
 
 Custom seed all tables:
 ``` bash 
 php artisan database:seeder
 ```
-
-
 Custom seed tables by filename:
-
 ``` bash
 php artisan database:seeder --seeder=PageSeeder
 php artisan database:seeder --seeder=TemplateSeeder
 php artisan database:seeder --seeder=RouteSeeder
 ```
 
-Laravel rollback:
-``` bash
-php artisan migrate:rollback
-
-php artisan migrate:rollback --step=1
-
-php artisan migrate:reset
-```
-
 
 ## Test
-
 
 Launch server
 ``` bash
@@ -152,19 +132,12 @@ php artisan serve --port=8000
 ```
 
 SWAGGER
-
 ``` bash
 http://127.0.0.1:8000/docs/api/index.html
 ```
 
-
 BACKOFFICE
-
 ``` bash
 http://127.0.0.1:8000/backoffice
-
-http://127.0.0.1:8000/backoffice/wysiwyg
-
-http://127.0.0.1:8000/backoffice/wysiwyg/inline
 ```
 
