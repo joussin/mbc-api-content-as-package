@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use MainNamespace\App\Bootstrap;
 use MainNamespace\App\Entity\Collections\LaravelRouteCollection;
 use MainNamespace\App\Entity\Collections\LaravelRouteCollectionInterface;
 use MainNamespace\App\Entity\Collections\RouteEntityCollection;
@@ -24,7 +25,7 @@ use Illuminate\Support\ServiceProvider;
 class MainServiceProvider extends ServiceProvider
 {
 
-    public string $package_name = 'api_router_content_package';
+    public string $package_name = 'mbc_api_content';
     /**
      * Get the services provided by the provider.
      *
@@ -56,7 +57,7 @@ class MainServiceProvider extends ServiceProvider
         // controller action
         //response
 
-
+        $this->app->singleton(Bootstrap::class);
 
 
         $this->mergeConfigFrom(
@@ -85,6 +86,7 @@ class MainServiceProvider extends ServiceProvider
                 collect(RouteModel::all())
             );
         });
+
 
         $this->app->singleton(RenderServiceInterface::class, function() {
             return new RenderService(
