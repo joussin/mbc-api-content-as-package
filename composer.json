@@ -1,22 +1,51 @@
 {
     "name": "joussin/mbc-api-content-as-package",
+    "description": "Create an api content manager with backoffice",
+    "license": "MIT",
+    "keywords": [
+        "spatie",
+        "laravel-export"
+    ],
+    "homepage": "https://github.com/joussin/mbc-api-content-as-package",
+    "authors": [
+        {
+            "name": "Joussin Stéphane",
+            "email": "joussin@live.com",
+            "homepage": "https://github.com/joussin/",
+            "role": "Developer"
+        }
+    ],
 
-    "type": "package",
     "require": {
         "php": "^8.0.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MainNamespace\\Providers\\MainServiceProvider"
+            ]
+        }
     },
     "autoload": {
         "psr-4": {
             "MainNamespace\\": "./"
         }
     },
-
-    "description": "base laravel project",
-    "license": "proprietary",
-    "authors": [
-        {
-            "name": "Joussin Stéphane",
-            "email": "joussin@live.com"
+    "autoload-dev": {
+        "psr-4": {
+            "MainNamespace\\Tests\\": "tests"
         }
-    ]
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true,
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
+
 }

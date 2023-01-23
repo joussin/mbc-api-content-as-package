@@ -45,57 +45,29 @@ server:
 
 ------------------------------------------------------------------------
 
-package composer:
 
-dans le composer.json du projet:
+composer.json:
 
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/joussin/laravel-package.git"
-        }
-    ],
-    
-        "require": {
-            ...
-            "joussin/laravel-package": "*"
-        },
-   
-        "require": {
-            ...
-            "joussin/laravel-package": "dev-main"
-        },
-
-    
-
-dans le composer.json du package:
-
-
-    {
-        "name": "joussin/mbc-api-content",
-        "type": "package",
-        "require": {
-            "php": "^8.0.2"
-        },
-        "autoload": {
-            "psr-4": {
-                "MainNamespace\\": "./"
-            }
-        },
-    
-        "description": "base laravel project",
-        "license": "proprietary",
-        "authors": [
-            {
-                "name": "Joussin Stéphane",
-                "email": "joussin@live.com"
-            }
-        ],
-        "minimum-stability": "dev"
-    }
+"scripts": {
+"test": "vendor/bin/phpunit",
+"test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+}
 
 
 
-
-
- 
+"require": {
+"php": "^8.0",
+"guzzlehttp/guzzle": "^7.4",
+"illuminate/console": "^8.73|^9.0",
+"illuminate/contracts": "^8.73|^9.0",
+"illuminate/http": "^8.73|^9.0",
+"illuminate/support": "^8.73|^9.0",
+"nyholm/psr7": "^1.4",
+"psr/http-message": "^1.0",
+"spatie/crawler": "^7.0.5",
+"symfony/console": "^5.3|^6.0",
+"symfony/dom-crawler": "^5.3|^6.0",
+"symfony/http-foundation": "^5.3|^6.0",
+"symfony/process": "^5.3|^6.0",
+"symfony/psr-http-message-bridge": "^2.1"
+},

@@ -2,6 +2,38 @@
 INSTALL:
 ------------------------------------------------------------------------------------------------------------------------
 
+
+SI INSTALL AVEC COMPOSER:
+
+
+dans le composer.json du projet:
+
+    "repositories": [
+    
+        {
+        "type": "vcs",
+        "url": "https://github.com/joussin/mbc-api-content-as-package.git"
+        }
+    
+    ],
+
+
+    "require": {
+     ...
+        "joussin/sdk-rest-api": "0.0.2"
+    },
+
+
+composer update
+
+php artisan vendor:publish --provider=MainNamespace\\\Providers\\MainServiceProvider
+
+
+------------------------------------------------------------------------
+
+
+SI INSTALL SANS COMPOSER:
+
 composer:
 
     "require": {
@@ -37,9 +69,11 @@ composer:
         via artisan:
             php artisan composer:dumpautoload
 
+
 ------------------------------------------------------------------------
 
-Provider: 
+Provider:
+
     ajouter le provider dans config/app.php
 
         config/app.php
@@ -48,16 +82,30 @@ Provider:
                 MainServiceProvider::class
 
 
-php artisan vendor:publish --provider=MainNamespace\\\Providers\\MainServiceProvider
 
 ------------------------------------------------------------------------
 
-Documentation Api:
+config & public dir automatiquement:
 
-    Déplacer la Documentation Swagger dans le public folder:
-         A la racine du projet:
+    php artisan vendor:publish --provider=MainNamespace\\\Providers\\MainServiceProvider
+
+OU
+
+
+    Documentation Api:
     
-            mv ./laravel-package/public/docs ./public
+        Déplacer la Documentation Swagger dans le public folder:
+             A la racine du projet:
+        
+                mv vendor/joussin/mbc-api-content-as-package/public/docs ./public
+    
+    Config :
+    
+        Déplacer la config  dans le config folder:
+         
+                vendor/joussin/mbc-api-content-as-package/config/package-config.php 
+                -> config/mbc-api-content-config.php
+    
 
 
 ------------------------------------------------------------------------

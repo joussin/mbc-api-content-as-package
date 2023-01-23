@@ -60,7 +60,7 @@ class MainServiceProvider extends ServiceProvider
 
 
         $this->mergeConfigFrom(
-            __DIR__ . './../config/package-config.php',
+            __DIR__ . './../config/mbc-api-content-config.php',
             $this->package_name
         );
 
@@ -118,12 +118,12 @@ class MainServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/package-config.php' => config_path('mbc-api-content-config.php'),
+                __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
             ], 'config');
 
-//            $this->commands([
-//                ExportCommand::class,
-//            ]);
+            $this->publishes([
+                __DIR__.'/../public/api/' => public_path('api/'),
+            ], 'public');
         }
 
 
