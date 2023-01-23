@@ -1,24 +1,24 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use MainNamespace\App\Bootstrap;
-use MainNamespace\App\Entity\Collections\LaravelRouteCollection;
-use MainNamespace\App\Entity\Collections\LaravelRouteCollectionInterface;
-use MainNamespace\App\Entity\Collections\RouteEntityCollection;
-use MainNamespace\App\Entity\Collections\RouteEntityCollectionInterface;
-use MainNamespace\App\Facades\RouterFacade;
-use MainNamespace\App\Models\Page;
-use MainNamespace\App\Models\Route as RouteModel;
-use MainNamespace\App\Models\Template;
-use MainNamespace\App\Services\RenderService;
-use MainNamespace\App\Services\RenderServiceInterface;
-use MainNamespace\App\Services\RouterService;
-use MainNamespace\App\Services\RouterServiceInterface;
+use MbcApiContent\App\Bootstrap;
+use MbcApiContent\App\Entity\Collections\LaravelRouteCollection;
+use MbcApiContent\App\Entity\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\App\Entity\Collections\RouteEntityCollection;
+use MbcApiContent\App\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Models\Page;
+use MbcApiContent\App\Models\Route as RouteModel;
+use MbcApiContent\App\Models\Template;
+use MbcApiContent\App\Services\RenderService;
+use MbcApiContent\App\Services\RenderServiceInterface;
+use MbcApiContent\App\Services\RouterService;
+use MbcApiContent\App\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 

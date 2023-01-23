@@ -1,9 +1,9 @@
 <?php
 
-namespace MainNamespace\App\Models;
+namespace MbcApiContent\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use MainNamespace\App\Models\Page;
+use MbcApiContent\App\Models\Page;
 
 
 class Route extends Model

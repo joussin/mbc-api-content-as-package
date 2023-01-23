@@ -1,9 +1,9 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Facades\Route;
-use MainNamespace\App\Http\Middleware\RouteMiddleware;
+use MbcApiContent\App\Http\Middleware\RouteMiddleware;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 

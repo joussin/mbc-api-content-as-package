@@ -1,8 +1,8 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
-use MainNamespace\Console\Commands\CommandSeeder;
+use MbcApiContent\Console\Commands\CommandSeeder;
 
 use Illuminate\Support\ServiceProvider;
 

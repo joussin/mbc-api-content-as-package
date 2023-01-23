@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\Database\Seeds;
+namespace MbcApiContent\Database\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +45,7 @@ class RouteSeeder extends Seeder
             'protocol'         => 'http',
             'name'             => 'route-name-test',
             'uri'              => '/uri-test',
-            'controller_name'   => 'MainNamespace\App\Http\Controllers\Rendering\MainController',
+            'controller_name'   => 'MbcApiContent\App\Http\Controllers\Rendering\MainController',
             'controller_action' => 'any',
             'path_parameters'        => null,
             'query_parameters'       => null,

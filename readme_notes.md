@@ -16,6 +16,7 @@ installer le projet:
 
 liste des routes:
 
+php artisan route:list  
 php artisan route:list --except-vendor
 
 

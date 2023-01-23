@@ -1,9 +1,9 @@
 <?php
 
-namespace MainNamespace\App;
+namespace MbcApiContent\App;
 
-use MainNamespace\App\Facades\RouterFacade;
-use MainNamespace\App\Models\Route;
+use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
 
 

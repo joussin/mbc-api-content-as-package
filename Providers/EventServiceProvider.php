@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
