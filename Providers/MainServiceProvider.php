@@ -61,7 +61,7 @@ class MainServiceProvider extends ServiceProvider
 
 
         $this->mergeConfigFrom(
-            __DIR__ . './../config/mbc-api-content-config.php',
+            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,
             $this->package_name
         );
 
