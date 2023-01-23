@@ -26,6 +26,9 @@ You can install the package via composer:
 ```bash
     "require": {
         "joussin/mbc-api-content-as-package": "0.0.2"
+        "joussin/mbc-api-content-as-package": "@dev"
+        "joussin/mbc-api-content-as-package": "dev-master"
+        "joussin/mbc-api-content-as-package": "dev-develop"
     }
 ```
 
