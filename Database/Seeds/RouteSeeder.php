@@ -45,7 +45,7 @@ class RouteSeeder extends Seeder
             'protocol'         => 'http',
             'name'             => 'route-name-test',
             'uri'              => '/uri-test',
-            'controller_name'   => 'MbcApiContent\App\Http\Controllers\Rendering\MainController',
+            'controller_name'   => 'MainController',
             'controller_action' => 'any',
             'path_parameters'        => null,
             'query_parameters'       => null,

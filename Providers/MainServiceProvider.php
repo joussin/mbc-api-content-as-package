@@ -126,11 +126,40 @@ class MainServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../public/api/' => public_path('api/'),
             ], 'public');
+
+
+            $this->generateFromJinja();
         }
 
     }
 
+    private function generateFromJinja()
+    {
+
+        $api_prefix = 'api';
+
+        $public_path = __DIR__ . './../public/api/docs/';
+
+        $file = 'openapi.json';
+
+        $file_jinja = 'openapi.json.j2';
 
 
+        $data = file_get_contents($public_path.$file_jinja);
+
+        $vars = [
+            '{{api_prefix}}' => $api_prefix,
+        ];
+
+        $data_parsed = str_replace(
+            array_keys($vars),
+            array_values($vars),
+            $data
+        );
+
+        $myfile = fopen($public_path . $file, "w") or die("Unable to open file!");
+        fwrite($myfile, $data_parsed);
+        fclose($myfile);
+    }
 
 }
