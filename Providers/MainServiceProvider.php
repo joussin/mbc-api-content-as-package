@@ -119,6 +119,10 @@ class MainServiceProvider extends ServiceProvider
     {
 
         if ($this->app->runningInConsole()) {
+
+            $this->generateFromJinja();
+
+
             $this->publishes([
                 __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
             ], 'config');
@@ -126,9 +130,6 @@ class MainServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../public/api/' => public_path('api/'),
             ], 'public');
-
-
-            $this->generateFromJinja();
         }
 
     }
@@ -161,7 +162,7 @@ class MainServiceProvider extends ServiceProvider
         fwrite($myfile, $data_parsed);
         fclose($myfile);
 
-        unlink($public_path.$file_jinja);
+//        unlink($public_path.$file_jinja);
     }
 
 }
