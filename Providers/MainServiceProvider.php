@@ -136,7 +136,7 @@ class MainServiceProvider extends ServiceProvider
     private function generateFromJinja()
     {
 
-        $api_prefix = 'api';
+        $api_prefix = config('mbc_api_content')['api']['routes']['prefix'];
 
         $public_path = __DIR__ . './../public/api/docs/';
 
