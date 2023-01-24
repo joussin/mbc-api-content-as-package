@@ -1,9 +1,9 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Facades\Route;
-use MainNamespace\App\Http\Middleware\RouteMiddleware;
+use MbcApiContent\App\Http\Middleware\RouteMiddleware;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -27,6 +27,10 @@ class RouteServiceProvider extends ServiceProvider
 ////        $this->loadRoutesFrom($api);
 ////        $this->loadRoutesFrom($backoffice);
 
+
+
+
+
         $config = config('mbc_api_content');
 
         $apiPrefix = $config['api']['routes']['prefix'] ?? 'api';
@@ -41,7 +45,8 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix($backofficePrefix)
                 ->group(__DIR__.'/../'  . 'routes/backoffice.php');
         });
-
-
     }
+
+
+
 }

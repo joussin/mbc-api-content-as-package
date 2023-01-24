@@ -1,24 +1,24 @@
 <?php
 
-namespace MainNamespace\Providers;
+namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use MainNamespace\App\Bootstrap;
-use MainNamespace\App\Entity\Collections\LaravelRouteCollection;
-use MainNamespace\App\Entity\Collections\LaravelRouteCollectionInterface;
-use MainNamespace\App\Entity\Collections\RouteEntityCollection;
-use MainNamespace\App\Entity\Collections\RouteEntityCollectionInterface;
-use MainNamespace\App\Facades\RouterFacade;
-use MainNamespace\App\Models\Page;
-use MainNamespace\App\Models\Route as RouteModel;
-use MainNamespace\App\Models\Template;
-use MainNamespace\App\Services\RenderService;
-use MainNamespace\App\Services\RenderServiceInterface;
-use MainNamespace\App\Services\RouterService;
-use MainNamespace\App\Services\RouterServiceInterface;
+use MbcApiContent\App\Bootstrap;
+use MbcApiContent\App\Entity\Collections\LaravelRouteCollection;
+use MbcApiContent\App\Entity\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\App\Entity\Collections\RouteEntityCollection;
+use MbcApiContent\App\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Models\Page;
+use MbcApiContent\App\Models\Route as RouteModel;
+use MbcApiContent\App\Models\Template;
+use MbcApiContent\App\Services\RenderService;
+use MbcApiContent\App\Services\RenderServiceInterface;
+use MbcApiContent\App\Services\RouterService;
+use MbcApiContent\App\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -61,7 +61,7 @@ class MainServiceProvider extends ServiceProvider
 
 
         $this->mergeConfigFrom(
-            __DIR__ . './../config/mbc-api-content-config.php',
+            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,
             $this->package_name
         );
 
@@ -119,6 +119,10 @@ class MainServiceProvider extends ServiceProvider
     {
 
         if ($this->app->runningInConsole()) {
+
+            $this->generateFromJinja();
+
+
             $this->publishes([
                 __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
             ], 'config');
@@ -130,7 +134,35 @@ class MainServiceProvider extends ServiceProvider
 
     }
 
+    private function generateFromJinja()
+    {
+
+        $api_prefix = config('mbc_api_content')['api']['routes']['prefix'];
+
+        $public_path = __DIR__ . '/./../public/api/docs/';
+
+        $file = 'openapi.json';
+
+        $file_jinja = 'openapi.json.j2';
 
 
+        $data = file_get_contents($public_path.$file_jinja);
+
+        $vars = [
+            '{{api_prefix}}' => $api_prefix,
+        ];
+
+        $data_parsed = str_replace(
+            array_keys($vars),
+            array_values($vars),
+            $data
+        );
+
+        $myfile = fopen($public_path . $file, "w") or die("Unable to open file!");
+        fwrite($myfile, $data_parsed);
+        fclose($myfile);
+
+      //  unlink($public_path.$file_jinja);
+    }
 
 }

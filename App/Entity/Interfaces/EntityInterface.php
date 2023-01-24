@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Entity\Interfaces;
+namespace MbcApiContent\App\Entity\Interfaces;
 
 use Illuminate\Database\Eloquent\Model;
 

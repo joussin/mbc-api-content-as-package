@@ -1,9 +1,9 @@
 <?php
 
-namespace MainNamespace\App\Entity\Traits;
+namespace MbcApiContent\App\Entity\Traits;
 
 use Illuminate\Support\Str;
-use function MainNamespace\App\Entity\str_contains;
+use function MbcApiContent\App\Entity\str_contains;
 
 trait RouteEntityValidatorTrait
 {

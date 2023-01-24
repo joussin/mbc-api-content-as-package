@@ -17,7 +17,17 @@
     ],
 
     "require": {
-        "php": "^8.0.2"
+        "php": "^8.0.2",
+        "illuminate/console": "^8.73|^9.0",
+        "illuminate/contracts": "^8.73|^9.0",
+        "illuminate/http": "^8.73|^9.0",
+        "illuminate/support": "^8.73|^9.0",
+        "psr/http-message": "^1.0",
+        "symfony/console": "^5.3|^6.0",
+        "symfony/dom-crawler": "^5.3|^6.0",
+        "symfony/http-foundation": "^5.3|^6.0",
+        "symfony/process": "^5.3|^6.0",
+        "symfony/psr-http-message-bridge": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
@@ -28,18 +38,18 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MainNamespace\\Providers\\MainServiceProvider"
+                "MbcApiContent\\Providers\\MainServiceProvider"
             ]
         }
     },
     "autoload": {
         "psr-4": {
-            "MainNamespace\\": "./"
+            "MbcApiContent\\": "./"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MainNamespace\\Tests\\": "tests"
+            "MbcApiContent\\Tests\\": "tests"
         }
     },
     "minimum-stability" : "dev",

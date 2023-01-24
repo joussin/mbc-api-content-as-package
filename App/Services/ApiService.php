@@ -1,10 +1,10 @@
 <?php
 
-namespace MainNamespace\App\Services;
+namespace MbcApiContent\App\Services;
 
-use MainNamespace\App\Models\Page;
-use MainNamespace\App\Models\Route;
-use MainNamespace\App\Models\Template;
+use MbcApiContent\App\Models\Page;
+use MbcApiContent\App\Models\Route;
+use MbcApiContent\App\Models\Template;
 
 class ApiService implements ApiServiceInterface
 {

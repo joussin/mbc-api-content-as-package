@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\Console\Commands;
+namespace MbcApiContent\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -72,7 +72,7 @@ class CommandSeeder extends Command
             $this->info("> Seeding Tables...");
 
             Artisan::call("db:seed", [
-                '--class'=> 'MainNamespace\\Database\\Seeds\\' . $name
+                '--class'=> 'MbcApiContent\\Database\\Seeds\\' . $name
             ]);
 
         } catch (\Exception $exception) {

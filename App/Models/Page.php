@@ -1,11 +1,11 @@
 <?php
 
-namespace MainNamespace\App\Models;
+namespace MbcApiContent\App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use MainNamespace\App\Models\Route;
+use MbcApiContent\App\Models\Route;
 
 
 class Page  extends Model

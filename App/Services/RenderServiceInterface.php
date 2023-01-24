@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Services;
+namespace MbcApiContent\App\Services;
 
 
 use Illuminate\Http\Request;
@@ -11,15 +11,15 @@ use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use MainNamespace\App\Entity\Route as RouteEntity;
-use MainNamespace\App\Entity\Traits\HydrateEntityTrait;
-use MainNamespace\App\Models\Route as RouteModel;
+use MbcApiContent\App\Entity\Route as RouteEntity;
+use MbcApiContent\App\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\App\Models\Route as RouteModel;
 
-use MainNamespace\App\Entity\Page as PageEntity;
-use MainNamespace\App\Models\Page as PageModel;
+use MbcApiContent\App\Entity\Page as PageEntity;
+use MbcApiContent\App\Models\Page as PageModel;
 
-use MainNamespace\App\Entity\Template as TemplateEntity;
-use MainNamespace\App\Models\Template as TemplateModel;
+use MbcApiContent\App\Entity\Template as TemplateEntity;
+use MbcApiContent\App\Models\Template as TemplateModel;
 
 
 interface RenderServiceInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Services;
+namespace MbcApiContent\App\Services;
 
 
 interface ApiServiceInterface

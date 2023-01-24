@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\App\Entity\Traits;
+namespace MbcApiContent\App\Entity\Traits;
 
 use Illuminate\Support\Facades\Validator;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace MainNamespace\App\Entity\Traits;
+namespace MbcApiContent\App\Entity\Traits;
 
-use MainNamespace\App\Entity\Interfaces\EntityInterface;
+use MbcApiContent\App\Entity\Interfaces\EntityInterface;
 
 trait TemplateEntityParserTrait
 {

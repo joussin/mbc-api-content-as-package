@@ -1,12 +1,12 @@
 <?php
 
-namespace MainNamespace\App\Http\Controllers\Rendering;
+namespace MbcApiContent\App\Http\Controllers\Rendering;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use MainNamespace\App\Facades\RouterFacade;
-use MainNamespace\App\Http\Controllers\Rendering\Commons\Controller;
+use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Http\Controllers\Rendering\Commons\Controller;
 
 
 class MainController extends Controller

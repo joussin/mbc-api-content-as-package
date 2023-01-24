@@ -1,6 +1,6 @@
 <?php
 
-namespace MainNamespace\Database\Seeds;
+namespace MbcApiContent\Database\Seeds;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
