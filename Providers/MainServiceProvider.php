@@ -138,7 +138,7 @@ class MainServiceProvider extends ServiceProvider
 
         $api_prefix = config('mbc_api_content')['api']['routes']['prefix'];
 
-        $public_path = __DIR__ . './../public/api/docs/';
+        $public_path = __DIR__ . '/./../public/api/docs/';
 
         $file = 'openapi.json';
 
