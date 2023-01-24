@@ -4,7 +4,7 @@ return [
 
     'api' => [
         'routes' => [
-            'prefix' => 'api_v1'
+            'prefix' => 'api/v1'
         ]
     ],
     'backoffice' => [
