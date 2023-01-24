@@ -160,6 +160,8 @@ class MainServiceProvider extends ServiceProvider
         $myfile = fopen($public_path . $file, "w") or die("Unable to open file!");
         fwrite($myfile, $data_parsed);
         fclose($myfile);
+
+        unlink($public_path.$file_jinja);
     }
 
 }
