@@ -26,6 +26,14 @@ interface LaravelRouteCollectionInterface
     public function getByName($name) : \Illuminate\Routing\Route|null;
 
 
+
+    public function getRoutesUriList() : array;
+
+    public function getRoutesByUriList() : array;
+
+    public function getByUri($uri) : \Illuminate\Routing\Route|null;
+
+
     /**
      * Determine if the route collection contains a given named route.
      *
@@ -34,6 +42,7 @@ interface LaravelRouteCollectionInterface
      */
     public function hasNamedRoute(string $name) : bool;
 
+    public function hasUriRoute(string $uri) : bool;
 
     /**
      * Get routes from the collection by method.

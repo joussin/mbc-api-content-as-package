@@ -9,33 +9,33 @@ class ModelObserver
 
     public function created(ModelInterface $model)
     {
-        event(new ApiContentModelEvent($model, 'created'));
+        event(new ModelChangedEvent($model, 'created'));
     }
 
     
     public function updated(ModelInterface $model)
     {
 
-        event(new ApiContentModelEvent($model, 'updated'));
+        event(new ModelChangedEvent($model, 'updated'));
     }
  
     public function deleted(ModelInterface $model)
     {
 
-        event(new ApiContentModelEvent($model, 'deleted'));
+        event(new ModelChangedEvent($model, 'deleted'));
     }
 
    
     public function restored(ModelInterface $model)
     {
 
-        event(new ApiContentModelEvent($model, 'restored'));
+        event(new ModelChangedEvent($model, 'restored'));
     }
 
    
     public function forceDeleted(ModelInterface $model)
     {
 
-        event(new ApiContentModelEvent($model, 'forceDeleted'));
+        event(new ModelChangedEvent($model, 'forceDeleted'));
     }
 }

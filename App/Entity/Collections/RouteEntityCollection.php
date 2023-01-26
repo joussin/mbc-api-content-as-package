@@ -37,11 +37,22 @@ class RouteEntityCollection extends Collection implements RouteEntityCollectionI
         $this->routeModelsCollection = $routeModelsCollection;
         $this->laravelRouteCollection = $laravelRouteCollection;
 
+    }
 
+    /**
+     * @return Collection
+     */
+    public function getRouteModelsCollection(): Collection
+    {
+        return $this->routeModelsCollection;
+    }
 
-
-
-
+    /**
+     * @return LaravelRouteCollectionInterface
+     */
+    public function getLaravelRouteCollection(): LaravelRouteCollectionInterface
+    {
+        return $this->laravelRouteCollection;
     }
 
 

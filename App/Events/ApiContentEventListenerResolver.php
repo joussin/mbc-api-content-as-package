@@ -14,13 +14,21 @@ class ApiContentEventListenerResolver
 
             \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver->ClosureEvent()');
 
-            if($event instanceof ApiContentModelEvent)
+            if($event instanceof ModelChangedEvent)
             {
                 \Illuminate\Support\Facades\Log::info('$event instanceof ApiContentModelEvent', [
                     $event->getModel(),
                     $event->getAction(),
                     $event->getModelClass(),
                     $event->getCallbackMethod(),
+                ]);
+            }
+
+            if($event instanceof StaticFilesChangedEvent)
+            {
+                \Illuminate\Support\Facades\Log::info('$event instanceof StaticFilesChangedEvent', [
+                    $event->getFilename(),
+                    $event->getAction()
                 ]);
             }
 

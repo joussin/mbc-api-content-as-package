@@ -4,11 +4,14 @@ namespace MbcApiContent\App;
 
 use MbcApiContent\App\Events\ApiContentEventInterface;
 use MbcApiContent\App\Events\ApiContentEventListenerResolver;
-use MbcApiContent\App\Events\ApiContentModelEvent;
+use MbcApiContent\App\Events\ModelChangedEvent;
+use MbcApiContent\App\Events\ModelObserver;
 use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Event;
+use MbcApiContent\App\Models\Template;
 
 class Bootstrap
 {
@@ -23,6 +26,7 @@ class Bootstrap
     public function init()
     {
         $this->initRouter();
+        $this->initModelObserver();
         $this->initClosureEvent();
     }
 
@@ -37,6 +41,13 @@ class Bootstrap
         }
     }
 
+
+    public function initModelObserver(): void
+    {
+        Page::observe(ModelObserver::class);
+        Route::observe(ModelObserver::class);
+        Template::observe(ModelObserver::class);
+    }
 
     public function initClosureEvent(): void
     {

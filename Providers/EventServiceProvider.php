@@ -3,10 +3,7 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use MbcApiContent\App\Events\ModelObserver;
-use MbcApiContent\App\Models\Page;
-use MbcApiContent\App\Models\Route;
-use MbcApiContent\App\Models\Template;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,9 +20,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Page::observe(ModelObserver::class);
-        Route::observe(ModelObserver::class);
-        Template::observe(ModelObserver::class);
     }
 
     /**

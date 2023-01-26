@@ -4,7 +4,7 @@ namespace MbcApiContent\App\Events;
 
 use MbcApiContent\App\Models\ModelInterface;
 
-class ApiContentModelEvent extends ApiContentEvent
+class ModelChangedEvent extends ApiContentEvent
 {
 
     protected ModelInterface $model;
