@@ -142,6 +142,8 @@ class MainServiceProvider extends ServiceProvider
                 __DIR__.'/../public/api/' => public_path('api/'),
             ], 'public');
 
+            unlink(public_path('api/docs/') . 'openapi.json' . '.j2');
+
             $this->publishes([
                 __DIR__.'/../resources/views/api_content/' => resource_path('views/api_content/'),
             ], 'views');
@@ -183,6 +185,5 @@ class MainServiceProvider extends ServiceProvider
         fwrite($myfile, $data_parsed);
         fclose($myfile);
 
-        //  unlink($public_path.$file_jinja);
     }
 }
