@@ -15,7 +15,14 @@
             "role": "Developer"
         }
     ],
+    "repositories": [
 
+        {
+            "type": "vcs",
+            "url": "https://github.com/joussin/laravel-export.git"
+        }
+
+    ],
     "require": {
         "php": "^8.0.2",
         "illuminate/console": "^8.73|^9.0",
@@ -27,7 +34,8 @@
         "symfony/dom-crawler": "^5.3|^6.0",
         "symfony/http-foundation": "^5.3|^6.0",
         "symfony/process": "^5.3|^6.0",
-        "symfony/psr-http-message-bridge": "^2.1"
+        "symfony/psr-http-message-bridge": "^2.1",
+        "joussin/laravel-export": "dev-develop"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
