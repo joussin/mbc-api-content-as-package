@@ -139,7 +139,7 @@ class MainServiceProvider extends ServiceProvider
             ], 'public');
 
             $this->publishes([
-                __DIR__.'/../resources/views/api_content/' => resources_path('views/api_content/'),
+                __DIR__.'/../resources/views/api_content/' => resource_path('views/api_content/'),
             ], 'views');
 
         }
