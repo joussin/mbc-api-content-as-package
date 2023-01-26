@@ -9,6 +9,10 @@ class EventServiceProvider extends ServiceProvider
 {
 
 
+    public function register()
+    {
+    }
+
     /**
      * Register any events for your application.
      *
@@ -26,6 +30,13 @@ class EventServiceProvider extends ServiceProvider
     public function shouldDiscoverEvents()
     {
         return true;
+    }
+
+    protected function discoverEventsWithin()
+    {
+        return [
+            $this->app->path('Listeners'),
+        ];
     }
 
 }

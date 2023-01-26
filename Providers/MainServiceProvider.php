@@ -11,6 +11,7 @@ use MbcApiContent\App\Entity\Collections\LaravelRouteCollection;
 use MbcApiContent\App\Entity\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\App\Entity\Collections\RouteEntityCollection;
 use MbcApiContent\App\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\App\Events\ApiContentEventListenerResolver;
 use MbcApiContent\App\Facades\RouterFacade;
 use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route as RouteModel;
@@ -25,17 +26,7 @@ use Illuminate\Support\ServiceProvider;
 class MainServiceProvider extends ServiceProvider
 {
 
-    public string $package_name = 'mbc_api_content';
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [];
-    }
-
+    public const PACKAGE_NAME = 'mbc_api_content';
     /**
      * Register any application services.
      *
@@ -57,17 +48,6 @@ class MainServiceProvider extends ServiceProvider
         // controller action
         //response
 
-        $this->app->singleton(Bootstrap::class);
-
-
-        $this->mergeConfigFrom(
-            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,
-            $this->package_name
-        );
-
-        $this->loadTranslationsFrom(base_path('laravel-package/resources/lang/'), $this->package_name);
-        $this->loadViewsFrom(base_path('laravel-package/resources/views/'), $this->package_name);
-
 
 
         $this->app->register(ConsoleServiceProvider::class);
@@ -75,9 +55,31 @@ class MainServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
 
+        $this->app->singleton(Bootstrap::class, function(){
+            return new Bootstrap(
+                app()->make(ApiContentEventListenerResolver::class)
+            );
+        });
+
+        $this->app->singleton(ApiContentEventListenerResolver::class);
+
+        $this->mergeConfigFrom(
+            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,
+            self::PACKAGE_NAME
+        );
+
+        $this->loadViewsFrom(base_path('resources/views/'),
+            'views'
+        );
+
+
         // RouterFacade::
         $this->app->singleton('router_service_facade_accessor', function ($app) {
             return app()->make(RouterServiceInterface::class);
+        });
+        // RenderFacade::
+        $this->app->singleton('render_service_facade_accessor', function ($app) {
+            return app()->make(RenderServiceInterface::class);
         });
 
         $this->app->singleton(RouterServiceInterface::class, function() {
@@ -117,11 +119,19 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if ($this->app->runningInConsole()) {
 
-            $this->generateFromJinja();
+            $this->install();
+        }
 
+    }
+
+
+    public function install()
+    {
+
+        try{
+            $this->generateSwaggerJsonFromJinja();
 
             $this->publishes([
                 __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
@@ -130,39 +140,48 @@ class MainServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../public/api/' => public_path('api/'),
             ], 'public');
-        }
 
+            $this->publishes([
+                __DIR__.'/../resources/views/api_content/' => resource_path('views/api_content/'),
+            ], 'views');
+
+        }
+        catch (\Exception $e)
+        {
+            throw new \Exception('Error installing ' . $e->getMessage());
+        }
     }
 
-    private function generateFromJinja()
+
+
+    private function generateSwaggerJsonFromJinja()
     {
+        $this->generateFromJinja(
+            'openapi.json',
+            'public/api/docs/',
+            [
+                'api_prefix' => config(MainServiceProvider::PACKAGE_NAME)['api']['routes']['prefix'],
+            ]
+        );
+    }
 
-        $api_prefix = config('mbc_api_content')['api']['routes']['prefix'];
 
-        $public_path = __DIR__ . '/./../public/api/docs/';
+    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [])
+    {
+        $filename_path = __DIR__ . '/./../' . $filename_path;
 
-        $file = 'openapi.json';
-
-        $file_jinja = 'openapi.json.j2';
-
-
-        $data = file_get_contents($public_path.$file_jinja);
-
-        $vars = [
-            '{{api_prefix}}' => $api_prefix,
-        ];
+        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
 
         $data_parsed = str_replace(
-            array_keys($vars),
-            array_values($vars),
-            $data
+            array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
+            array_values($datas),
+            $file_jinja_content
         );
 
-        $myfile = fopen($public_path . $file, "w") or die("Unable to open file!");
+        $myfile = fopen($filename_path . $filename, "w") or die("Unable to open file!");
         fwrite($myfile, $data_parsed);
         fclose($myfile);
 
-      //  unlink($public_path.$file_jinja);
+        //  unlink($public_path.$file_jinja);
     }
-
 }

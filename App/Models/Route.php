@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\App\Models\Page;
 
 
-class Route extends Model
+class Route  extends BaseModel
 {
 
     protected $table = 'route';

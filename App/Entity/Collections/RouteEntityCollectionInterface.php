@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 interface RouteEntityCollectionInterface
 {
 
-//    public function getRouteModelsCollection(): Collection;
-//
-//    public function getLaravelRouteCollection(): AbstractCollectionInterface;
+    public function getRouteModelsCollection(): Collection;
+
+    public function getLaravelRouteCollection(): LaravelRouteCollectionInterface;
 }

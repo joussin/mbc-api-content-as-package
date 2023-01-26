@@ -95,7 +95,7 @@ use Illuminate\Support\ServiceProvider;
         public function boot(Bootstrap $bootstrapMbcApiContent)
         {
         
-            $bootstrapMbcApiContent->init();
+            $bootstrapMbcApiContent->initRouter();
 
         }
     }
@@ -142,4 +142,5 @@ BACKOFFICE
 ``` bash
 http://127.0.0.1:8000/backoffice
 ```
+
 

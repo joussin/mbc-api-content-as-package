@@ -2,36 +2,36 @@
 
 namespace MbcApiContent\App;
 
+use MbcApiContent\App\Events\ApiContentEventInterface;
+use MbcApiContent\App\Events\ApiContentEventListenerResolver;
+use MbcApiContent\App\Events\ModelChangedEvent;
+use MbcApiContent\App\Events\ModelObserver;
 use MbcApiContent\App\Facades\RouterFacade;
+use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\Event;
+use MbcApiContent\App\Models\Template;
 
 class Bootstrap
 {
 
-    private $connection;
+    protected $apiContentEventListenerResolver;
 
-    private $excludeTables = ['migrations'];
-
-    private $includeTables = ['page', 'route', 'template'];
-
-    private $prefix = 'Tables_in_';
-
-    private $includeTablesColumns = [];
-
+    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver)
+    {
+        $this->apiContentEventListenerResolver = $apiContentEventListenerResolver;
+    }
 
     public function init()
     {
+        $this->initRouter();
+        $this->initModelObserver();
+        $this->initClosureEvent();
+    }
 
-//        $this->connection = \Illuminate\Support\Facades\Schema::connection('mysql');
-//
-//        $this->getDbConfig();
-//        $this->getDbTableConfig();
-//
-//        $message = $this->formatMessage('');
-
-
+    public function initRouter()
+    {
         try{
             $router = RouterFacade::initCollections();
         }
@@ -42,77 +42,29 @@ class Bootstrap
     }
 
 
-
-    public function formatMessage()
+    public function initModelObserver(): void
     {
-        $routeTbl = $this->connection->hasTable('route');
-        $pageTbl = $this->connection->hasTable('page');
-        $templateTbl = $this->connection->hasTable('template');
-
-        $message = 'Table found ' ;
-
-        $messageBase = "Mysql Table missing : ";
-
-        $routeTblErrorStr = (($routeTbl) ? '' : 'table route not found');
-        $pageTblErrorStr = (($pageTbl) ? '' : 'table page not found');
-        $templateTblErrorStr =  (($templateTbl) ? '' : 'table template not found');
-
-        if( !$routeTbl)
-        {
-            $message .= $messageBase .  $routeTblErrorStr ;
-        }
-
-        elseif( !$pageTbl)
-        {
-            $message .= $messageBase .  $pageTblErrorStr ;
-        }
-
-        elseif( !$templateTbl)
-        {
-            $message .= $messageBase .  $templateTblErrorStr ;
-        }
-
-        return $message;
+        Page::observe(ModelObserver::class);
+        Route::observe(ModelObserver::class);
+        Template::observe(ModelObserver::class);
     }
 
-    public function getDbConfig()
+    public function initClosureEvent(): void
     {
-        $database_name = $this->connection->getConnection()->getDatabaseName();
-
-        $tables_found = $this->connection->getAllTables();
-
-        $table_name_getter = $this->prefix . $database_name;
-
-        $tables_found_filtred = array_filter($tables_found, function($table) use($table_name_getter) {
-            return (!in_array($table->$table_name_getter, $this->excludeTables)) ? true : false;
+        Event::listen(function (ApiContentEventInterface $event) {
+            $this->apiContentEventListenerResolver->getClosureEvent()($event);
         });
-
-        $tables_found_as_list_name = array_map(function ($table) use($table_name_getter) { return $table->$table_name_getter; }, $tables_found_filtred);
-        $tables_found_as_list_name = array_values($tables_found_as_list_name);
-
-
-        $neededButNotFound = array_diff($this->includeTables, $tables_found_as_list_name);
-        $foundButNotNeed = array_diff( $tables_found_as_list_name, $this->includeTables);
-
-        return [
-            'not_found' => $neededButNotFound,
-            'not_need' => $foundButNotNeed,
-            'all_found' => $tables_found_as_list_name,
-            'all_needed' => $this->includeTables,
-        ];
     }
 
-
-    public function getDbTableConfig()
+    /**
+     * @param \Closure $closureEvent function(ApiContentEventInterface $event){};
+     * @return void
+     */
+    public function setClosureEvent(\Closure $closureEvent): void
     {
-        $includeTablesColumns = array_reduce($this->includeTables, function ($result, $table) {
-            $columns = Schema::getColumnListing($table);
-            $result[$table] = $columns;
-            return $result;
-        }, array());
-
-        return $includeTablesColumns;
+        $this->apiContentEventListenerResolver->setClosureEvent($closureEvent);
     }
+
 
 
 }

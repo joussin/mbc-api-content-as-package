@@ -3,12 +3,11 @@
 namespace MbcApiContent\App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use MbcApiContent\App\Models\Route;
 
 
-class Page  extends Model
+class Page  extends BaseModel
 {
 
     protected $table = 'page';
@@ -39,4 +38,10 @@ class Page  extends Model
     {
         return $this->belongsTo(Template::class, 'template_id', 'id');
     }
+
+    public function updatedEventCallback() : bool
+    {
+        return true;
+    }
+
 }

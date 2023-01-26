@@ -1,4 +1,20 @@
 
+## Event
+
+event(new ApiContentEvent());
+
+InstallServiceProvider
+
+ApiContentEventInterface
+
+
+// https://laravel.com/docs/9.x/packages
+
+         //https://laravel.com/docs/9.x/eloquent-resources
+
+
+
+
 GENERATE STATIC : 
 
 https://github.com/spatie/laravel-export

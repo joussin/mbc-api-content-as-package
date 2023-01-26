@@ -18,6 +18,9 @@ use MbcApiContent\App\Facades\RouterFacade;
 class LaravelRouteCollection extends Collection implements LaravelRouteCollectionInterface
 {
 
+    protected $uriList = [];
+    protected $itemsByUri = [];
+
     protected $nameList = [];
 
     protected $itemsByName = [];
@@ -48,6 +51,9 @@ class LaravelRouteCollection extends Collection implements LaravelRouteCollectio
      */
     public function add(mixed $item)
     {
+        $this->uriList[] = $item->uri();
+        $this->itemsByUri[$item->uri()] = $item;
+
         $this->nameList[] = $item->getName();
         $this->itemsByName[$item->getName()] = $item;
 
@@ -89,6 +95,35 @@ class LaravelRouteCollection extends Collection implements LaravelRouteCollectio
         return $this->nameList[$name] ?? null;
     }
 
+
+    public function getRoutesUriList() : array
+    {
+        return $this->uriList;
+    }
+
+    /**
+     * @return \Illuminate\Routing\Route[]
+     */
+    public function getRoutesByUriList() : array
+    {
+        return $this->itemsByUri;
+    }
+
+    /**
+     * Get a route instance by its uri.
+     *
+     * @param  string  $uri
+     * @return \Illuminate\Routing\Route|null
+     */
+    public function getByUri($uri) : \Illuminate\Routing\Route|null
+    {
+        return $this->itemsByUri[$uri] ?? null;
+    }
+
+
+
+
+
     /**
      * Determine if the route collection contains a given named route.
      *
@@ -98,6 +133,17 @@ class LaravelRouteCollection extends Collection implements LaravelRouteCollectio
     public function hasNamedRoute(string $name) : bool
     {
         return ! is_null($this->getByName($name));
+    }
+
+    /**
+     * Determine if the route collection contains a given uri route.
+     *
+     * @param  string  $uri
+     * @return bool
+     */
+    public function hasUriRoute(string $uri) : bool
+    {
+        return ! is_null($this->getByUri($uri));
     }
 
     /**
