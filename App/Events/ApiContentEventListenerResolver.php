@@ -10,7 +10,22 @@ class ApiContentEventListenerResolver
 
     public function __construct()
     {
-        $this->closureEvent = function(ApiContentEventInterface $event){$event->callback();};
+        $this->closureEvent = function(ApiContentEventInterface $event){
+
+            \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver->ClosureEvent()');
+
+            if($event instanceof ApiContentModelEvent)
+            {
+                \Illuminate\Support\Facades\Log::info('$event instanceof ApiContentModelEvent', [
+                    $event->getModel(),
+                    $event->getAction(),
+                    $event->getModelClass(),
+                    $event->getCallbackMethod(),
+                ]);
+            }
+
+            $event->callback();
+        };
     }
 
     /**
@@ -28,17 +43,5 @@ class ApiContentEventListenerResolver
     {
         $this->closureEvent = $closureEvent;
     }
-
-
-//
-//
-//    public function __call($method, $args)
-//    {
-//        if(is_callable(array($this, $method))) {
-//            return call_user_func_array($this->$method, $args);
-//        }
-//        // else throw exception
-//    }
-
 
 }

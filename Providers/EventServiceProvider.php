@@ -28,16 +28,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        Event::listen(function (ApiContentEventInterface $event) {
-            $apiContentEventListenerResolver = app()->make(ApiContentEventListenerResolver::class);
-            $apiContentEventListenerResolver->getClosureEvent()($event);
-        });
-
         Page::observe(ModelObserver::class);
         Route::observe(ModelObserver::class);
         Template::observe(ModelObserver::class);
-
     }
 
     /**

@@ -8,17 +8,23 @@ use MbcApiContent\App\Events\ApiContentModelEvent;
 use MbcApiContent\App\Facades\RouterFacade;
 use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\Event;
 
 class Bootstrap
 {
 
     protected $apiContentEventListenerResolver;
 
-   public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver)
-   {
-       $this->apiContentEventListenerResolver = $apiContentEventListenerResolver;
-   }
+    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver)
+    {
+        $this->apiContentEventListenerResolver = $apiContentEventListenerResolver;
+    }
+
+    public function init()
+    {
+        $this->initRouter();
+        $this->initClosureEvent();
+    }
 
     public function initRouter()
     {
@@ -34,15 +40,8 @@ class Bootstrap
 
     public function initClosureEvent(): void
     {
-        $this->apiContentEventListenerResolver->setClosureEvent(function(ApiContentEventInterface $event){
-            if($event instanceof ApiContentModelEvent)
-            {
-                \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver->ClosureEvent(ApiContentModelEvent $event) : ', [
-                    $event->getModel(),
-                    $event->getAction(),
-                ]);
-                $event->callback();
-            }
+        Event::listen(function (ApiContentEventInterface $event) {
+            $this->apiContentEventListenerResolver->getClosureEvent()($event);
         });
     }
 

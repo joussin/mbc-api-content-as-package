@@ -7,20 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class BaseModel extends Model implements ModelInterface
 {
 
-    public function __call($method, $args)
+    public function createdEventCallback() : mixed
     {
-        // example :
-//        $page->createdEventCallback()
-//        $page->updatedEventCallback()
-//        $page->deletedEventCallback()
-//        $page->restoredEventCallback()
-//        $page->forceDeletedEventCallback()
-        dd($method, $args);
+        return null;
+    }
+    public function updatedEventCallback() : mixed
+    {
+        return null;
+    }
+    public function deletedEventCallback() : mixed
+    {
+        return null;
+    }
+    public function restoredEventCallback() : mixed
+    {
+        return null;
+    }
+    public function forceDeletedEventCallback(): mixed
+    {
+        return null;
+    }
 
+//    public function __call($method, $args)
+//    {
 //        if(is_callable(array($this, $method))) {
 //            return call_user_func_array($this->$method, $args);
 //        }
 //        // else throw exception
-    }
+//    }
+
 
 }

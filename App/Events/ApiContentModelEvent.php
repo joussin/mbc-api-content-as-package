@@ -33,15 +33,26 @@ class ApiContentModelEvent extends ApiContentEvent
         return $this->action;
     }
 
+
+    public function getModelClass() : string
+    {
+        return get_class($this->model);
+    }
+
+    public function getCallbackMethod() : string
+    {
+        return $this->action . 'EventCallback';
+    }
+
     public function callback() : mixed
     {
-        // example :
-//        $page->createdEventCallback()
-        $method = $this->action . 'EventCallback';
+        $method = $this->getCallbackMethod();
+        $modelClass = $this->getModelClass();
 
-        $result = $this->model->$method();
-
-
-        return $result;
+        if(method_exists($modelClass, $method ))
+        {
+            return $this->model->$method();
+        }
+        return null;
     }
 }

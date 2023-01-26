@@ -5,7 +5,7 @@ namespace MbcApiContent\App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Template  extends Model implements ModelInterface
+class Template  extends BaseModel
 {
 
     protected $table = 'template';

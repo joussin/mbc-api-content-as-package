@@ -38,4 +38,10 @@ class Page  extends BaseModel
     {
         return $this->belongsTo(Template::class, 'template_id', 'id');
     }
+
+    public function updatedEventCallback() : bool
+    {
+        return true;
+    }
+
 }
