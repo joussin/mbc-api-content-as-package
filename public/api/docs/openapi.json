@@ -1,0 +1,684 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Swagger ApiContent",
+        "description": "ApiContent",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.17"
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8001/api/v1"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Page",
+            "description": "Page",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "Route",
+            "description": "Route",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "Template",
+            "description": "Template",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        }
+    ],
+    "paths": {
+
+
+
+        "/page" : {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find all Page",
+                "description": "Returns a all Page",
+                "operationId": "getPageAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Page"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Add a new Page",
+                "description": "Add a new Page",
+                "operationId": "addPage",
+                "requestBody": {
+                    "description": "Create a new Page",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Page"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/page/{id}": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find Page",
+                "description": "Returns a single Page",
+                "operationId": "getPageById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Page to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Update Page",
+                "description": "Update a single Page",
+                "operationId": "getUpdateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Page to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update new Page",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Page"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+
+        "/route" : {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find all Route",
+                "description": "Returns a all Route",
+                "operationId": "getRouteAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Route"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Add a new Route",
+                "description": "Add a new Route",
+                "operationId": "addRoute",
+                "requestBody": {
+                    "description": "Create a new Route",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Route"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/route/{id}": {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find Route",
+                "description": "Returns a single Route",
+                "operationId": "getRouteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Route to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Update Route",
+                "description": "Update a single Route",
+                "operationId": "UpdateRouteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Route to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update new Route",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Route"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            }
+        },
+
+
+
+        "/template" : {
+            "get": {
+                "tags": [
+                    "Template"
+                ],
+                "summary": "Find all Template",
+                "description": "Returns a all Template",
+                "operationId": "getTemplateAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Template"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Template not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Template"
+                ],
+                "summary": "Add a new Template",
+                "description": "Add a new Template",
+                "operationId": "addTemplate",
+                "requestBody": {
+                    "description": "Create a new Template",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Template"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Template"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/template/{id}": {
+            "get": {
+                "tags": [
+                    "Template"
+                ],
+                "summary": "Find Template",
+                "description": "Returns a single Template",
+                "operationId": "getTemplateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Template to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Template"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Template not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Template"
+                ],
+                "summary": "Update Template",
+                "description": "Update a single Template",
+                "operationId": "UpdateTemplateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Template to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update a Template",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Template"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Template"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Template not found"
+                    }
+                }
+            }
+        }
+
+    },
+    "components": {
+        "schemas": {
+            "Route": {
+                "type": "object",
+                "properties": {
+
+
+
+                    "method": {
+                        "type": "string",
+                        "example": "GET"
+                    },
+
+                    "protocol": {
+                        "type": "string",
+                        "example": "http"
+                    },
+
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+
+                    "uri": {
+                        "type": "string",
+                        "example": "/carte-grise"
+                    },
+                    "controller_name": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "controller_action": {
+                        "type": "string",
+                        "example": "any"
+                    },
+
+
+                    "path_parameters": {
+                        "type": "object",
+                        "example": {}
+                    },
+
+
+                    "query_parameters": {
+                        "type": "object",
+                        "example": {}
+                    },
+
+
+                    "static_doc_name": {
+                        "type": "string",
+                        "example": "carte-grise.html"
+                    },
+                    "static_uri": {
+                        "type": "string",
+                        "example": "/carte-grise.html"
+                    },
+
+                    "domain": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "rewrite_rule": {
+                        "type": "string",
+                        "example": ""
+                    },
+
+                    "status": {
+                        "type": "string",
+                        "description": "Page Status",
+                        "example": "ONLINE",
+                        "enum": [
+                            "ONLINE",
+                            "OFFLINE"
+                        ]
+                    },
+
+                    "active_start_at": {
+                        "type": "string",
+                        "example": "2022-01-01"
+                    },
+                    "active_end_at": {
+                        "type": "string",
+                        "example": "2022-01-10"
+                    }
+                }
+            },
+
+            "Page": {
+                "type": "object",
+                "properties": {
+
+                    "version": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "carte-grise"
+                    },
+
+
+                    "template_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+
+
+                    "template_input_data": {
+                        "type": "object",
+                        "example": {
+                            "variable_name_1" : "value_1","variable_name_2" : "value_2"
+                        }
+                    },
+
+                    "route_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+
+
+                }
+            },
+            "Template": {
+                "type": "object",
+                "properties": {
+
+                    "version": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "template-n-1"
+                    },
+                    "template_data": {
+                        "type": "object",
+                        "example": [
+                            "variable_name_1" ,"variable_name_2"
+                        ]
+                    },
+
+                    "template_content": {
+                        "type": "string",
+                        "format": "html",
+                        "example": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\" /></head><body></body></html>"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -21,17 +21,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->aliasMiddleware('router.middleware', RouteMiddleware::class);
 
 
-//        $api = __DIR__.'/../'  . 'routes/api.php';
-//        $backoffice = __DIR__.'/../'  . 'routes/backoffice.php';
-//
-////        $this->loadRoutesFrom($api);
-////        $this->loadRoutesFrom($backoffice);
-
-
-
-
-
-        $config = config('mbc_api_content');
+        $config = config('mbc_api_content_config');
 
         $apiPrefix = $config['api']['routes']['prefix'] ?? 'api';
         $backofficePrefix = $config['backoffice']['routes']['prefix'] ?? 'backoffice';
