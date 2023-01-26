@@ -11,6 +11,7 @@ use MbcApiContent\App\Entity\Collections\LaravelRouteCollection;
 use MbcApiContent\App\Entity\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\App\Entity\Collections\RouteEntityCollection;
 use MbcApiContent\App\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\App\Events\ApiContentEventListenerResolver;
 use MbcApiContent\App\Facades\RouterFacade;
 use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route as RouteModel;
@@ -49,16 +50,18 @@ class MainServiceProvider extends ServiceProvider
 
 
 
-
-       // $this->app->register(InstallServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
 
 
-        $this->app->singleton(Bootstrap::class);
+        $this->app->singleton(Bootstrap::class, function(){
+            return new Bootstrap(
+                app()->make(ApiContentEventListenerResolver::class)
+            );
+        });
 
-
+        $this->app->singleton(ApiContentEventListenerResolver::class);
 
         $this->mergeConfigFrom(
             file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,

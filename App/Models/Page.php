@@ -3,12 +3,11 @@
 namespace MbcApiContent\App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use MbcApiContent\App\Models\Route;
 
 
-class Page  extends Model implements ModelInterface
+class Page  extends BaseModel
 {
 
     protected $table = 'page';

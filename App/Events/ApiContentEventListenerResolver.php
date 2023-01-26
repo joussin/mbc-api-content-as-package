@@ -10,7 +10,7 @@ class ApiContentEventListenerResolver
 
     public function __construct()
     {
-        $this->closureEvent = function(ApiContentEventInterface $event){};
+        $this->closureEvent = function(ApiContentEventInterface $event){$event->callback();};
     }
 
     /**
@@ -32,13 +32,13 @@ class ApiContentEventListenerResolver
 
 //
 //
-    public function __call($method, $args)
-    {
-        if(is_callable(array($this, $method))) {
-            return call_user_func_array($this->$method, $args);
-        }
-        // else throw exception
-    }
+//    public function __call($method, $args)
+//    {
+//        if(is_callable(array($this, $method))) {
+//            return call_user_func_array($this->$method, $args);
+//        }
+//        // else throw exception
+//    }
 
 
 }

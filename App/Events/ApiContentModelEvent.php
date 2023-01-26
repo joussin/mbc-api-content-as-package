@@ -8,12 +8,11 @@ class ApiContentModelEvent extends ApiContentEvent
 {
 
     protected ModelInterface $model;
+
     protected string $action;
 
     public function __construct(ModelInterface $model, string $action)
     {
-        parent::__construct();
-
         $this->model = $model;
         $this->action = $action;
     }
@@ -34,5 +33,15 @@ class ApiContentModelEvent extends ApiContentEvent
         return $this->action;
     }
 
+    public function callback() : mixed
+    {
+        // example :
+//        $page->createdEventCallback()
+        $method = $this->action . 'EventCallback';
 
+        $result = $this->model->$method();
+
+
+        return $result;
+    }
 }
