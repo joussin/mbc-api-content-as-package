@@ -12,15 +12,18 @@ use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Event;
 use MbcApiContent\App\Models\Template;
+use Spatie\Export\Exporter;
 
 class Bootstrap
 {
 
     protected $apiContentEventListenerResolver;
+    protected $exporter;
 
-    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver)
+    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver, Exporter $exporter)
     {
         $this->apiContentEventListenerResolver = $apiContentEventListenerResolver;
+        $this->exporter = $exporter;
     }
 
     public function init()
@@ -28,6 +31,8 @@ class Bootstrap
         $this->initRouter();
         $this->initModelObserver();
         $this->initClosureEvent();
+
+        $this->exporter->paths( RouterFacade::getRoutesEntityCollection());
     }
 
     public function initRouter()
