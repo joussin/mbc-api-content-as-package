@@ -52,7 +52,12 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/phpunit",
+        "publish-assets": [
+            "@php artisan vendor:publish --provider=MbcApiContent\\Providers\\MainServiceProvider"
+
+
+        ]
     }
 
 }

@@ -142,7 +142,6 @@ class MainServiceProvider extends ServiceProvider
                 __DIR__.'/../public/api/' => public_path('api/'),
             ], 'public');
 
-            unlink(public_path('api/docs/') . 'openapi.json' . '.j2');
 
             $this->publishes([
                 __DIR__.'/../resources/views/api_content/' => resource_path('views/api_content/'),
@@ -164,12 +163,13 @@ class MainServiceProvider extends ServiceProvider
             'public/api/docs/',
             [
                 'api_prefix' => config(MainServiceProvider::PACKAGE_NAME)['api']['routes']['prefix'],
-            ]
+            ],
+            true
         );
     }
 
 
-    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [])
+    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [], bool $deleteAfter = false)
     {
         $filename_path = __DIR__ . '/./../' . $filename_path;
 
@@ -185,5 +185,7 @@ class MainServiceProvider extends ServiceProvider
         fwrite($myfile, $data_parsed);
         fclose($myfile);
 
+        if($deleteAfter)
+        unlink($filename_path.$filename . '.j2');
     }
 }
