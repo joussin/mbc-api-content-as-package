@@ -3,7 +3,7 @@
         'name' => 'joussin/mbc-api-content-as-package',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => 'e7a6ea00ef9389b290ffd696264e8ed03fb2fc24',
+        'reference' => 'a80dcb30f45aa6b2ec4be3434ca9f72757dc40be',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -211,7 +211,7 @@
         'joussin/mbc-api-content-as-package' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'e7a6ea00ef9389b290ffd696264e8ed03fb2fc24',
+            'reference' => 'a80dcb30f45aa6b2ec4be3434ca9f72757dc40be',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

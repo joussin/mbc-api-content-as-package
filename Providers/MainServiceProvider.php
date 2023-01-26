@@ -58,17 +58,9 @@ class MainServiceProvider extends ServiceProvider
 
         $this->app->singleton(Bootstrap::class, function(){
             return new Bootstrap(
-                app()->make(ApiContentEventListenerResolver::class),
-                app()->make(Exporter::class)
+                app()->make(ApiContentEventListenerResolver::class)
             );
         });
-
-        $this->app->make(Exporter::class)
-            ->cleanBeforeExport(config('export.clean_before_export', false))
-            ->crawl(config('export.crawl', false))
-            ->paths(config('export.paths', null))
-            ->includeFiles(config('export.include_files', []))
-            ->excludeFilePatterns(config('export.exclude_file_patterns', []));
 
         $this->app->singleton(ApiContentEventListenerResolver::class);
 

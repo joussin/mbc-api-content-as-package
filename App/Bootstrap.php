@@ -18,12 +18,12 @@ class Bootstrap
 {
 
     protected $apiContentEventListenerResolver;
-    protected $exporter;
 
-    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver, Exporter $exporter)
+
+    public function __construct(ApiContentEventListenerResolver $apiContentEventListenerResolver)
     {
         $this->apiContentEventListenerResolver = $apiContentEventListenerResolver;
-        $this->exporter = $exporter;
+
     }
 
     public function init()
@@ -32,7 +32,6 @@ class Bootstrap
         $this->initModelObserver();
         $this->initClosureEvent();
 
-        $this->exporter->paths( RouterFacade::getRoutesEntityCollection());
     }
 
     public function initRouter()
