@@ -44,12 +44,25 @@ class ApiContentModelEvent extends ApiContentEvent
         return $this->action . 'EventCallback';
     }
 
+    public function isCallbackImplemented($modelClass, $method) : bool
+    {
+        if(!method_exists($modelClass, $method ))
+        {
+            return false;
+        }
+        $reflectionClass = new \ReflectionClass($modelClass);
+        if ($reflectionClass->getMethod($method)->class == $modelClass) {
+            return true;
+        }
+        return false;
+    }
+
     public function callback() : mixed
     {
         $method = $this->getCallbackMethod();
         $modelClass = $this->getModelClass();
 
-        if(method_exists($modelClass, $method ))
+        if($this->isCallbackImplemented($modelClass, $method))
         {
             return $this->model->$method();
         }

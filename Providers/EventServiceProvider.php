@@ -3,9 +3,6 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
-use MbcApiContent\App\Events\ApiContentEventInterface;
-use MbcApiContent\App\Events\ApiContentEventListenerResolver;
 use MbcApiContent\App\Events\ModelObserver;
 use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
@@ -17,10 +14,8 @@ class EventServiceProvider extends ServiceProvider
 
     public function register()
     {
-
-
-
     }
+
     /**
      * Register any events for your application.
      *
