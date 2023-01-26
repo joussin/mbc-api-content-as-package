@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Event;
 use MbcApiContent\App\Events\ApiContentEvent;
 use MbcApiContent\App\Events\ApiContentEventInterface;
 use MbcApiContent\App\Events\ApiContentEventListenerResolver;
+use MbcApiContent\App\Events\ApiContentModelEvent;
 use MbcApiContent\App\Events\ModelObserver;
 use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
@@ -31,6 +32,33 @@ class EventServiceProvider extends ServiceProvider
     {
 
          $apiContentEventListenerResolver = app()->make(ApiContentEventListenerResolver::class);
+
+
+        $apiContentEventListenerResolver->setClosureEvent(function(ApiContentEventInterface $event){
+
+
+            if($event instanceof ApiContentModelEvent)
+            {
+                \Illuminate\Support\Facades\Log::info('MODEL EVENT');
+            }
+
+            if($event instanceof ApiContentEvent)
+            {
+                \Illuminate\Support\Facades\Log::info('APICONTENTEVENT');
+            }
+
+
+            \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver = ', [
+                $event->getModel(),
+                $event->getAction(),
+
+            ]);
+
+
+        });
+
+
+
 
         Event::listen(function (ApiContentEventInterface $event)  use($apiContentEventListenerResolver) {
             //

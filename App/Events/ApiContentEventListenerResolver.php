@@ -10,9 +10,7 @@ class ApiContentEventListenerResolver
 
     public function __construct()
     {
-        $this->closureEvent = function(ApiContentEventInterface $event){
-            \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver = ', (array)$event);
-        };
+        $this->closureEvent = function(ApiContentEventInterface $event){};
     }
 
     /**
