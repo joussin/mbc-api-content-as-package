@@ -27,8 +27,10 @@ class EventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(ApiContentEventListenerResolver $apiContentEventListenerResolver)
+    public function boot()
     {
+
+         $apiContentEventListenerResolver = app()->make(ApiContentEventListenerResolver::class);
 
 //        Event::listen(function (ApiContentEvent $event) use($apiContentEventListenerResolver) {
 //            //

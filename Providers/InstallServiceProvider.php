@@ -41,9 +41,7 @@ class InstallServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-// https://laravel.com/docs/9.x/packages
 
-         //https://laravel.com/docs/9.x/eloquent-resources
 
         if ($this->app->runningInConsole()) {
 
