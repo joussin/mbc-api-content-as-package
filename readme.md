@@ -95,7 +95,7 @@ use Illuminate\Support\ServiceProvider;
         public function boot(Bootstrap $bootstrapMbcApiContent)
         {
         
-            $bootstrapMbcApiContent->initRouter();
+            $bootstrapMbcApiContent->init();
 
         }
     }

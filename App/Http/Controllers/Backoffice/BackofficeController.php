@@ -21,7 +21,8 @@ class BackofficeController extends Controller
 
     public function index()
     {
-
+//        return view('api_content_views::dashboard');
+        return view('api_content_views::index');
         return view('backoffice.index');
     }
 

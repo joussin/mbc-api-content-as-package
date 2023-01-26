@@ -107,13 +107,12 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'api_content_views'); // return view('api_content_views::dashboard');
+
         if ($this->app->runningInConsole()) {
 
             $this->install();
         }
-
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'api_content_views'); // return view('api_content_views::dashboard');
-
     }
 
 
@@ -121,7 +120,6 @@ class MainServiceProvider extends ServiceProvider
     {
 
         try{
-          //  $this->generateSwaggerJsonFromJinja();
 
             $this->publishes([
                 __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
@@ -133,7 +131,7 @@ class MainServiceProvider extends ServiceProvider
 
 
             $this->publishes([
-                __DIR__.'/../resources/views/' => resource_path('views/vendor/mbc-api-content/'),
+                __DIR__.'/../resources/views/' => resource_path('views/vendor/api_content_views/'),
             ]);
 
         }
@@ -145,36 +143,36 @@ class MainServiceProvider extends ServiceProvider
 
 
 
-    private function generateSwaggerJsonFromJinja()
-    {
-        $this->generateFromJinja(
-            'openapi.json',
-            'public/api/docs/',
-            [
-                'api_prefix' => config('mbc_api_content_config')['api']['routes']['prefix'],
-            ],
-            true
-        );
-    }
-
-
-    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [], bool $deleteAfter = false)
-    {
-        $filename_path = __DIR__ . '/./../' . $filename_path;
-
-        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
-
-        $data_parsed = str_replace(
-            array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
-            array_values($datas),
-            $file_jinja_content
-        );
-
-        $myfile = fopen($filename_path . $filename, "w") or die("Unable to open file!");
-        fwrite($myfile, $data_parsed);
-        fclose($myfile);
-
-//        if($deleteAfter)
-//        unlink($filename_path.$filename . '.j2');
-    }
+//    private function generateSwaggerJsonFromJinja()
+//    {
+//        $this->generateFromJinja(
+//            'openapi.json',
+//            'public/api/docs/',
+//            [
+//                'api_prefix' => config('mbc_api_content_config')['api']['routes']['prefix'],
+//            ],
+//            true
+//        );
+//    }
+//
+//
+//    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [], bool $deleteAfter = false)
+//    {
+//        $filename_path = __DIR__ . '/./../' . $filename_path;
+//
+//        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
+//
+//        $data_parsed = str_replace(
+//            array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
+//            array_values($datas),
+//            $file_jinja_content
+//        );
+//
+//        $myfile = fopen($filename_path . $filename, "w") or die("Unable to open file!");
+//        fwrite($myfile, $data_parsed);
+//        fclose($myfile);
+//
+////        if($deleteAfter)
+////        unlink($filename_path.$filename . '.j2');
+//    }
 }
