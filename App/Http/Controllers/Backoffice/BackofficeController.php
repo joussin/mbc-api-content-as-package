@@ -21,16 +21,14 @@ class BackofficeController extends Controller
 
     public function index()
     {
-//        return view('api_content_views::dashboard');
-        return view('api_content_views::index');
-        return view('backoffice.index');
+        return view('api_content_views::backoffice.index');;
     }
 
 
     public function editorExample()
     {
 
-        return view('backoffice.editor_example');
+        return view('api_content_views::backoffice.editor_example');
     }
 
     public function wysiwyg()
@@ -39,7 +37,7 @@ class BackofficeController extends Controller
         $pages = $this->apiService->getAllPage();
         $templates = $this->apiService->getAllTemplate();
 
-        return view('backoffice.wysiwyg', [
+        return view('api_content_views::backoffice.wysiwyg', [
             'pages' => $pages,
             'templates' => $templates,
         ]);
@@ -56,7 +54,7 @@ class BackofficeController extends Controller
     public function wysiwygInline()
     {
 
-        return view('backoffice.wysiwyg_inline');
+        return view('api_content_views::backoffice.wysiwyg_inline');
     }
 
 
@@ -64,7 +62,7 @@ class BackofficeController extends Controller
     public function wysiwygInlineEdit()
     {
 
-        return view('backoffice.wysiwyg_inline');
+        return view('api_content_views::backoffice.wysiwyg_inline');
     }
 
 
@@ -72,7 +70,7 @@ class BackofficeController extends Controller
     public function wysiwygEdit()
     {
 
-        return view('backoffice.wysiwyg');
+        return view('api_content_views::backoffice.wysiwyg');
     }
 
 
