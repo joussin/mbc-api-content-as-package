@@ -185,7 +185,7 @@ class MainServiceProvider extends ServiceProvider
         fwrite($myfile, $data_parsed);
         fclose($myfile);
 
-        if($deleteAfter)
-        unlink($filename_path.$filename . '.j2');
+//        if($deleteAfter)
+//        unlink($filename_path.$filename . '.j2');
     }
 }
