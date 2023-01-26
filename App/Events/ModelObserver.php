@@ -2,6 +2,8 @@
 
 namespace MbcApiContent\App\Events;
 
+use MbcApiContent\App\Models\ModelInterface;
+
 class ModelObserver
 {
 
@@ -9,7 +11,7 @@ class ModelObserver
 
     public function __construct()
     {
-        $this->closureEvent = function(Illuminate\Database\Eloquent\Model $model){
+        $this->closureEvent = function(ModelInterface $model){
             \Illuminate\Support\Facades\Log::info('ModelObserver closureEvent = ');
         };
     }
@@ -38,31 +40,37 @@ class ModelObserver
         // else throw exception
     }
 
-    public function created(Illuminate\Database\Eloquent\Model $model)
+    public function created(ModelInterface $model)
     {
         $this->closureEvent($model);
+
+        event(new ApiContentModelEvent());
     }
 
     
-    public function updated(Illuminate\Database\Eloquent\Model $model)
+    public function updated(ModelInterface $model)
     {
         $this->closureEvent($model);
+        event(new ApiContentModelEvent());
     }
  
-    public function deleted(Illuminate\Database\Eloquent\Model $model)
+    public function deleted(ModelInterface $model)
     {
         $this->closureEvent($model);
+        event(new ApiContentModelEvent());
     }
 
    
-    public function restored(Illuminate\Database\Eloquent\Model $model)
+    public function restored(ModelInterface $model)
     {
         $this->closureEvent($model);
+        event(new ApiContentModelEvent());
     }
 
    
-    public function forceDeleted(Illuminate\Database\Eloquent\Model $model)
+    public function forceDeleted(ModelInterface $model)
     {
         $this->closureEvent($model);
+        event(new ApiContentModelEvent());
     }
 }

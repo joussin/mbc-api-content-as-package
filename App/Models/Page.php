@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 use MbcApiContent\App\Models\Route;
 
 
-class Page  extends Model
+class Page  extends Model implements ModelInterface
 {
 
     protected $table = 'page';

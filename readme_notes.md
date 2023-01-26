@@ -1,6 +1,8 @@
 
 ## Event
 
+event(new ApiContentEvent());
+
 InstallServiceProvider
 
 ApiContentEventInterface

@@ -32,11 +32,6 @@ class EventServiceProvider extends ServiceProvider
 
          $apiContentEventListenerResolver = app()->make(ApiContentEventListenerResolver::class);
 
-//        Event::listen(function (ApiContentEvent $event) use($apiContentEventListenerResolver) {
-//            //
-//            $apiContentEventListenerResolver->getClosureEvent($event);
-//        });
-
         Event::listen(function (ApiContentEventInterface $event)  use($apiContentEventListenerResolver) {
             //
             $apiContentEventListenerResolver->getClosureEvent()($event);
