@@ -2,6 +2,7 @@
 
 namespace MbcApiContent\App\Events;
 
+
 class ApiContentEventListenerResolver
 {
 
@@ -9,7 +10,9 @@ class ApiContentEventListenerResolver
 
     public function __construct()
     {
-        $this->closureEvent = function(ApiContentEventInterface $event){};
+        $this->closureEvent = function(ApiContentEventInterface $event){
+            \Illuminate\Support\Facades\Log::info('ApiContentEventListenerResolver = ');
+        };
     }
 
     /**

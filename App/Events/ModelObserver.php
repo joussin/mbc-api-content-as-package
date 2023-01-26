@@ -9,7 +9,9 @@ class ModelObserver
 
     public function __construct()
     {
-        $this->closureEvent = function(Illuminate\Database\Eloquent\Model $model){};
+        $this->closureEvent = function(Illuminate\Database\Eloquent\Model $model){
+            \Illuminate\Support\Facades\Log::info('ModelObserver closureEvent = ');
+        };
     }
 
     /**
