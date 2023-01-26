@@ -71,7 +71,7 @@ class InstallServiceProvider extends ServiceProvider
         }
         catch (\Exception $e)
         {
-            throw new \Exception('Error installing');
+            throw new \Exception('Error installing ' . $e->getMessage());
         }
     }
 
