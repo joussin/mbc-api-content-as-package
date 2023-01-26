@@ -20,7 +20,6 @@ use MbcApiContent\App\Services\RenderServiceInterface;
 use MbcApiContent\App\Services\RouterService;
 use MbcApiContent\App\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
-use MbcApiContent\config\ApiContentConfig;
 
 
 class MainServiceProvider extends ServiceProvider
@@ -51,7 +50,7 @@ class MainServiceProvider extends ServiceProvider
 
 
 
-        $this->app->register(InstallServiceProvider::class);
+       // $this->app->register(InstallServiceProvider::class);
         $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
@@ -117,8 +116,69 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->app->runningInConsole()) {
+
+            $this->install();
+        }
+
+    }
+
+
+    public function install()
+    {
+
+        try{
+            $this->generateSwaggerJsonFromJinja();
+
+            $this->publishes([
+                __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
+            ], 'config');
+
+            $this->publishes([
+                __DIR__.'/../public/api/' => public_path('api/'),
+            ], 'public');
+
+            $this->publishes([
+                __DIR__.'/../resources/views/api_content/' => resources_path('views/api_content/'),
+            ], 'views');
+
+        }
+        catch (\Exception $e)
+        {
+            throw new \Exception('Error installing ' . $e->getMessage());
+        }
     }
 
 
 
+    private function generateSwaggerJsonFromJinja()
+    {
+        $this->generateFromJinja(
+            'openapi.json',
+            'public/api/docs/',
+            [
+                'api_prefix' => config(MainServiceProvider::PACKAGE_NAME)['api']['routes']['prefix'],
+            ]
+        );
+    }
+
+
+    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [])
+    {
+        $filename_path = __DIR__ . '/./../' . $filename_path;
+
+        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
+
+        $data_parsed = str_replace(
+            array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
+            array_values($datas),
+            $file_jinja_content
+        );
+
+        $myfile = fopen($filename_path . $filename, "w") or die("Unable to open file!");
+        fwrite($myfile, $data_parsed);
+        fclose($myfile);
+
+        //  unlink($public_path.$file_jinja);
+    }
 }

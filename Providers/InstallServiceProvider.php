@@ -18,7 +18,6 @@ use MbcApiContent\App\Services\RenderServiceInterface;
 use MbcApiContent\App\Services\RouterService;
 use MbcApiContent\App\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
-use MbcApiContent\config\ApiContentConfig;
 
 
 class InstallServiceProvider extends ServiceProvider
@@ -93,7 +92,7 @@ class InstallServiceProvider extends ServiceProvider
     {
         $filename_path = __DIR__ . '/./../' . $filename_path;
 
-        $file_jinja_content = file_get_contents($filename_path.$filename . 'j2');
+        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
 
         $data_parsed = str_replace(
             array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
