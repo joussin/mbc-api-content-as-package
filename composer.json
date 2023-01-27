@@ -32,7 +32,7 @@
     },
     "autoload": {
         "psr-4": {
-            "MbcApiContent\\": "./"
+            "MbcApiContent\\": "src/"
         }
     },
     "autoload-dev": {
