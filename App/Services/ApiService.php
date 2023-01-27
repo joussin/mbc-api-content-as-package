@@ -4,7 +4,6 @@ namespace MbcApiContent\App\Services;
 
 use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
-use MbcApiContent\App\Models\Template;
 
 class ApiService implements ApiServiceInterface
 {
@@ -85,47 +84,4 @@ class ApiService implements ApiServiceInterface
         $page->save();
         return $page->toArray();
     }
-
-
-
-
-
-    public function postTemplate(array $attributes) : array
-    {
-        $template = new Template();
-        $template->fill($attributes);
-        $template->save();
-        return $template->toArray();
-    }
-
-    public function getAllTemplate() : array
-    {
-
-        $templates = Template::all();
-
-        $templatesArray = [];
-
-        foreach ($templates as $template)
-        {
-            $templatesArray[] = $template->toArray();
-        }
-
-        return $templatesArray;
-    }
-
-    public function getTemplate(int $id) : array
-    {
-        $template = Template::where('id', $id)->first();
-
-        return $template->toArray();
-    }
-
-    public function updateTemplate(int $id, array $attributes) : array
-    {
-        $template = Template::where('id', $id)->first();
-        $template->fill($attributes);
-        $template->save();
-        return $template->toArray();
-    }
-
 }

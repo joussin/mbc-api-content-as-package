@@ -45,17 +45,4 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    Route::get('/template', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getAllTemplate'])
-        ;
-    Route::get('/template/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getTemplate'])
-        ;
-     Route::put('/template/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@updateTemplate'])
-        ;
-
-    Route::post('/template', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@postTemplate'])
-        ;
-
-
-
-
 

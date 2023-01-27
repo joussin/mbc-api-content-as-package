@@ -140,39 +140,4 @@ class MainServiceProvider extends ServiceProvider
             throw new \Exception('Error installing ' . $e->getMessage());
         }
     }
-
-
-
-//    private function generateSwaggerJsonFromJinja()
-//    {
-//        $this->generateFromJinja(
-//            'openapi.json',
-//            'public/api/docs/',
-//            [
-//                'api_prefix' => config('mbc_api_content_config')['api']['routes']['prefix'],
-//            ],
-//            true
-//        );
-//    }
-//
-//
-//    private function generateFromJinja(string $filename, string $filename_path = '', array $datas = [], bool $deleteAfter = false)
-//    {
-//        $filename_path = __DIR__ . '/./../' . $filename_path;
-//
-//        $file_jinja_content = file_get_contents($filename_path.$filename . '.j2');
-//
-//        $data_parsed = str_replace(
-//            array_map(function($k){return "{{" . $k . "}}";}, array_keys($datas)), // 'varname' -> '{{varname}}'
-//            array_values($datas),
-//            $file_jinja_content
-//        );
-//
-//        $myfile = fopen($filename_path . $filename, "w") or die("Unable to open file!");
-//        fwrite($myfile, $data_parsed);
-//        fclose($myfile);
-//
-////        if($deleteAfter)
-////        unlink($filename_path.$filename . '.j2');
-//    }
 }

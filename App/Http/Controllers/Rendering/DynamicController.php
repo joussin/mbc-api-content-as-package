@@ -10,10 +10,6 @@ use MbcApiContent\App\Http\Controllers\Rendering\Commons\Controller;
 class DynamicController extends Controller
 {
 
-    public function any(Request $request, $id)
-    {
-        return 'DynamicController-any';
-    }
 
     public function dynamic(Request $request, $id)
     {

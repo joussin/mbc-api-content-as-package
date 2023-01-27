@@ -30,18 +30,7 @@ class ValidationRules
 
         'version' => 'required|integer',
         'name'             => 'required|string|alpha-dash|min:2|max:50',
-        'template_id'             => 'nullable|integer',
-//            'template_input_data'             => 'nullable',
         'route_id'             => 'nullable|integer',
-    ];
-
-    public const TEMPLATE_RULES = [
-        'version' => 'required|integer',
-        'name'             => 'required|string|alpha-dash|min:2|max:50',
-
-//            'template_data'             => 'nullable',
-        'template_content'             => 'nullable|string',
-
     ];
 
 

@@ -21,10 +21,6 @@ class PageSeeder extends Seeder
         $page = [
             'version' => 1,
             'name' => "page-home",
-            'template_id' => 1,
-            'template_input_data' => json_encode([
-                'info' => "Page home alias = page-home | template = 1 | route = 1"
-            ]),
             'route_id' => 1,
         ];
 
@@ -34,8 +30,6 @@ class PageSeeder extends Seeder
         $page = [
             'version' => 1,
             'name' => "page-carte-grise",
-            'template_id' => null, // 1
-            'template_input_data' => null, //json_encode($template_input_data),
             'route_id' => null,
         ];
 

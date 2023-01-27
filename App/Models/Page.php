@@ -17,14 +17,9 @@ class Page  extends BaseModel
     protected $fillable = [
         "version",
         "name",
-        "template_id",
-        "template_input_data",
         "route_id"
     ];
 
-    protected $casts = [
-        'template_input_data' => 'array',
-    ];
 
 
     // doc
@@ -33,11 +28,7 @@ class Page  extends BaseModel
         return $this->belongsTo(Route::class, 'route_id', 'id');
     }
 
-    // doc
-    public function template()
-    {
-        return $this->belongsTo(Template::class, 'template_id', 'id');
-    }
+
 
     public function updatedEventCallback() : bool
     {

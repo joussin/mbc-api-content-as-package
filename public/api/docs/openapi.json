@@ -38,14 +38,6 @@
                 "description": "Find out more",
                 "url": "http://swagger.io"
             }
-        },
-        {
-            "name": "Template",
-            "description": "Template",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
         }
     ],
     "paths": {
@@ -362,167 +354,6 @@
                     }
                 }
             }
-        },
-
-
-
-        "/template" : {
-            "get": {
-                "tags": [
-                    "Template"
-                ],
-                "summary": "Find all Template",
-                "description": "Returns a all Template",
-                "operationId": "getTemplateAll",
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Template"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Template not found"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Template"
-                ],
-                "summary": "Add a new Template",
-                "description": "Add a new Template",
-                "operationId": "addTemplate",
-                "requestBody": {
-                    "description": "Create a new Template",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Template"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Template"
-                                }
-                            }
-                        }
-                    },
-                    "405": {
-                        "description": "Invalid input"
-                    }
-                }
-            }
-        },
-        "/template/{id}": {
-            "get": {
-                "tags": [
-                    "Template"
-                ],
-                "summary": "Find Template",
-                "description": "Returns a single Template",
-                "operationId": "getTemplateById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Template to return",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Template"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Template not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Template"
-                ],
-                "summary": "Update Template",
-                "description": "Update a single Template",
-                "operationId": "UpdateTemplateById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Template to Update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Update a Template",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Template"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Template"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Template not found"
-                    }
-                }
-            }
         }
 
     },
@@ -629,20 +460,6 @@
                     },
 
 
-                    "template_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                    },
-
-
-                    "template_input_data": {
-                        "type": "object",
-                        "example": {
-                            "variable_name_1" : "value_1","variable_name_2" : "value_2"
-                        }
-                    },
-
                     "route_id": {
                         "type": "integer",
                         "format": "int64",
@@ -650,33 +467,6 @@
                     }
 
 
-                }
-            },
-            "Template": {
-                "type": "object",
-                "properties": {
-
-                    "version": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "template-n-1"
-                    },
-                    "template_data": {
-                        "type": "object",
-                        "example": [
-                            "variable_name_1" ,"variable_name_2"
-                        ]
-                    },
-
-                    "template_content": {
-                        "type": "string",
-                        "format": "html",
-                        "example": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\" /></head><body></body></html>"
-                    }
                 }
             }
         }

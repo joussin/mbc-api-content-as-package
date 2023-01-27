@@ -94,7 +94,6 @@ class RouterService implements RouterServiceInterface
         $routeEntity->setRoute($route);
         $routeEntity->addRouteOptions();
 
-        $routeEntity->addRouteDefaults('template_id', 99);
         $routeEntity->addRouteDefaults('alias', $routeEntity->getName());
 
         return $routeEntity;

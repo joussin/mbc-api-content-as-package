@@ -8,6 +8,7 @@ use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 
 
+use MbcApiContent\App\Entity\Collections\RouteEntityCollectionInterface;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
@@ -19,16 +20,12 @@ use MbcApiContent\App\Models\Route as RouteModel;
 use MbcApiContent\App\Entity\Page as PageEntity;
 use MbcApiContent\App\Models\Page as PageModel;
 
-use MbcApiContent\App\Entity\Template as TemplateEntity;
-use MbcApiContent\App\Models\Template as TemplateModel;
-
-
 class RenderService implements RenderServiceInterface
 {
 
 
     // ---------------------INPUT----------------------------------
-    public Collection $routesEntityCollection;
+    public RouteEntityCollectionInterface $routesEntityCollection;
 
     public Collection $routesModelCollection;
 
@@ -46,10 +43,6 @@ class RenderService implements RenderServiceInterface
 
     public ?PageEntity $pageEntity;
     public ?PageModel $pageModel;
-
-    public ?TemplateEntity $templateEntity;
-    public ?TemplateModel $templateModel;
-
 
     public function __construct(RouterServiceInterface $routerService)
     {
@@ -78,29 +71,23 @@ class RenderService implements RenderServiceInterface
 
         if(is_null($html))
         {
-            throw new \Exception('Unable to parse template from page and template entities.');
+            throw new \Exception('Unable to parse Content from page.');
         }
     }
 
 
     public function getHtml() :?string
     {
-        return $this->pageEntity->parseTemplate();
+        return '';
     }
 
 
     // models relations methods
     //
     // request to route (object, model, entity)
-    // request to route objs + page (model, array) + template (model, array)
+    // request to route objs + page (model, array)
     //
     // route to page
-    // page to template
-
-    // page to route et template
-    // route to page et template
-
-
     public function requestToContentCollection(LaravelRequest $request): bool
     {
         $laravelRoute = $request->route();
@@ -129,23 +116,6 @@ class RenderService implements RenderServiceInterface
         }
 
 
-        $templateModel = $this->getTemplateModelByPageModel($pageModel);
-        if(is_null($templateModel))
-        {
-            return false;
-        }
-
-        $templateEntity = $this->getTemplateEntityByTemplateModel($templateModel);
-        if(is_null($templateEntity))
-        {
-            return false;
-        }
-
-        $pageEntity = $this->getPageEntityByPageModel($pageModel, $templateEntity);
-        if(is_null($pageEntity))
-        {
-            return false;
-        }
 
         if( count($this->propertiesIs(null)) == 7)
         {
@@ -153,9 +123,8 @@ class RenderService implements RenderServiceInterface
             $this->routeModel = $routeModel;
             $this->routeEntity = $routeEntity;
             $this->pageModel = $pageModel;
-            $this->pageEntity = $pageEntity;
-            $this->templateModel = $templateModel;
-            $this->templateEntity = $templateEntity;
+//            $this->pageEntity = $pageEntity;
+
         }
 
         if( count($this->propertiesIs(null)) == 0)
@@ -197,22 +166,9 @@ class RenderService implements RenderServiceInterface
     }
 
 
-    public function getPageEntityByPageModel(PageModel $pageModel, TemplateEntity $templateEntity): ?PageEntity
+    public function getPageEntityByPageModel(PageModel $pageModel): ?PageEntity
     {
-        return new PageEntity($pageModel, $templateEntity);
+        return new PageEntity($pageModel);
     }
-
-
-    public function getTemplateModelByPageModel(PageModel $pageModel): ?TemplateModel
-    {
-        return $pageModel->template()->getResults();
-    }
-
-
-    public function getTemplateEntityByTemplateModel(TemplateModel $templateModel): ?TemplateEntity
-    {
-        return new TemplateEntity($templateModel);
-    }
-
 
 }

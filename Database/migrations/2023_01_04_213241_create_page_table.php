@@ -18,9 +18,6 @@ return new class extends Migration
             $table->integer('version');
             $table->string('name');
 
-            $table->integer('template_id')->nullable()->unsigned();
-            $table->json('template_input_data')->nullable();
-
             $table->integer('route_id')->nullable()->unsigned();
 
             $table->timestamp('created_at')->useCurrent();
@@ -37,12 +34,6 @@ return new class extends Migration
         Schema::table('page', function (Blueprint $table) {
             $table->foreign('route_id', 'page_route_id_foreign')
                 ->references('id')->on('route')->nullOnDelete();
-
-            $table->foreign('template_id', 'page_template_id_foreign')
-                ->references('id')->on('template')->nullOnDelete();
-
-
-
         });
 
     }
@@ -56,7 +47,6 @@ return new class extends Migration
     {
         Schema::table('page', function (Blueprint $table) {
             $table->dropForeign('page_route_id_foreign');
-            $table->dropForeign('page_template_id_foreign');
         });
 
         Schema::dropIfExists('page');

@@ -35,11 +35,9 @@ class BackofficeController extends Controller
     {
 
         $pages = $this->apiService->getAllPage();
-        $templates = $this->apiService->getAllTemplate();
 
         return view('api_content_views::backoffice.wysiwyg', [
-            'pages' => $pages,
-            'templates' => $templates,
+            'pages' => $pages
         ]);
     }
 

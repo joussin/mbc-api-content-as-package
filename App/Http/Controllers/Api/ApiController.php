@@ -22,62 +22,6 @@ class ApiController extends Controller
     }
 
 
-    public function postPage(Request $request)
-    {
-        Log::info("-----------postPage----------------");
-        Log::info(json_encode([
-            $request->all()
-        ]));
-
-
-        $validated = $this->validate($request, ValidationRules::PAGE_RULES);
-
-        $validated['template_input_data'] = ($request->post('template_input_data')) ? json_encode($request->post('template_input_data')) : null;
-
-
-        $result = $this->apiService->postPage($validated);
-
-        return response()->json($result, 200);
-    }
-
-
-    public function getAllPage(Request $request)
-    {
-
-        $result = $this->apiService->getAllPage();
-
-        return response()->json($result, 200);
-    }
-
-
-    public function getPage(Request $request, $id)
-    {
-        $result = $this->apiService->getPage($id);
-
-        return response()->json($result, 200);
-    }
-
-
-    public function updatePage(Request $request, $id)
-    {
-        Log::info("-----------updatePage----------------");
-        Log::info(json_encode([
-            $request->all()
-        ]));
-
-
-        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_RULES));
-
-
-        if ($request->post('template_input_data'))
-            $validated['template_input_data'] = json_encode($request->post('template_input_data'));
-
-
-        $result = $this->apiService->updatePage($id, $validated);
-
-        return response()->json($result, 200);
-    }
-
 
     public function postRoute(Request $request)
     {
@@ -137,60 +81,59 @@ class ApiController extends Controller
     }
 
 
-    public function postTemplate(Request $request)
-    {
 
-        Log::info("------------postTemplate---------------");
+
+
+
+    public function postPage(Request $request)
+    {
+        Log::info("-----------postPage----------------");
         Log::info(json_encode([
             $request->all()
         ]));
 
 
-        $validated = $this->validate($request, ValidationRules::TEMPLATE_RULES);
-
-        $validated['template_data'] = ($request->post('template_data')) ? json_encode($request->post('template_data')) : null;
+        $validated = $this->validate($request, ValidationRules::PAGE_RULES);
 
 
-        $result = $this->apiService->postTemplate($validated);
 
-        return response()->json($result, 200);
-    }
-
-
-    public function getAllTemplate(Request $request)
-    {
-
-        $result = $this->apiService->getAllTemplate();
+        $result = $this->apiService->postPage($validated);
 
         return response()->json($result, 200);
     }
 
 
-    public function getTemplate(Request $request, $id)
+    public function getAllPage(Request $request)
     {
-        $result = $this->apiService->getTemplate($id);
+
+        $result = $this->apiService->getAllPage();
 
         return response()->json($result, 200);
     }
 
-    public function updateTemplate(Request $request, $id)
+
+    public function getPage(Request $request, $id)
     {
-        Log::info("------------updateTemplate---------------");
+        $result = $this->apiService->getPage($id);
+
+        return response()->json($result, 200);
+    }
+
+
+    public function updatePage(Request $request, $id)
+    {
+        Log::info("-----------updatePage----------------");
         Log::info(json_encode([
             $request->all()
         ]));
 
 
-        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::TEMPLATE_RULES));
-
-        if ($request->post('template_data'))
-            $validated['template_data'] = json_encode($request->post('template_data'));
+        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_RULES));
 
 
-        $result = $this->apiService->updateTemplate($id, $validated);
+        $result = $this->apiService->updatePage($id, $validated);
 
         return response()->json($result, 200);
     }
-
 
 }

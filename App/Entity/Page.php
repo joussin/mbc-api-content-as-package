@@ -5,7 +5,6 @@ namespace MbcApiContent\App\Entity;
 use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\App\Entity\Interfaces\EntityInterface;
 use MbcApiContent\App\Entity\Traits\HydrateEntityTrait;
-use MbcApiContent\App\Entity\Traits\TemplateEntityParserTrait;
 use MbcApiContent\App\Entity\Validators\ValidationRules;
 use MbcApiContent\App\Models\Page as PageModel;
 
@@ -15,15 +14,11 @@ class Page  implements EntityInterface
 
     use HydrateEntityTrait;
 
-    use TemplateEntityParserTrait;
 
     /**
      * @var Model
      */
     public $model;
-
-
-    public ?Template $templateEntity;
 
 
     public int $id;
@@ -32,9 +27,6 @@ class Page  implements EntityInterface
 
     public string $alias;
 
-    public ?int $template_id;
-
-    public ?array $template_input_data;
 
     public ?int $route_id;
 
@@ -43,7 +35,7 @@ class Page  implements EntityInterface
     public string $updated_at; //\DateTimeInterface
 
 
-    public function __construct(PageModel $pageModel, ?Template $templateEntity = null)
+    public function __construct(PageModel $pageModel)
     {
         $modelAsArray = $pageModel->toArray();
 
@@ -53,22 +45,9 @@ class Page  implements EntityInterface
 
         $this->model = $pageModel;
 
-        if(!is_null($templateEntity))
-        {
-            $this->templateEntity = $templateEntity;
-        }
     }
 
 
-    public function getTemplateModel() : ?Model
-    {
-        return $this->getModel()->template()->getResults();
-    }
-
-    public function parseTemplate() : ?string
-    {
-        return $this->parse($this, $this->templateEntity);
-    }
 
 
     public function getModel(): ?Model

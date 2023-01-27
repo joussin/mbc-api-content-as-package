@@ -11,7 +11,6 @@ use MbcApiContent\App\Models\Page;
 use MbcApiContent\App\Models\Route;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Event;
-use MbcApiContent\App\Models\Template;
 use Spatie\Export\Exporter;
 
 class Bootstrap
@@ -50,7 +49,6 @@ class Bootstrap
     {
         Page::observe(ModelObserver::class);
         Route::observe(ModelObserver::class);
-        Template::observe(ModelObserver::class);
     }
 
     public function initClosureEvent(): void
