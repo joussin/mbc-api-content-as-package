@@ -32,7 +32,7 @@ class Bootstrap
         }
         catch (\Exception $e)
         {
-            throw new \Exception('Project not configured');
+            throw new \Exception('Project not configured ' . $e->getMessage());
         }
     }
 

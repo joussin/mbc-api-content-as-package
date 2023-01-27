@@ -14,9 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('page', function (Blueprint $table) {
+
+            $defaults = \MbcApiContent\Models\ModelsDefaults::getDefaults(['name'=> 'page-name']);
+
+
             $table->increments('id');
-            $table->integer('version');
-            $table->string('name');
+            $table->integer('version')->default( $defaults['version'] );
+            $table->string('name')->default( $defaults['name'] );
 
             $table->integer('route_id')->nullable()->unsigned();
 
@@ -29,6 +33,8 @@ return new class extends Migration
             $table->unique(['version', 'name']);
 
         });
+
+        // DB::getPdo()->lastInsertId();
 
 
         Schema::table('page', function (Blueprint $table) {

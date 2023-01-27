@@ -18,8 +18,7 @@ class RouteSeeder extends Seeder
 
 
         $route = [
-            'method' => "GET",
-            'protocol' => "http",
+
             'name' => "route-home",
             'uri' => "/",
             'static_doc_name' => 'home.html',
@@ -29,8 +28,7 @@ class RouteSeeder extends Seeder
         DB::table('route')->insert($route);
 
         $route = [
-            'method' => "GET",
-            'protocol' => "http",
+
             'name' => "route-numero-2",
             'uri' => "/route-numero-2",
             'static_doc_name' => 'route-numero-2.html',

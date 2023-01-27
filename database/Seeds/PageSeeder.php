@@ -16,8 +16,6 @@ class PageSeeder extends Seeder
     public function run()
     {
 
-
-
         $page = [
             'version' => 1,
             'name' => "page-home",
