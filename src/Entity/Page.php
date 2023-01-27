@@ -1,12 +1,12 @@
 <?php
 
-namespace MbcApiContent\src\Entity;
+namespace MbcApiContent\Entity;
 
 use Illuminate\Database\Eloquent\Model;
-use MbcApiContent\src\Entity\Interfaces\EntityInterface;
-use MbcApiContent\src\Entity\Traits\HydrateEntityTrait;
-use MbcApiContent\src\Entity\Validators\ValidationRules;
-use MbcApiContent\src\Models\Page as PageModel;
+use MbcApiContent\Entity\Interfaces\EntityInterface;
+use MbcApiContent\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\Entity\Validators\ValidationRules;
+use MbcApiContent\Models\Page as PageModel;
 
 
 class Page  implements EntityInterface

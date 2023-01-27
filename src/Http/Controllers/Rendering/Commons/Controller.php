@@ -1,12 +1,12 @@
 <?php
 
-namespace MbcApiContent\src\Http\Controllers\Rendering\Commons;
+namespace MbcApiContent\Http\Controllers\Rendering\Commons;
 
 
 use Illuminate\Http\Request;
 
-use MbcApiContent\src\Facades\RouterFacade;
-use MbcApiContent\src\Services\RenderServiceInterface;
+use MbcApiContent\Facades\RouterFacade;
+use MbcApiContent\Services\RenderServiceInterface;
 
 class Controller extends \App\Http\Controllers\Controller
 {

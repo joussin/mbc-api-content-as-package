@@ -1,15 +1,15 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route as RouterFacade;
-use MbcApiContent\src\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
 {
@@ -18,13 +18,13 @@ class RouterService implements RouterServiceInterface
  *
  * Les différents objets des routes:
  *
- *  RouteEntity: custom Route Object : \MbcApiContent\App\Entity\RouteEntity
- *  RouteModel : custom Route DB model : \MbcApiContent\App\Models\Route
+ *  RouteEntity: custom Route Object : \MbcApiContent\Entity\RouteEntity
+ *  RouteModel : custom Route DB model : \MbcApiContent\Models\Route
  *  Route/LaravelRoute: laravel route Object : \Illuminate\Routing\Route
  *  Router: laravel router Object : \Illuminate\Routing\Router
  *
  *  \Illuminate\Support\Facades\Route as RouterFacade: laravel router Object facade
- *  \MbcApiContent\App\Services\RouterService as RouterFacade: custom router service Object facade
+ *  \MbcApiContent\Services\RouterService as RouterFacade: custom router service Object facade
  *
  *  Collection RouterService::routesModelCollection : RouteModel[] Collection
  *  Collection RouterService::routesEntityCollection : RouteEntity[] Collection

@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
 
 use Illuminate\Http\Request;
@@ -11,11 +11,11 @@ use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Route as RouteModel;
 
-use MbcApiContent\src\Entity\Page as PageEntity;
-use MbcApiContent\src\Models\Page as PageModel;
+use MbcApiContent\Entity\Page as PageEntity;
+use MbcApiContent\Models\Page as PageModel;
 
 
 

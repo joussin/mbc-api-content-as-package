@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
 
 use Illuminate\Http\Request;
@@ -8,17 +8,17 @@ use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 
 
-use MbcApiContent\src\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Entity\Traits\HydrateEntityTrait;
-use MbcApiContent\src\Facades\RouterFacade;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\Facades\RouterFacade;
+use MbcApiContent\Models\Route as RouteModel;
 
-use MbcApiContent\src\Entity\Page as PageEntity;
-use MbcApiContent\src\Models\Page as PageModel;
+use MbcApiContent\Entity\Page as PageEntity;
+use MbcApiContent\Models\Page as PageModel;
 
 class RenderService implements RenderServiceInterface
 {

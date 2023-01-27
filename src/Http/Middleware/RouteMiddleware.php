@@ -1,12 +1,12 @@
 <?php
 
 
-namespace MbcApiContent\src\Http\Middleware;
+namespace MbcApiContent\Http\Middleware;
 
 use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use MbcApiContent\src\Facades\RouterFacade;
+use MbcApiContent\Facades\RouterFacade;
 
 
 class RouteMiddleware

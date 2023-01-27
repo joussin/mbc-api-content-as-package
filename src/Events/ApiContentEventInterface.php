@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\src\Events;
+namespace MbcApiContent\Events;
 
 interface ApiContentEventInterface
 {

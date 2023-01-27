@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
 
 interface ApiServiceInterface

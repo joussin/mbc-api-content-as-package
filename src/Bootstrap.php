@@ -1,9 +1,9 @@
 <?php
 
-namespace MbcApiContent\src;
+namespace MbcApiContent;
 
-use MbcApiContent\src\Events\ApiContentEventListener;
-use MbcApiContent\src\Facades\RouterFacade;
+use MbcApiContent\Events\ApiContentEventListener;
+use MbcApiContent\Facades\RouterFacade;
 use Illuminate\Support\Facades\Schema;
 
 class Bootstrap

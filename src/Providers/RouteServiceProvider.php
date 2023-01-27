@@ -3,7 +3,7 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Facades\Route;
-use MbcApiContent\src\Http\Middleware\RouteMiddleware;
+use MbcApiContent\Http\Middleware\RouteMiddleware;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -29,11 +29,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () use($apiPrefix, $backofficePrefix) {
             Route::middleware('api')
                 ->prefix($apiPrefix)
-                ->group(__DIR__.'/../'  . 'routes/api.php');
+                ->group(__DIR__.'/../../'  . 'routes/api.php');
 
             Route::middleware('web')
                 ->prefix($backofficePrefix)
-                ->group(__DIR__.'/../'  . 'routes/backoffice.php');
+                ->group(__DIR__.'/../../'  . 'routes/backoffice.php');
         });
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace MbcApiContent\src\Events;
+namespace MbcApiContent\Events;
 
 use Illuminate\Support\Facades\Event;
-use MbcApiContent\src\Models\Page;
-use MbcApiContent\src\Models\Route;
+use MbcApiContent\Models\Page;
+use MbcApiContent\Models\Route;
 
 class ApiContentEventListener
 {
@@ -113,8 +113,8 @@ class ApiContentEventListener
 
             foreach ($eventActions as $eventAction)
             {
-                Page::getEventDispatcher()->forget("eloquent.$eventAction: MbcApiContent\App\Models\Page");
-                Route::getEventDispatcher()->forget("eloquent.$eventAction: MbcApiContent\App\Models\Route");
+                Page::getEventDispatcher()->forget("eloquent.$eventAction: MbcApiContent\Models\Page");
+                Route::getEventDispatcher()->forget("eloquent.$eventAction: MbcApiContent\Models\Route");
             }
         }
     }

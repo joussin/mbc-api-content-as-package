@@ -70,7 +70,7 @@ Boot app : migrate db before
 
 ```php
 use Illuminate\Support\ServiceProvider;
-    use MbcApiContent\src\Bootstrap;
+    use MbcApiContent\Bootstrap;
     
     class AppServiceProvider extends ServiceProvider
     {
@@ -163,13 +163,13 @@ class CustomEvent implements ApiContentEventInterface
 
 Listener:
 ```php
-MbcApiContent\src\Events\ApiContentEventListenerResolver
+MbcApiContent\Events\ApiContentEventListenerResolver
 ```        
         
 Event Dispatched callback:
 
 ```php
-MbcApiContent\src\Events\ApiContentEventListener::eventClosure
+MbcApiContent\Events\ApiContentEventListener::eventClosure
 ```
 
 Dispatch event:

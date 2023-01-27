@@ -1,10 +1,10 @@
 <?php
 
-namespace MbcApiContent\src\Models;
+namespace MbcApiContent\Models;
 
 
 use Illuminate\Support\Facades\Log;
-use MbcApiContent\src\Models\Route;
+use MbcApiContent\Models\Route;
 
 
 class Page  extends BaseModel

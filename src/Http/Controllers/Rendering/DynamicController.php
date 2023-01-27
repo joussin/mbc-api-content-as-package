@@ -1,10 +1,10 @@
 <?php
 
-namespace MbcApiContent\src\Http\Controllers\Rendering;
+namespace MbcApiContent\Http\Controllers\Rendering;
 
 use Illuminate\Http\Request;
-use MbcApiContent\src\Facades\RouterFacade;
-use MbcApiContent\src\Http\Controllers\Rendering\Commons\Controller;
+use MbcApiContent\Facades\RouterFacade;
+use MbcApiContent\Http\Controllers\Rendering\Commons\Controller;
 
 
 class DynamicController extends Controller

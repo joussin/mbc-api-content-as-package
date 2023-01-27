@@ -3,17 +3,17 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Collection;
-use MbcApiContent\src\Bootstrap;
-use MbcApiContent\src\Entity\Collections\LaravelRouteCollection;
-use MbcApiContent\src\Entity\Collections\LaravelRouteCollectionInterface;
-use MbcApiContent\src\Entity\Collections\RouteEntityCollection;
-use MbcApiContent\src\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\src\Events\ApiContentEventListener;
-use MbcApiContent\src\Models\Route as RouteModel;
-use MbcApiContent\src\Services\RenderService;
-use MbcApiContent\src\Services\RenderServiceInterface;
-use MbcApiContent\src\Services\RouterService;
-use MbcApiContent\src\Services\RouterServiceInterface;
+use MbcApiContent\Bootstrap;
+use MbcApiContent\Entity\Collections\LaravelRouteCollection;
+use MbcApiContent\Entity\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\Entity\Collections\RouteEntityCollection;
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\Events\ApiContentEventListener;
+use MbcApiContent\Models\Route as RouteModel;
+use MbcApiContent\Services\RenderService;
+use MbcApiContent\Services\RenderServiceInterface;
+use MbcApiContent\Services\RouterService;
+use MbcApiContent\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -94,7 +94,7 @@ class MainServiceProvider extends ServiceProvider
         $this->app->bind(LaravelRouteCollectionInterface::class, LaravelRouteCollection::class);
 
         $this->mergeConfigFrom(
-            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../config/mbc-api-content-config.php') ,
+            file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../../config/mbc-api-content-config.php') ,
             'mbc_api_content_config'
         );
 
@@ -107,7 +107,7 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'api_content_views'); // return view('api_content_views::dashboard');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'api_content_views'); // return view('api_content_views::dashboard');
 
         if ($this->app->runningInConsole()) {
 
@@ -122,16 +122,16 @@ class MainServiceProvider extends ServiceProvider
         try{
 
             $this->publishes([
-                __DIR__.'/../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
+                __DIR__.'/../../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
             ]);
 
             $this->publishes([
-                __DIR__.'/../public/api/' => public_path('api/'),
+                __DIR__.'/../../public/api/' => public_path('api/'),
             ]);
 
 
             $this->publishes([
-                __DIR__.'/../resources/views/' => resource_path('views/vendor/api_content_views/'),
+                __DIR__.'/../../resources/views/' => resource_path('views/vendor/api_content_views/'),
             ]);
 
         }

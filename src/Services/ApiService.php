@@ -1,9 +1,9 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
-use MbcApiContent\src\Models\Page;
-use MbcApiContent\src\Models\Route;
+use MbcApiContent\Models\Page;
+use MbcApiContent\Models\Route;
 
 class ApiService implements ApiServiceInterface
 {

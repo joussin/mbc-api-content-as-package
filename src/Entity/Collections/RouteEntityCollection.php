@@ -1,12 +1,12 @@
 <?php
 
-namespace MbcApiContent\src\Entity\Collections;
+namespace MbcApiContent\Entity\Collections;
 
 
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Facades\RouterFacade;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Facades\RouterFacade;
 
 /**
  * @template TKey of array-key

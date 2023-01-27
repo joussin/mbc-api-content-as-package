@@ -1,15 +1,15 @@
 <?php
 
-namespace MbcApiContent\src\Entity;
+namespace MbcApiContent\Entity;
 
 use Illuminate\Routing\Route as LaravelRoute;
-use MbcApiContent\src\Entity\Interfaces\EntityInterface;
-use MbcApiContent\src\Entity\Traits\HydrateEntityTrait;
-use MbcApiContent\src\Entity\Traits\RouteEntityTrait;
-use MbcApiContent\src\Entity\Traits\RouteEntityValidatorTrait;
-use MbcApiContent\src\Entity\Validators\ValidationRules;
-use MbcApiContent\src\Http\Controllers\Rendering\MainController;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Interfaces\EntityInterface;
+use MbcApiContent\Entity\Traits\HydrateEntityTrait;
+use MbcApiContent\Entity\Traits\RouteEntityTrait;
+use MbcApiContent\Entity\Traits\RouteEntityValidatorTrait;
+use MbcApiContent\Entity\Validators\ValidationRules;
+use MbcApiContent\Http\Controllers\Rendering\MainController;
+use MbcApiContent\Models\Route as RouteModel;
 
 
 class Route implements EntityInterface
@@ -24,7 +24,7 @@ class Route implements EntityInterface
 
     public const DEFAULT_NAME_PREFIX = "DEFAULT_NAME_PREFIX";
 
-    public const DEFAULT_NAMESPACE = "MbcApiContent\App\Http\Controllers\Rendering\\";
+    public const DEFAULT_NAMESPACE = "MbcApiContent\Http\Controllers\Rendering\\";
 
     /**
      * @var RouteModel

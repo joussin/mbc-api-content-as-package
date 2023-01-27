@@ -1,8 +1,8 @@
 <?php
 
-namespace MbcApiContent\src\Events;
+namespace MbcApiContent\Events;
 
-use MbcApiContent\src\Models\ModelInterface;
+use MbcApiContent\Models\ModelInterface;
 
 class ModelObserver
 {

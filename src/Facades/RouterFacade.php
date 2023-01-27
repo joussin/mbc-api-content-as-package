@@ -1,15 +1,15 @@
 <?php
 
-namespace MbcApiContent\src\Facades;
+namespace MbcApiContent\Facades;
 
 
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
-use MbcApiContent\src\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Route as RouteModel;
 
 /**
  *
@@ -21,7 +21,7 @@ use MbcApiContent\src\Models\Route as RouteModel;
  * @method static RouteEntity createRouteEntityFromRouteModel(RouteModel $routeModel)
  * @method static LaravelRoute addRouteEntityToRouter(RouteEntity $routeEntity)
  *
- * @see \MbcApiContent\src\Services\RouterService;
+ * @see \MbcApiContent\Services\RouterService;
  */
 class RouterFacade  extends Facade
 {

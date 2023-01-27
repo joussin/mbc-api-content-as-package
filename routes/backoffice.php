@@ -19,14 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 
 //// BackofficeController
-Route::get('/', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@index']);
-Route::get('/wysiwyg', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@wysiwyg']);
-Route::get('/wysiwyg/inline', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@wysiwygInline']);
+Route::get('/', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@index']);
+Route::get('/wysiwyg', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@wysiwyg']);
+Route::get('/wysiwyg/inline', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@wysiwygInline']);
 
-Route::get('/wysiwyg/edit/{templateId}', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@wysiwygEdit']);
-Route::get('/wysiwyg/inline/edit/{templateId}', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@wysiwygInlineEdit']);
+Route::get('/wysiwyg/edit/{templateId}', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@wysiwygEdit']);
+Route::get('/wysiwyg/inline/edit/{templateId}', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@wysiwygInlineEdit']);
 
-Route::get('/wysiwyg/editor_example', ['uses' => '\MbcApiContent\App\Http\Controllers\Backoffice\BackofficeController@editorExample']);
+Route::get('/wysiwyg/editor_example', ['uses' => '\MbcApiContent\Http\Controllers\Backoffice\BackofficeController@editorExample']);
 
 
 

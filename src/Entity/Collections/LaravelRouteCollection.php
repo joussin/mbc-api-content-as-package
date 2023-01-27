@@ -1,13 +1,13 @@
 <?php
 
-namespace MbcApiContent\src\Entity\Collections;
+namespace MbcApiContent\Entity\Collections;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use MbcApiContent\src\Facades\RouterFacade;
+use MbcApiContent\Facades\RouterFacade;
 
 
 /**

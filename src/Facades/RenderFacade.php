@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\src\Facades;
+namespace MbcApiContent\Facades;
 
 
 use Illuminate\Http\Request;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static ?string getHtml()
  * @method static void requestToRender(Request $request)
  *
- * @see \MbcApiContent\src\Services\RenderService;
+ * @see \MbcApiContent\Services\RenderService;
  */
 class RenderFacade  extends Facade
 {

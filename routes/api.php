@@ -22,25 +22,25 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    Route::get('/route', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getAllRoute'])
+    Route::get('/route', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@getAllRoute'])
         ;
-    Route::get('/route/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getRoute'])
+    Route::get('/route/{id}', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@getRoute'])
         ;
-    Route::put('/route/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@updateRoute'])
-        ;
-
-    Route::post('/route', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@postRoute'])
+    Route::put('/route/{id}', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@updateRoute'])
         ;
 
-
-    Route::get('/page', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getAllPage'])
-        ;
-    Route::get('/page/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@getPage'])
-        ;
-     Route::put('/page/{id}', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@updatePage'])
+    Route::post('/route', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@postRoute'])
         ;
 
-    Route::post('/page', ['uses' => '\MbcApiContent\App\Http\Controllers\Api\ApiController@postPage'])
+
+    Route::get('/page', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@getAllPage'])
+        ;
+    Route::get('/page/{id}', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@getPage'])
+        ;
+     Route::put('/page/{id}', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@updatePage'])
+        ;
+
+    Route::post('/page', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@postPage'])
         ;
 
 

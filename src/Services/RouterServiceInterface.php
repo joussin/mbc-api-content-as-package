@@ -1,14 +1,14 @@
 <?php
 
-namespace MbcApiContent\src\Services;
+namespace MbcApiContent\Services;
 
 
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
-use MbcApiContent\src\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\src\Entity\Route as RouteEntity;
-use MbcApiContent\src\Models\Route as RouteModel;
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
+use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Route as RouteModel;
 
 interface RouterServiceInterface
 {
