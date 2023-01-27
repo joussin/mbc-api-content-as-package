@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('page', function (Blueprint $table) {
+        $defaults = \MbcApiContent\Models\ModelsDefaults::getDatas('page');
 
-            $defaults = \MbcApiContent\Models\ModelsDefaults::getDefaults(['name'=> 'page-name']);
+
+
+        Schema::create('page', function (Blueprint $table) use($defaults) {
 
 
             $table->increments('id');
@@ -34,12 +36,16 @@ return new class extends Migration
 
         });
 
-        // DB::getPdo()->lastInsertId();
 
 
+        // many page to one route
         Schema::table('page', function (Blueprint $table) {
-            $table->foreign('route_id', 'page_route_id_foreign')
-                ->references('id')->on('route')->nullOnDelete();
+            $table->foreign(
+                'route_id',
+                'page_route_id_foreign')
+                ->references('id')
+                ->on('route')
+                ->nullOnDelete();
         });
 
     }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,15 +14,41 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('route', function (Blueprint $table) {
 
-            $defaults = \MbcApiContent\Models\ModelsDefaults::getDefaults(['name'=> 'route-name']);
+//                $defaults = \MbcApiContent\Models\ModelsDefaults::
+//                getDatas('route', 3, 0, [
+//                    [
+//                        'uri' => '/',
+//                        'static_uri' => '/',
+//                        'static_doc_name' => 'index.html',
+//                    ],
+//                    [
+//                        'uri' => '/route-nb-2',
+//                        'static_uri' => '/route-nb-2/page.html',
+//                        'static_doc_name' => 'page.html',
+//                    ],
+//                    [
+//                        'uri' => '/route-nb-3/{id}',
+//                        'static_uri' => '/route-nb-3/{id}/page.html',
+//                        'static_doc_name' => 'page.html',
+//                    ],
+//                ]);
+// DB::table('route')->insert($route);
+//                dd($defaults);
+
+
+        $defaults = \MbcApiContent\Models\ModelsDefaults::getDatas('route');
+        dd($defaults);
+
+        Schema::create('route', function (Blueprint $table) use($defaults) {
+
 
 
             $table->increments('id');
 
-            $table->string('method')->default('GET');
-            $table->enum('protocol', ['http', 'https'])->default('http');
+            $table->string('method')->default($defaults['method']);
+            $table->enum('protocol', ['http', 'https'])->default($defaults['protocol']);
+
 
             $table->string('name')->default( $defaults['name'] );
             $table->string('uri')->default($defaults['uri'] );
@@ -35,7 +62,7 @@ return new class extends Migration
             $table->string('rewrite_rule')->nullable();
 
 
-            $table->enum('status', ['ONLINE', 'OFFLINE'])->default('ONLINE');
+            $table->enum('status', ['ONLINE', 'OFFLINE'])->default($defaults['status']);
             $table->date('active_start_at')->nullable();
             $table->date('active_end_at')->nullable();
 
