@@ -36,8 +36,8 @@ class Route  extends BaseModel
         'query_parameters' => 'array',
     ];
 
-
-    public function pageWith($laravelRouteParameters)
+    // $laravelRouteParameters = ['id'=> 1]
+    public function pageWith(array $laravelRouteParameters = [])
     {
         $pages = $this->pages()->getResults();
 
@@ -54,7 +54,6 @@ class Route  extends BaseModel
 
                     foreach($this->path_parameters as $parameter)
                     {
-
                         if(
                             !isset($page->path_parameters[$parameter]) ||
                             !isset($laravelRouteParameters[$parameter]) ||
