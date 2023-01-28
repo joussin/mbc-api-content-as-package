@@ -50,14 +50,15 @@ class ModelsDefaults
     protected static function set_common_defaults()
     {
         self::$COMMON_DEFAULTS['version'] = 1;
-        self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name-' . self::$counter;
+//        self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name-' . self::$counter;
+        self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name';
     }
 
 
     // MODELS
     public static array $PAGE_DEFAULTS = [
         // required to merge
-        'name'     => "",
+        'name'     => null,
 
         // required
         'version'  => null,
@@ -84,7 +85,7 @@ class ModelsDefaults
 
     public static array $ROUTE_DEFAULTS = [
         // required to merge
-        'name'            => "",
+        'name'            => null,
 
         // required
         'method'          => 'GET',
