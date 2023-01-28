@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+
+    use \MbcApiContent\Models\Migrations\MigrationHelperTrait;
     /**
      * Run the migrations.
      *
@@ -13,12 +15,15 @@ return new class extends Migration
      */
     public function up()
     {
-        $defaults = \MbcApiContent\Models\ModelsDefaults::getDatas('page');
 
 
+        Schema::create('page', function (Blueprint $table) {
 
-        Schema::create('page', function (Blueprint $table) use($defaults) {
+            $defaults = $this->getDefaults('page');
 
+            dd(
+                $defaults
+            );
 
             $table->increments('id');
             $table->integer('version')->default( $defaults['version'] );

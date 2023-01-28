@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use \MbcApiContent\Models\Migrations\MigrationHelperTrait;
+
     /**
      * Run the migrations.
      *
@@ -15,32 +17,11 @@ return new class extends Migration
     public function up()
     {
 
-//                $defaults = \MbcApiContent\Models\ModelsDefaults::
-//                getDatas('route', 3, 0, [
-//                    [
-//                        'uri' => '/',
-//                        'static_uri' => '/',
-//                        'static_doc_name' => 'index.html',
-//                    ],
-//                    [
-//                        'uri' => '/route-nb-2',
-//                        'static_uri' => '/route-nb-2/page.html',
-//                        'static_doc_name' => 'page.html',
-//                    ],
-//                    [
-//                        'uri' => '/route-nb-3/{id}',
-//                        'static_uri' => '/route-nb-3/{id}/page.html',
-//                        'static_doc_name' => 'page.html',
-//                    ],
-//                ]);
-// DB::table('route')->insert($route);
-//                dd($defaults);
+
+        Schema::create('route', function (Blueprint $table) {
 
 
-        $defaults = \MbcApiContent\Models\ModelsDefaults::getDatas('route');
-        dd($defaults);
-
-        Schema::create('route', function (Blueprint $table) use($defaults) {
+            $defaults = $this->getDefaults('route');
 
 
 

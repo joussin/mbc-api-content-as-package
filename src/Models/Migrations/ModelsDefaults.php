@@ -1,19 +1,29 @@
 <?php
 
-namespace MbcApiContent\Models;
+namespace MbcApiContent\Models\Migrations;
 
 class ModelsDefaults
 {
-    public static int $counter = 0;
-    public static int $autoIncrementId = 0;
+    protected static int $counter = 0;
+    protected static int $autoIncrementId = 0;
 
-    public static string $tableName = 'table';
-    public static string $uniqid = '123456';
+    protected static string $tableName = 'table';
+    protected static string $uniqid = '123456';
 
-    public static int $version = 1;
-    public static string $name = 'name';
+    protected static int $version = 1;
+    protected static string $name = 'name';
 
-    public static array $FINAL_DEFAULTS = [];
+    protected static function hydrateObj($tableName)
+    {
+        self::$tableName = $tableName;
+        self::$uniqid = uniqid();
+
+        self::$name = $tableName . '-name-' . self::$uniqid;
+
+        self::$counter++;
+        self::$autoIncrementId++;
+    }
+
 
     public static array $COMMON_DEFAULTS = [
         // infos
@@ -31,6 +41,18 @@ class ModelsDefaults
         'updated_at' => null,
     ];
 
+    protected static function set_common_defaults()
+    {
+        // default $COMMON_DEFAULTS values
+        self::$COMMON_DEFAULTS['counter'] = self::$counter;
+        self::$COMMON_DEFAULTS['autoIncrementId'] = self::$autoIncrementId;
+
+        self::$COMMON_DEFAULTS['uniq'] = self::$uniqid;
+
+        self::$COMMON_DEFAULTS['version'] = self::$version;
+        self::$COMMON_DEFAULTS['tableName'] = self::$tableName;
+        self::$COMMON_DEFAULTS['name'] = self::$name;
+    }
 
     // MODELS
     public static array $PAGE_DEFAULTS = [
@@ -94,35 +116,29 @@ class ModelsDefaults
     ];
 
 
-    protected static function setObjDefaults($tableName)
-    {
-        self::$tableName = $tableName;
-        self::$uniqid = uniqid();
-        
-        self::$name = $tableName . '-name-' . self::$uniqid;
-
-        self::$counter++;
-        self::$autoIncrementId++;
-    }
-
-    protected static function setCommonDefaults()
-    {
-        // default $COMMON_DEFAULTS values
-        self::$COMMON_DEFAULTS['counter'] = self::$counter;
-        self::$COMMON_DEFAULTS['autoIncrementId'] = self::$autoIncrementId;
-
-        self::$COMMON_DEFAULTS['uniq'] = self::$uniqid;
-
-        self::$COMMON_DEFAULTS['version'] = self::$version;
-        self::$COMMON_DEFAULTS['tableName'] = self::$tableName;
-        self::$COMMON_DEFAULTS['name'] = self::$name;
-    }
-
-
-    protected static function merge_common_and_table_defaults(bool $overrideTableDefaults = false): array
+    protected static function get_table_defaults(): array
     {
         $table_defaults_name = strtoupper(self::$tableName . '_defaults');
-        $table_defaults = self::$$table_defaults_name;
+
+        return self::$$table_defaults_name;
+    }
+
+    protected static function set_table_defaults(array $table_defaults): void
+    {
+        $table_defaults_name = strtoupper(self::$tableName . '_defaults');
+
+        self::$$table_defaults_name = $table_defaults;
+    }
+
+
+    public static array $FINAL_DEFAULTS = [];
+
+
+
+    // private generate methods
+    protected static function merge_common_and_table_defaults(bool $overrideTableDefaults = false): array
+    {
+        $table_defaults = self::get_table_defaults();
 
         foreach ($table_defaults as $k => $v) {
             if (isset(self::$COMMON_DEFAULTS[$k]) && self::$COMMON_DEFAULTS[$k] != $v) {
@@ -132,31 +148,45 @@ class ModelsDefaults
 
         if($overrideTableDefaults)
         {
-            self::$$table_defaults_name = $table_defaults;
+            self::set_table_defaults($table_defaults);
         }
 
         return $table_defaults;
     }
 
-
-    protected static function getDefaults($tableName, array $replaces = []): array
+    protected static function replace_table_defaults(bool $overrideTableDefaults = false, array $replacesDatas = []): array
     {
-        self::setObjDefaults($tableName);
-        self::setCommonDefaults();
+        $table_defaults = self::get_table_defaults();
 
-        $defaults = self::merge_common_and_table_defaults();
-
-        foreach ($replaces as $key => $value) {
-            $defaults[$key] = $value;
+        foreach ($replacesDatas as $key => $value) {
+            $table_defaults[$key] = $value;
         }
 
-        return $defaults;
+        if($overrideTableDefaults)
+        {
+            self::set_table_defaults($table_defaults);
+        }
+
+        return $table_defaults;
+    }
+
+    protected static function getTableDefaultsDatas($tableName, array $replacesDatas = []): array
+    {
+        self::hydrateObj($tableName);
+        self::set_common_defaults();
+
+        $table_defaults = self::merge_common_and_table_defaults();
+
+        $table_defaults = self::replace_table_defaults(false, $replacesDatas);
+
+        return $table_defaults;
     }
 
 
     // public
-    // $replacesArray => [ ['key'=> 'value'] ]
-    public static function getDatas($tableName, int $nb = 1, int $currentAutoIncrementId = 0, array $replacesArray = []): ?array
+    // $replacesDatasArray : force data value for key
+    // $replacesDatasArray => [ ['key'=> 'value'] ]
+    public static function getDatas($tableName, int $nb = 1, int $currentAutoIncrementId = 0, array $replacesDatasArray = []): ?array
     {
         $datas = [];
 
@@ -164,21 +194,9 @@ class ModelsDefaults
             self::$autoIncrementId = $currentAutoIncrementId;
         }
 
-//        if ($nb == 1) {
-//            $replaces = !empty($replacesArray[0]) ? ($replacesArray[0]) : [];
-//
-//            $datas[] = self::getDefaults($tableName, $replaces);
-//        } else if ($nb > 1) {
-//
-//            for ($i = 0; $i < $nb; $i++) {
-//                $replaces = !empty($replacesArray[$i]) ? ($replacesArray[$i]) : [];
-//                $datas[] = self::getDefaults($tableName, $replaces);
-//            }
-//        }
-
         for ($i = 0; $i < $nb; $i++) {
-            $replaces = !empty($replacesArray[$i]) ? ($replacesArray[$i]) : [];
-            $datas[] = self::getDefaults($tableName, $replaces);
+            $replacesDatas = !empty($replacesDatasArray[$i]) ? ($replacesDatasArray[$i]) : [];
+            $datas[] = self::getTableDefaultsDatas($tableName, $replacesDatas);
         }
 
         self::$FINAL_DEFAULTS = $datas;
