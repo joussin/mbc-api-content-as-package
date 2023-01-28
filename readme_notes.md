@@ -1,12 +1,4 @@
-
-## Event
-
-event(new ApiContentEvent());
-
-InstallServiceProvider
-
-ApiContentEventInterface
-
+ 
 
 // https://laravel.com/docs/9.x/packages
 

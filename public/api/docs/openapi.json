@@ -3,19 +3,19 @@
     "info": {
         "title": "Swagger ApiContent",
         "description": "ApiContent",
-        "termsOfService": "http://swagger.io/terms/",
+        "termsOfService": "https://github.com/joussin/mbc-api-content-as-package",
         "contact": {
             "email": "apiteam@swagger.io"
         },
         "license": {
             "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "url": "https://github.com/joussin/mbc-api-content-as-package"
         },
         "version": "1.0.17"
     },
     "externalDocs": {
         "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
+        "url": "https://github.com/joussin/mbc-api-content-as-package"
     },
     "servers": [
         {
@@ -23,14 +23,6 @@
         }
     ],
     "tags": [
-        {
-            "name": "Page",
-            "description": "Page",
-            "externalDocs": {
-                "description": "Find out more",
-                "url": "http://swagger.io"
-            }
-        },
         {
             "name": "Route",
             "description": "Route",
@@ -40,8 +32,8 @@
             }
         },
         {
-            "name": "Template",
-            "description": "Template",
+            "name": "Page",
+            "description": "Page",
             "externalDocs": {
                 "description": "Find out more",
                 "url": "http://swagger.io"
@@ -50,163 +42,6 @@
     ],
     "paths": {
 
-
-
-        "/page" : {
-            "get": {
-                "tags": [
-                    "Page"
-                ],
-                "summary": "Find all Page",
-                "description": "Returns a all Page",
-                "operationId": "getPageAll",
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/Page"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Page not found"
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Page"
-                ],
-                "summary": "Add a new Page",
-                "description": "Add a new Page",
-                "operationId": "addPage",
-                "requestBody": {
-                    "description": "Create a new Page",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Page"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Page"
-                                }
-                            }
-                        }
-                    },
-                    "405": {
-                        "description": "Invalid input"
-                    }
-                }
-            }
-        },
-        "/page/{id}": {
-            "get": {
-                "tags": [
-                    "Page"
-                ],
-                "summary": "Find Page",
-                "description": "Returns a single Page",
-                "operationId": "getPageById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Page to return",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Page"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Page not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Page"
-                ],
-                "summary": "Update Page",
-                "description": "Update a single Page",
-                "operationId": "getUpdateById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Page to Update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "description": "Update new Page",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Page"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Page"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Page not found"
-                    }
-                }
-            }
-        },
 
         "/route" : {
             "get": {
@@ -364,26 +199,23 @@
             }
         },
 
-
-
-        "/template" : {
+        "/page" : {
             "get": {
                 "tags": [
-                    "Template"
+                    "Page"
                 ],
-                "summary": "Find all Template",
-                "description": "Returns a all Template",
-                "operationId": "getTemplateAll",
+                "summary": "Find all Page",
+                "description": "Returns a all Page",
+                "operationId": "getPageAll",
                 "responses": {
                     "200": {
                         "description": "successful operation",
                         "content": {
-
                             "application/json": {
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/Template"
+                                        "$ref": "#/components/schemas/Page"
                                     }
                                 }
                             }
@@ -393,23 +225,23 @@
                         "description": "Invalid ID supplied"
                     },
                     "404": {
-                        "description": "Template not found"
+                        "description": "Page not found"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "Template"
+                    "Page"
                 ],
-                "summary": "Add a new Template",
-                "description": "Add a new Template",
-                "operationId": "addTemplate",
+                "summary": "Add a new Page",
+                "description": "Add a new Page",
+                "operationId": "addPage",
                 "requestBody": {
-                    "description": "Create a new Template",
+                    "description": "Create a new Page",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Template"
+                                "$ref": "#/components/schemas/Page"
                             }
                         }
                     },
@@ -422,7 +254,7 @@
 
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Template"
+                                    "$ref": "#/components/schemas/Page"
                                 }
                             }
                         }
@@ -433,19 +265,19 @@
                 }
             }
         },
-        "/template/{id}": {
+        "/page/{id}": {
             "get": {
                 "tags": [
-                    "Template"
+                    "Page"
                 ],
-                "summary": "Find Template",
-                "description": "Returns a single Template",
-                "operationId": "getTemplateById",
+                "summary": "Find Page",
+                "description": "Returns a single Page",
+                "operationId": "getPageById",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID of Template to return",
+                        "description": "ID of Page to return",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -457,10 +289,9 @@
                     "200": {
                         "description": "successful operation",
                         "content": {
-
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Template"
+                                    "$ref": "#/components/schemas/Page"
                                 }
                             }
                         }
@@ -469,22 +300,22 @@
                         "description": "Invalid ID supplied"
                     },
                     "404": {
-                        "description": "Template not found"
+                        "description": "Page not found"
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "Template"
+                    "Page"
                 ],
-                "summary": "Update Template",
-                "description": "Update a single Template",
-                "operationId": "UpdateTemplateById",
+                "summary": "Update Page",
+                "description": "Update a single Page",
+                "operationId": "getUpdateById",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "ID of Template to Update",
+                        "description": "ID of Page to Update",
                         "required": true,
                         "schema": {
                             "type": "integer",
@@ -493,11 +324,11 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Update a Template",
+                    "description": "Update new Page",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Template"
+                                "$ref": "#/components/schemas/Page"
                             }
                         }
                     },
@@ -507,10 +338,9 @@
                     "200": {
                         "description": "successful operation",
                         "content": {
-
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Template"
+                                    "$ref": "#/components/schemas/Page"
                                 }
                             }
                         }
@@ -519,11 +349,12 @@
                         "description": "Invalid ID supplied"
                     },
                     "404": {
-                        "description": "Template not found"
+                        "description": "Page not found"
                     }
                 }
             }
         }
+
 
     },
     "components": {
@@ -629,20 +460,6 @@
                     },
 
 
-                    "template_id": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                    },
-
-
-                    "template_input_data": {
-                        "type": "object",
-                        "example": {
-                            "variable_name_1" : "value_1","variable_name_2" : "value_2"
-                        }
-                    },
-
                     "route_id": {
                         "type": "integer",
                         "format": "int64",
@@ -650,33 +467,6 @@
                     }
 
 
-                }
-            },
-            "Template": {
-                "type": "object",
-                "properties": {
-
-                    "version": {
-                        "type": "integer",
-                        "format": "int64",
-                        "example": 1
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "template-n-1"
-                    },
-                    "template_data": {
-                        "type": "object",
-                        "example": [
-                            "variable_name_1" ,"variable_name_2"
-                        ]
-                    },
-
-                    "template_content": {
-                        "type": "string",
-                        "format": "html",
-                        "example": "<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"utf-8\" /></head><body></body></html>"
-                    }
                 }
             }
         }
