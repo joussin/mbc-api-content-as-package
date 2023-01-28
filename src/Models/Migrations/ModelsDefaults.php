@@ -171,6 +171,13 @@ class ModelsDefaults
 
         $table_datas = self::replace_table_defaults(false, $replacesDatas);
 
+        if(isset($table_datas['unique'])){
+            unset($table_datas['unique']);
+        }
+        if(isset($table_datas['foreign'])){
+            unset($table_datas['foreign']);
+        }
+
         return $table_datas;
     }
 

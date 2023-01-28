@@ -77,6 +77,8 @@ trait MigrationHelperTrait
             DB::table('route')->insert($datas[0]);
             DB::table('route')->insert($datas[1]);
             DB::table('route')->insert($datas[2]);
+
+
         } else if ($table == 'page') {
 
 
@@ -89,7 +91,8 @@ trait MigrationHelperTrait
             );
 
 
-            DB::table('page')->insert($datas[0]);
+            DB::table('page')->insert($datas);
+
         }
 
     }
