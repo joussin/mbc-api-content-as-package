@@ -10,27 +10,33 @@ class ModelsDefaults
     protected static string $tableName = 'table';
     protected static string $uniqid = '123456';
 
-    protected static int $version = 1;
-    protected static string $name = 'name';
 
     protected static function hydrateObj($tableName)
     {
         self::$tableName = $tableName;
         self::$uniqid = uniqid();
-
-        self::$name = $tableName . '-name-' . self::$uniqid;
-
         self::$counter++;
         self::$autoIncrementId++;
     }
 
+    /*
+       public static array $OBJ = [
+           // infos
+           'counter'         => null,
+           'autoIncrementId' => null,
+           'tableName'       => null,
+           'uniq'            => null,
+       ];
+
+                // default $COMMON_DEFAULTS values
+           self::$COMMON_DEFAULTS['tableName'] = self::$tableName;
+
+           self::$COMMON_DEFAULTS['counter'] = self::$counter;
+           self::$COMMON_DEFAULTS['autoIncrementId'] = self::$autoIncrementId;
+           self::$COMMON_DEFAULTS['uniq'] = self::$uniqid;
+        */
 
     public static array $COMMON_DEFAULTS = [
-        // infos
-        'counter'         => null,
-        'autoIncrementId' => null,
-        'tableName'       => null,
-        'uniq'            => null,
 
         // required to merge
         'version'         => null,
@@ -43,16 +49,10 @@ class ModelsDefaults
 
     protected static function set_common_defaults()
     {
-        // default $COMMON_DEFAULTS values
-        self::$COMMON_DEFAULTS['counter'] = self::$counter;
-        self::$COMMON_DEFAULTS['autoIncrementId'] = self::$autoIncrementId;
-
-        self::$COMMON_DEFAULTS['uniq'] = self::$uniqid;
-
-        self::$COMMON_DEFAULTS['version'] = self::$version;
-        self::$COMMON_DEFAULTS['tableName'] = self::$tableName;
-        self::$COMMON_DEFAULTS['name'] = self::$name;
+        self::$COMMON_DEFAULTS['version'] = 1;
+        self::$COMMON_DEFAULTS['name'] = $tableName . '-name-' . self::$counter;
     }
+
 
     // MODELS
     public static array $PAGE_DEFAULTS = [
@@ -60,7 +60,7 @@ class ModelsDefaults
         'name'     => "",
 
         // required
-        'version'  => 1,
+        'version'  => null,
 
         // nullable
         'route_id' => null,
@@ -131,7 +131,7 @@ class ModelsDefaults
     }
 
 
-    public static array $FINAL_DEFAULTS = [];
+
 
 
 
@@ -170,17 +170,26 @@ class ModelsDefaults
         return $table_defaults;
     }
 
-    protected static function getTableDefaultsDatas($tableName, array $replacesDatas = []): array
+    protected static function getTableDefaults($tableName): array
     {
         self::hydrateObj($tableName);
         self::set_common_defaults();
 
-        $table_defaults = self::merge_common_and_table_defaults();
-
-        $table_defaults = self::replace_table_defaults(false, $replacesDatas);
+        $table_defaults = self::get_table_defaults();
+        $table_datas = self::merge_common_and_table_defaults();
 
         return $table_defaults;
     }
+
+    protected static function getTableDatas($tableName, array $replacesDatas = []): array
+    {
+        $table_defaults = self::getTableDefaults($tableName);
+
+        $table_datas = self::replace_table_defaults(false, $replacesDatas);
+
+        return $table_datas;
+    }
+
 
 
     // public
@@ -196,15 +205,13 @@ class ModelsDefaults
 
         for ($i = 0; $i < $nb; $i++) {
             $replacesDatas = !empty($replacesDatasArray[$i]) ? ($replacesDatasArray[$i]) : [];
-            $datas[] = self::getTableDefaultsDatas($tableName, $replacesDatas);
+            $datas[] = self::getTableDatas($tableName, $replacesDatas);
         }
 
-        self::$FINAL_DEFAULTS = $datas;
-
-        if (count(self::$FINAL_DEFAULTS) > 1) {
-            return self::$FINAL_DEFAULTS;
-        } elseif (count(self::$FINAL_DEFAULTS) == 1) {
-            return self::$FINAL_DEFAULTS[0];
+        if (count($datas) > 1) {
+            return $datas;
+        } elseif (count($datas) == 1) {
+            return $datas[0];
         }
 
         return null;
