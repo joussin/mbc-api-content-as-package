@@ -107,6 +107,10 @@ class Route implements EntityInterface
 
         $modelAsArray = $this->assignProp($modelAsArray);
 
+        if (!\str_contains($this->controller_name, '\\')) {
+            $this->controller_name = self::DEFAULT_NAMESPACE . $this->controller_name;
+        }
+
         $this->route_action = [$this->controller_name, $this->controller_action];
 
         $this->model = $routeModel;

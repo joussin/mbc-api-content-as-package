@@ -53,10 +53,11 @@ trait RouteEntityValidatorTrait
      */
     public function validateControllerAction(?string $controller_name, ?string $controller_action, string $default_namespace, bool $throwException = false) : bool
     {
+
         if (!is_null($controller_name) && !is_null($controller_action)) {
 
             if (!\str_contains($controller_name, '\\')) {
-                $controllerName = $default_namespace . $controller_name;
+                $controller_name = $default_namespace . $controller_name;
             }
 
             $validate = method_exists($controller_name, $controller_action);
