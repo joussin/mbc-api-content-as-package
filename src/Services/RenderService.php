@@ -109,7 +109,7 @@ class RenderService implements RenderServiceInterface
             return false;
         }
 
-        $pageModel = $this->getPageModelByRouteModel($routeModel);
+        $pageModel = $this->getPageModel($routeModel, $laravelRoute);
         if(is_null($pageModel))
         {
             return false;
@@ -120,6 +120,7 @@ class RenderService implements RenderServiceInterface
         {
             return false;
         }
+
 
 
 
@@ -166,9 +167,14 @@ class RenderService implements RenderServiceInterface
         return null;
     }
 
-    public function getPageModelByRouteModel(RouteModel $routeModel): ?PageModel
+    public function getPageModel($routeModel, LaravelRoute $laravelRoute): ?PageModel
     {
-        return $routeModel->pageWithId(2);
+        if( count($this->pages()->getResults()->all() ) == 1)
+        {
+            return $this->pages()->getResults()->first();
+        }
+
+        return $routeModel->pageWith($laravelRoute->parameters);
     }
 
 

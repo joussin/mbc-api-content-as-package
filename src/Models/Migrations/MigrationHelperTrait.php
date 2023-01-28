@@ -71,7 +71,7 @@ trait MigrationHelperTrait
                         'static_doc_name' => 'page.html',
 //                        'controller_name' => 'DynamicController',
                         'controller_action' => 'dynamic',
-                        'path_parameters' => ['id'],
+                        'path_parameters' => json_encode(['id']),
                     ],
                 ]
             );
@@ -85,7 +85,7 @@ trait MigrationHelperTrait
         } else if ($table == 'page') {
 
 
-            $datas = $this->getDatas('page', 3, 0,
+            $datas = $this->getDatas('page', 4, 0,
                 [
                     [
                         'name' => 'page-nb-1',
@@ -98,12 +98,12 @@ trait MigrationHelperTrait
                     [
                         'name' => 'page-nb-3',
                         'route_id' => 3,
-                        'path_parameters' => ['id'=> 1],
+                        'path_parameters' => json_encode(['id'=> 1]),
                     ],
                     [
                         'name' => 'page-nb-4',
                         'route_id' => 3,
-                        'path_parameters' => ['id'=> 2],
+                        'path_parameters' => json_encode(['id'=> 2]),
                     ]
                 ]
             );

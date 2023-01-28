@@ -37,19 +37,45 @@ class Route  extends BaseModel
     ];
 
 
-    public function pageWithId($id)
+    public function pageWith($laravelRouteParameters)
     {
-        $pages = $this->page()->getResults();
+        $pages = $this->pages()->getResults();
 
-        $pages = $pages->filter(function($page) use($id) {
-            return ($page->param == $id);
+        $pages = $pages->filter(function($page) use($laravelRouteParameters) {
+
+            $isThatPage = true;
+
+            // to check
+//            $this->path_parameters
+//                // to check in
+//            $page->path_parameters
+//            // with
+//                $laravelRouteParameters
+
+                    foreach($this->path_parameters as $parameter)
+                    {
+
+                        if(
+                            isset($page->path_parameters[$parameter]) &&
+                            isset($laravelRouteParameters[$parameter]) &&
+                            $page->path_parameters[$parameter] == $laravelRouteParameters[$parameter]
+                        )
+                        {
+//                            $isThatPage = true;
+                        } else {
+                            $isThatPage = false;
+                        }
+
+                    }
+
+            return $isThatPage;
         });
 
         return $pages->first();
     }
 
 
-    public function page()
+    public function pages()
     {
         return $this->hasMany(Page::class);
     }
