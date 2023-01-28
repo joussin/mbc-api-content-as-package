@@ -2,6 +2,8 @@
 
 namespace MbcApiContent\Models\Migrations;
 
+use Illuminate\Support\Facades\DB;
+
 trait MigrationHelperTrait
 {
 
@@ -36,64 +38,59 @@ trait MigrationHelperTrait
 
     public function getDatas(string $tableName, int $nb = 1, int $indexId = 0, array $forceDatas = []): ?array
     {
-        $this->setDatas($tableName,$nb, $indexId, $forceDatas);
+        $this->setDatas($tableName, $nb, $indexId, $forceDatas);
 
         return $this->datas;
     }
 
 
-
     public function seed($table)
     {
 
-if($table == 'route')
-{
+        if ($table == 'route') {
 
 
-        $datas = $this->getDatas('route', 3, 0,
-            [
+            $datas = $this->getDatas('route', 3, 0,
                 [
-                    'name' => 'route-nb-1',
-                    'uri' => '/',
-                    'static_uri' => '/',
-                    'static_doc_name' => 'index.html',
-                ],
-                [
-                    'name' => 'route-nb-2',
-                    'uri' => '/route-nb-2',
-                    'static_uri' => '/route-nb-2/page.html',
-                    'static_doc_name' => 'page.html',
-                ],
-                [
-                    'name' => 'route-nb-3',
-                    'uri' => '/route-nb-3/{id}',
-                    'static_uri' => '/route-nb-3/{id}/page.html',
-                    'static_doc_name' => 'page.html',
-                ],
-            ]
-        );
-
-
-        DB::table('route')->insert($datas[0]);
-        DB::table('route')->insert($datas[1]);
-        DB::table('route')->insert($datas[2]);
-}
-else if($table == 'page')
-{
-
-
-
-        $datas = $this->getDatas('page', 1, 0,
-            [
-                [
-                    'name' => 'page-nb-1',
+                    [
+                        'name'            => 'route-nb-1',
+                        'uri'             => '/',
+                        'static_uri'      => '/',
+                        'static_doc_name' => 'index.html',
+                    ],
+                    [
+                        'name'            => 'route-nb-2',
+                        'uri'             => '/route-nb-2',
+                        'static_uri'      => '/route-nb-2/page.html',
+                        'static_doc_name' => 'page.html',
+                    ],
+                    [
+                        'name'            => 'route-nb-3',
+                        'uri'             => '/route-nb-3/{id}',
+                        'static_uri'      => '/route-nb-3/{id}/page.html',
+                        'static_doc_name' => 'page.html',
+                    ],
                 ]
-            ]
-        );
+            );
 
 
-        DB::table('page')->insert($datas[0]);
-}
+            DB::table('route')->insert($datas[0]);
+            DB::table('route')->insert($datas[1]);
+            DB::table('route')->insert($datas[2]);
+        } else if ($table == 'page') {
+
+
+            $datas = $this->getDatas('page', 1, 0,
+                [
+                    [
+                        'name' => 'page-nb-1',
+                    ]
+                ]
+            );
+
+
+            DB::table('page')->insert($datas[0]);
+        }
 
     }
 
