@@ -2,7 +2,6 @@
 
 namespace MbcApiContent\Providers;
 
-use MbcApiContent\Console\Commands\CommandSeeder;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -27,7 +26,7 @@ class ConsoleServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->commands([
-            CommandSeeder::class
+//            CommandSeeder::class
         ]);
 
     }
