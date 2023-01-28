@@ -37,11 +37,21 @@ class Route  extends BaseModel
     ];
 
 
+    public function pageWithId($id)
+    {
+        $pages = $this->page()->getResults();
+
+        $pages = $pages->filter(function($page) use($id) {
+            return ($page->param == $id);
+        });
+
+        return $pages->first();
+    }
 
 
     public function page()
     {
-        return $this->hasOne(Page::class);
+        return $this->hasMany(Page::class);
     }
 
     public function index(){

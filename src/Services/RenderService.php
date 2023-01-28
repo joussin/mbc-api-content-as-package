@@ -115,15 +115,21 @@ class RenderService implements RenderServiceInterface
             return false;
         }
 
+        $pageEntity = $this->getPageEntityByPageModel($pageModel);
+        if(is_null($pageEntity))
+        {
+            return false;
+        }
 
 
-        if( count($this->propertiesIs(null)) == 7)
+
+        if( count($this->propertiesIs(null)) == 5)
         {
             $this->laravelRoute = $laravelRoute;
             $this->routeModel = $routeModel;
             $this->routeEntity = $routeEntity;
             $this->pageModel = $pageModel;
-//            $this->pageEntity = $pageEntity;
+            $this->pageEntity = $pageEntity;
 
         }
 
@@ -162,7 +168,7 @@ class RenderService implements RenderServiceInterface
 
     public function getPageModelByRouteModel(RouteModel $routeModel): ?PageModel
     {
-        return $routeModel->page()->getResults();
+        return $routeModel->pageWithId(2);
     }
 
 

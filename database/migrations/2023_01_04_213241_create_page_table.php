@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('name')->default( $defaults['name'] );
 
             $table->integer('route_id')->nullable()->unsigned();
+            $table->json('path_parameters')->nullable();
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(\Illuminate\Support\Facades\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

@@ -69,6 +69,9 @@ trait MigrationHelperTrait
                         'uri'             => '/route-nb-3/{id}',
                         'static_uri'      => '/route-nb-3/{id}/page.html',
                         'static_doc_name' => 'page.html',
+//                        'controller_name' => 'DynamicController',
+                        'controller_action' => 'dynamic',
+                        'path_parameters' => ['id'],
                     ],
                 ]
             );
@@ -82,16 +85,34 @@ trait MigrationHelperTrait
         } else if ($table == 'page') {
 
 
-            $datas = $this->getDatas('page', 1, 0,
+            $datas = $this->getDatas('page', 3, 0,
                 [
                     [
                         'name' => 'page-nb-1',
+                        'route_id' => 1,
+                    ],
+                    [
+                        'name' => 'page-nb-2',
+                        'route_id' => 2,
+                    ],
+                    [
+                        'name' => 'page-nb-3',
+                        'route_id' => 3,
+                        'path_parameters' => ['id'=> 1],
+                    ],
+                    [
+                        'name' => 'page-nb-4',
+                        'route_id' => 3,
+                        'path_parameters' => ['id'=> 2],
                     ]
                 ]
             );
 
 
-            DB::table('page')->insert($datas);
+            DB::table('page')->insert($datas[0]);
+            DB::table('page')->insert($datas[1]);
+            DB::table('page')->insert($datas[2]);
+            DB::table('page')->insert($datas[3]);
 
         }
 

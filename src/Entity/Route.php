@@ -11,6 +11,7 @@ use MbcApiContent\Entity\Validators\ValidationRules;
 use MbcApiContent\Http\Controllers\Rendering\MainController;
 use MbcApiContent\Models\Route as RouteModel;
 
+use Illuminate\Database\Eloquent\Model;
 
 class Route implements EntityInterface
 {
@@ -26,10 +27,14 @@ class Route implements EntityInterface
 
     public const DEFAULT_NAMESPACE = "MbcApiContent\Http\Controllers\Rendering\\";
 
+
+
+
     /**
-     * @var RouteModel
+     * @var Model
      */
-    protected $model;
+    public $model;
+
 
     /**
      * @var LaravelRoute $route
@@ -109,6 +114,10 @@ class Route implements EntityInterface
 
 
 
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
 
 
     public function validate(): string

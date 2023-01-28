@@ -30,6 +30,8 @@ class Page  implements EntityInterface
 
     public ?int $route_id;
 
+    public ?array $path_parameters;
+
     public string $created_at;
 
     public string $updated_at; //\DateTimeInterface

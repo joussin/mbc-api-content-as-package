@@ -15,7 +15,14 @@ class MainController extends Controller
 
     public function any(Request $request)
     {
+
         return 'MainController-any';
+    }
+
+    public function dynamic(Request $request, $id)
+    {
+
+        return 'MainController-dynamic' . $id;
     }
 
 

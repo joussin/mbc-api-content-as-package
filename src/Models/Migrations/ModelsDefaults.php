@@ -48,6 +48,7 @@ class ModelsDefaults
 
         // nullable
         'route_id' => null,
+        'path_parameters'   => null,
 
         // unique
         'unique'   => [

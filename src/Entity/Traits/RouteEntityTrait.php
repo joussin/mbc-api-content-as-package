@@ -2,7 +2,7 @@
 
 namespace MbcApiContent\Entity\Traits;
 
-use MbcApiContent\Models\Route as RouteModel;
+
 
 trait RouteEntityTrait
 {
@@ -15,12 +15,6 @@ trait RouteEntityTrait
         return $this->id;
     }
 
-
-
-    public function getModel(): ?RouteModel
-    {
-        return $this->model;
-    }
 
     /**
      * @return mixed|string

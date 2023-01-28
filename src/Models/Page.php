@@ -17,9 +17,13 @@ class Page  extends BaseModel
     protected $fillable = [
         "version",
         "name",
-        "route_id"
+        "route_id",
+        "path_parameters"
     ];
 
+    protected $casts = [
+        'path_parameters' => 'array',
+    ];
 
 
     // doc
@@ -27,7 +31,6 @@ class Page  extends BaseModel
     {
         return $this->belongsTo(Route::class, 'route_id', 'id');
     }
-
 
 
     public function updatedEventCallback() : bool
