@@ -50,7 +50,7 @@ class ModelsDefaults
     protected static function set_common_defaults()
     {
         self::$COMMON_DEFAULTS['version'] = 1;
-        self::$COMMON_DEFAULTS['name'] = $tableName . '-name-' . self::$counter;
+        self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name-' . self::$counter;
     }
 
 
