@@ -56,16 +56,13 @@ class Route  extends BaseModel
                     {
 
                         if(
-                            isset($page->path_parameters[$parameter]) &&
-                            isset($laravelRouteParameters[$parameter]) &&
-                            $page->path_parameters[$parameter] == $laravelRouteParameters[$parameter]
+                            !isset($page->path_parameters[$parameter]) ||
+                            !isset($laravelRouteParameters[$parameter]) ||
+                            !($page->path_parameters[$parameter] == $laravelRouteParameters[$parameter])
                         )
                         {
-//                            $isThatPage = true;
-                        } else {
                             $isThatPage = false;
                         }
-
                     }
 
             return $isThatPage;
