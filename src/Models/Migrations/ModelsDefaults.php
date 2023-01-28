@@ -64,20 +64,20 @@ class ModelsDefaults
 
         // nullable
         'route_id' => null,
-        
+
         // unique
         'unique'   => [
             ['version', 'id'],
             ['version', 'name'],
         ],
-        
+
         'foreign' => [
-             [
-                 'name' => 'page_route_id_foreign',
-                 'column' => 'route_id',
+            [
+                'name' => 'page_route_id_foreign',
+                'column' => 'route_id',
                 'relation_table' => 'route',
                 'relation_column' => 'id',
-                 'type' => 'manyToOne' // many page to one route
+                'type' => 'manyToOne' // many page to one route
             ]
         ]
     ];
@@ -136,7 +136,7 @@ class ModelsDefaults
 
 
     // private generate methods
-    protected static function merge_common_and_table_defaults(bool $overrideTableDefaults = false): array
+    protected static function merge_common_and_table_defaults(bool $overrideTableDefaults = true): array
     {
         $table_defaults = self::get_table_defaults();
 
@@ -154,7 +154,7 @@ class ModelsDefaults
         return $table_defaults;
     }
 
-    protected static function replace_table_defaults(bool $overrideTableDefaults = false, array $replacesDatas = []): array
+    protected static function replace_table_defaults(bool $overrideTableDefaults = true, array $replacesDatas = []): array
     {
         $table_defaults = self::get_table_defaults();
 

@@ -15,15 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-
-
         Schema::create('page', function (Blueprint $table) {
 
             $defaults = $this->getDefaults('page');
 
-            dd(
-                $defaults
-            );
 
             $table->increments('id');
             $table->integer('version')->default( $defaults['version'] );

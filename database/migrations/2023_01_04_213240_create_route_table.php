@@ -17,13 +17,9 @@ return new class extends Migration
     public function up()
     {
 
-
         Schema::create('route', function (Blueprint $table) {
 
-
             $defaults = $this->getDefaults('route');
-
-
 
             $table->increments('id');
 
