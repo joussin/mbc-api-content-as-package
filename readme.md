@@ -92,7 +92,6 @@ php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Da
 migrate by filename:
 ``` bash
 php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213240_create_route_table.php
-php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213241_create_page_table.php
 ```
 
 Custom seed all tables:

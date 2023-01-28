@@ -55,7 +55,10 @@ return new class extends Migration
 
         });
 
+        $this->seed('route');
     }
+
+
 
     /**
      * Reverse the migrations.
