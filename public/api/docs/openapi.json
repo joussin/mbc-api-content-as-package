@@ -1,0 +1,474 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Swagger ApiContent",
+        "description": "ApiContent",
+        "termsOfService": "https://github.com/joussin/mbc-api-content-as-package",
+        "contact": {
+            "email": "apiteam@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://github.com/joussin/mbc-api-content-as-package"
+        },
+        "version": "1.0.17"
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "https://github.com/joussin/mbc-api-content-as-package"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8001/api/v1"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Route",
+            "description": "Route",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        },
+        {
+            "name": "Page",
+            "description": "Page",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        }
+    ],
+    "paths": {
+
+
+        "/route" : {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find all Route",
+                "description": "Returns a all Route",
+                "operationId": "getRouteAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Route"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Add a new Route",
+                "description": "Add a new Route",
+                "operationId": "addRoute",
+                "requestBody": {
+                    "description": "Create a new Route",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Route"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/route/{id}": {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find Route",
+                "description": "Returns a single Route",
+                "operationId": "getRouteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Route to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Update Route",
+                "description": "Update a single Route",
+                "operationId": "UpdateRouteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Route to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update new Route",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Route"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            }
+        },
+
+        "/page" : {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find all Page",
+                "description": "Returns a all Page",
+                "operationId": "getPageAll",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Page"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Add a new Page",
+                "description": "Add a new Page",
+                "operationId": "addPage",
+                "requestBody": {
+                    "description": "Create a new Page",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Page"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/page/{id}": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find Page",
+                "description": "Returns a single Page",
+                "operationId": "getPageById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Page to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Update Page",
+                "description": "Update a single Page",
+                "operationId": "getUpdateById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Page to Update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Update new Page",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Page"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        }
+
+
+    },
+    "components": {
+        "schemas": {
+            "Route": {
+                "type": "object",
+                "properties": {
+
+
+
+                    "method": {
+                        "type": "string",
+                        "example": "GET"
+                    },
+
+                    "protocol": {
+                        "type": "string",
+                        "example": "http"
+                    },
+
+                    "name": {
+                        "type": "string",
+                        "example": "name"
+                    },
+
+                    "uri": {
+                        "type": "string",
+                        "example": "/carte-grise"
+                    },
+                    "controller_name": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "controller_action": {
+                        "type": "string",
+                        "example": "any"
+                    },
+
+
+                    "path_parameters": {
+                        "type": "object",
+                        "example": {}
+                    },
+
+
+                    "query_parameters": {
+                        "type": "object",
+                        "example": {}
+                    },
+
+
+                    "static_doc_name": {
+                        "type": "string",
+                        "example": "carte-grise.html"
+                    },
+                    "static_uri": {
+                        "type": "string",
+                        "example": "/carte-grise.html"
+                    },
+
+                    "domain": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "rewrite_rule": {
+                        "type": "string",
+                        "example": ""
+                    },
+
+                    "status": {
+                        "type": "string",
+                        "description": "Page Status",
+                        "example": "ONLINE",
+                        "enum": [
+                            "ONLINE",
+                            "OFFLINE"
+                        ]
+                    },
+
+                    "active_start_at": {
+                        "type": "string",
+                        "example": "2022-01-01"
+                    },
+                    "active_end_at": {
+                        "type": "string",
+                        "example": "2022-01-10"
+                    }
+                }
+            },
+
+            "Page": {
+                "type": "object",
+                "properties": {
+
+                    "version": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "carte-grise"
+                    },
+
+
+                    "route_id": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    }
+
+
+                }
+            }
+        }
+    }
+}
