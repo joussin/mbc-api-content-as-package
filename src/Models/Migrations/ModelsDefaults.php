@@ -19,22 +19,6 @@ class ModelsDefaults
         self::$autoIncrementId++;
     }
 
-    /*
-       public static array $OBJ = [
-           // infos
-           'counter'         => null,
-           'autoIncrementId' => null,
-           'tableName'       => null,
-           'uniq'            => null,
-       ];
-
-                // default $COMMON_DEFAULTS values
-           self::$COMMON_DEFAULTS['tableName'] = self::$tableName;
-
-           self::$COMMON_DEFAULTS['counter'] = self::$counter;
-           self::$COMMON_DEFAULTS['autoIncrementId'] = self::$autoIncrementId;
-           self::$COMMON_DEFAULTS['uniq'] = self::$uniqid;
-        */
 
     public static array $COMMON_DEFAULTS = [
 
@@ -50,7 +34,6 @@ class ModelsDefaults
     protected static function set_common_defaults()
     {
         self::$COMMON_DEFAULTS['version'] = 1;
-//        self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name-' . self::$counter;
         self::$COMMON_DEFAULTS['name'] = self::$tableName . '-name';
     }
 
@@ -177,7 +160,7 @@ class ModelsDefaults
         self::set_common_defaults();
 
         $table_defaults = self::get_table_defaults();
-        $table_datas = self::merge_common_and_table_defaults();
+        $table_defaults = self::merge_common_and_table_defaults();
 
         return $table_defaults;
     }
