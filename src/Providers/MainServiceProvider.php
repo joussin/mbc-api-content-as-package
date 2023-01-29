@@ -56,6 +56,7 @@ class MainServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(ApiContentEventListener::class);
+
         $this->app->singleton(MigrationService::class);
 
 
