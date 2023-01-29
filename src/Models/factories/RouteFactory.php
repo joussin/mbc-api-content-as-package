@@ -38,7 +38,13 @@ class RouteFactory extends Factory
             'static_doc_name' => 'index.html',
             'status'          => 'ONLINE',
 
+//            'user_id' => User::factory(),
+//            'title' => fake()->title(),
+//            'content' => fake()->paragraph(),
 
+//            'user_type' => function (array $attributes) {
+//                return User::find($attributes['user_id'])->type;
+//            },
         ];
     }
 
