@@ -30,8 +30,29 @@ class PageFactory extends Factory
         // nullable
         'route_id' => null, // ////
         'path_parameters'   => null,
-
     ];
+
+
+    /**
+     * @return array
+     */
+    public function getDefinition(): array
+    {
+        $nb = fake()->numberBetween(1, 9);
+
+        return [
+
+            // required
+            'name'     => 'page-name-' . $nb,
+            'version'  => 1,
+
+            // nullable
+            'route_id' => null, // ////
+            'path_parameters'   => null,
+        ];
+    }
+
+
 
 
 
@@ -42,6 +63,7 @@ class PageFactory extends Factory
      */
     public function definition()
     {
-        return self::DEFAULTS;
+        return self::getDefinition();
+//        return self::DEFAULTS;
     }
 }

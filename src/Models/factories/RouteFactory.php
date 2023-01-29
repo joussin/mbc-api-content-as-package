@@ -42,6 +42,35 @@ class RouteFactory extends Factory
         'active_end_at'     => null,
     ];
 
+    /**
+     * @return array
+     */
+    public function getDefinition(): array
+    {
+        $nb = fake()->numberBetween(1, 9);
+        $uri = fake()->url();
+
+        return [
+            'method'          => 'GET',
+            'protocol'        => 'http',
+            'name'            => 'route-name-' . $nb,
+            'uri'             => $uri,
+            'static_uri'      => '/',
+            'static_doc_name' => 'index.html',
+            'status'          => 'ONLINE',
+
+
+            // nullable
+            'controller_name'   => null,
+            'controller_action' => null,
+            'path_parameters'   => null,
+            'query_parameters'  => null,
+            'domain'            => null,
+            'rewrite_rule'      => null,
+            'active_start_at'   => null,
+            'active_end_at'     => null,
+        ];
+    }
 
     /**
      * Define the model's default state.
@@ -50,6 +79,7 @@ class RouteFactory extends Factory
      */
     public function definition()
     {
+        return self::getDefinition();
         return self::DEFAULTS;
     }
 }
