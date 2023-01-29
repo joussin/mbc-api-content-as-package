@@ -3,48 +3,48 @@
 namespace MbcApiContent\Models\Migrations;
 
 use Illuminate\Support\Facades\DB;
+use MbcApiContent\Models\BaseModel;
+use MbcApiContent\Models\Page;
+use MbcApiContent\Models\Route;
 
 class MigrationService
 {
-
-
 
 
     public function __construct()
     {
     }
 
+    public static function get_factories_class_name(string $model, $without_namespace = true ) {
+        $namespace = '\MbcApiContent\Models\Factories\\';
+        $model = ucfirst( $model );
+        return (!$without_namespace) ? $model . 'Factory' : $namespace . $model . 'Factory';
+    }
 
-    public static function getDefaults($modelName): array
+    public static function get_model_class_name( string $class, $without_namespace = true ) {
+//        $class = get_called_class();
+        if ( $without_namespace ) {
+            $class = explode( '\\', $class );
+            end( $class );
+            $last  = key( $class );
+            $class = $class[ $last ];
+        }
+        return $class;
+    }
+
+
+    public static function getDefaults(string $modelName): ?array
     {
-        $modelName = ucfirst( $modelName );
+        $factoryClass = self::get_factories_class_name($modelName);
 
-        $mynamespace = __NAMESPACE__;
-
-        dd(
-            $modelName,
-            $mynamespace
-        );
-
-
-//        return BaseModel::;
+        return $factoryClass::DEFAULTS;
     }
 
 
 
     public function seedAll($create = true)
     {
-        $this->seedRoute($create);
-        $this->seedPage($create);
 
-    }
-
-    /**
-     * @param $create
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
-     */
-    public function seedRoute($create = true) : mixed
-    {
         $data = [
             'name'            => 'route-nb-1',
             'uri'             => '/',
@@ -53,38 +53,32 @@ class MigrationService
         ];
 
 
-        if($create)
-        {
-            $route = \MbcApiContent\Models\Route::factory()->create($data);
-        } else {
-            $route = \MbcApiContent\Models\Route::factory()->make($data);
-        }
-
-        return $route;
-    }
+        $route = $this->create(Route::class, $data);
 
 
- /**
-     * @param $create
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
-     */
-    public function seedPage($create = true) : mixed
-    {
+
         $data = [
             'name'            => 'page-nb-1',
             'route_id' => 1,
         ];
 
+        $page = $this->create(Page::class, $data);
 
-        if($create)
-        {
-            $page = \MbcApiContent\Models\Page::factory()->create($data);
-        } else {
-            $page = \MbcApiContent\Models\Page::factory()->make($data);
-        }
-
-        return $page;
     }
 
+
+    public function create(string $modelClassName, array $data = []) : mixed
+    {
+        $modelInstance = $modelClassName::factory()->create($data);
+
+        return $modelInstance;
+    }
+
+    public function make(string $modelClassName, array $data = []) : mixed
+    {
+        $modelInstance = $modelClassName::factory()->make($data);
+
+        return $modelInstance;
+    }
 
 }

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    use \MbcApiContent\Models\Migrations\MigrationHelperTrait;
 
     /**
      * Run the migrations.
@@ -19,6 +18,10 @@ return new class extends Migration
         Schema::create('route', function (Blueprint $table) {
 
             $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('route');
+
+            dd(
+                $defaults
+            );
 
             $table->increments('id');
 

@@ -22,12 +22,12 @@ class PageFactory extends Factory
 
 
     // MODELS
-    public static array $DEFAULTS = [
+    public const DEFAULTS = [
         // required to merge
-        'name'     => null,
+        'name'     => 'page-name',
 
         // required
-        'version'  => null,
+        'version'  => 1,
 
         // nullable
         'route_id' => null,

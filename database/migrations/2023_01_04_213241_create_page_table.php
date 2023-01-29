@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
 
-    use \MbcApiContent\Models\Migrations\MigrationHelperTrait;
     /**
      * Run the migrations.
      *
@@ -18,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('page', function (Blueprint $table) {
 
-            $defaults = $this->getDefaults('page');
+            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('page');
 
 
             $table->increments('id');

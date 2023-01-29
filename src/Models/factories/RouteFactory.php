@@ -18,9 +18,9 @@ class RouteFactory extends Factory
      */
     protected $model = Route::class;
 
-    public static array $DEFAULTS = [
+    public const DEFAULTS = [
         // required to merge
-        'name'            => null,
+        'name'            => 'route-name',
 
         // required
         'method'          => 'GET',
@@ -42,7 +42,7 @@ class RouteFactory extends Factory
         'active_end_at'     => null,
 
         // required to merge
-        'version'         => null,
+        'version'         => 1,
 
 
         // auto

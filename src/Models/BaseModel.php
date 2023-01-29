@@ -5,28 +5,11 @@ namespace MbcApiContent\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\Models\Factories\RouteFactory;
+use MbcApiContent\Models\Migrations\MigrationService;
 
 class BaseModel extends Model implements ModelInterface
 {
     use HasFactory;
-
-    public static function get_factories_class_name(string $model, $without_namespace = true ) {
-        $namespace = '\MbcApiContent\Models\Factories\\';
-
-        return (!$without_namespace) ? $model . 'Factory' : $namespace . $model . 'Factory';
-
-    }
-
-    public static function get_model_class_name( $without_namespace = true ) {
-        $class = get_called_class();
-        if ( $without_namespace ) {
-            $class = explode( '\\', $class );
-            end( $class );
-            $last  = key( $class );
-            $class = $class[ $last ];
-        }
-        return $class;
-    }
 
 
     /**
@@ -36,11 +19,11 @@ class BaseModel extends Model implements ModelInterface
      */
     protected static function newFactory()
     {
-        $model = self::get_model_class_name();
+        $model = MigrationService::get_model_class_name(get_called_class());
 
-        $factoryClassLong = self::get_factories_class_name($model);
+        $factoryClass = MigrationService::get_factories_class_name($model);
 
-        return $factoryClassLong::new();
+        return $factoryClass::new();
     }
 
 
