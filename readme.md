@@ -1,8 +1,7 @@
 # Mbc api content
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-export.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-export)
-
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-export.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-export)
+[//]: # ([![Latest Version on Packagist]&#40;https://img.shields.io/packagist/v/spatie/laravel-export.svg?style=flat-square&#41;]&#40;https://packagist.org/packages/spatie/laravel-export&#41;)
+[//]: # ([![Total Downloads]&#40;https://img.shields.io/packagist/dt/spatie/laravel-export.svg?style=flat-square&#41;]&#40;https://packagist.org/packages/spatie/laravel-export&#41;)
 
 
 
@@ -78,9 +77,31 @@ use Illuminate\Support\ServiceProvider;
         {
        
             $bootstrapMbcApiContent->init();
+            
+            // $routesEntityCollection as RouteEntityCollection
+            $routesEntityCollection = $bootstrapMbcApiContent->getRoutesEntityCollection();
+            
+            // $routesEntityCollection as MbcApiContent\Entity\Route[]  to export
+            $routesEntityCollectionAsArray = $routesEntityCollection->all();
 
         }
     }
+```
+
+## Facades
+
+RouterFacade
+```php
+use MbcApiContent\Facades\RouterFacade;
+
+$routesEntityCollection = RouterFacade::getRoutesEntityCollection();
+```
+
+RenderFacade
+```php
+use MbcApiContent\Facades\RenderFacade;
+
+RouterFacade::;
 ```
 
 ## Database

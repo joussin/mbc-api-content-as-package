@@ -2,9 +2,9 @@
 
 namespace MbcApiContent;
 
+use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Facades\RouterFacade;
-use Illuminate\Support\Facades\Schema;
 
 class Bootstrap
 {
@@ -45,6 +45,11 @@ class Bootstrap
     public function initRouter()
     {
         $router = RouterFacade::initCollections();
+    }
+
+    public function getRoutesEntityCollection(): RouteEntityCollectionInterface
+    {
+        return RouterFacade::getRoutesEntityCollection();
     }
 
     public function isCli() : bool
