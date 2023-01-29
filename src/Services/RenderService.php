@@ -124,7 +124,7 @@ class RenderService implements RenderServiceInterface
 
 
 
-        if( count($this->propertiesIs(null)) == 5)
+        if( count($this->propertiesEquals(null)) == 5)
         {
             $this->laravelRoute = $laravelRoute;
             $this->routeModel = $routeModel;
@@ -134,7 +134,7 @@ class RenderService implements RenderServiceInterface
 
         }
 
-        if( count($this->propertiesIs(null)) == 0)
+        if( count($this->propertiesEquals(null)) == 0)
         {
             return true;
         }
@@ -143,15 +143,16 @@ class RenderService implements RenderServiceInterface
     }
 
 
-    public function propertiesIs(mixed $value = null) : array
+    public function propertiesEquals(mixed $value = null) : array
     {
-        $set = get_object_vars($this);
-        $all =    get_class_vars(self::class);
-        $all_set =    array_replace($all, $set);
+        $propertiesSet = get_object_vars($this);
+        $allProperties = get_class_vars(self::class);
+        $allPropertiesSet = array_replace($allProperties, $propertiesSet);
 
-        $properties = (array_filter($all_set, function($prop) use ($value) {if($value == ($prop)) {return true;}}));
-
-        return $properties;
+        return array_filter($allPropertiesSet, function($prop) use ($value) {
+            if($value == $prop) return true;
+            else return false;
+        });
     }
 
 
