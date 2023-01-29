@@ -72,7 +72,7 @@ class MainServiceProvider extends ServiceProvider
         $this->app->singleton(RouterServiceInterface::class, function() {
             return new RouterService(
                 app()->make(RouteEntityCollectionInterface::class),
-                collect(RouteModel::all())
+                new Collection(),
             );
         });
 

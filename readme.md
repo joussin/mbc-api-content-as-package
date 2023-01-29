@@ -1,8 +1,8 @@
 # Mbc api content
 
-[//]: # ([![Latest Version on Packagist]&#40;https://img.shields.io/packagist/v/spatie/laravel-export.svg?style=flat-square&#41;]&#40;https://packagist.org/packages/spatie/laravel-export&#41;)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/laravel-export.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-export)
 
-[//]: # ([![Total Downloads]&#40;https://img.shields.io/packagist/dt/spatie/laravel-export.svg?style=flat-square&#41;]&#40;https://packagist.org/packages/spatie/laravel-export&#41;)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/laravel-export.svg?style=flat-square)](https://packagist.org/packages/spatie/laravel-export)
 
 
 
@@ -94,16 +94,12 @@ migrate by filename:
 php artisan migrate:refresh --path=/vendor/joussin/mbc-api-content-as-package/Database/migrations/2023_01_04_213240_create_route_table.php
 ```
 
-Custom seed all tables:
-``` bash 
-php artisan database:seeder
-```
-Custom seed tables by filename:
+rollback:
 ``` bash
-php artisan database:seeder --seeder=PageSeeder
-php artisan database:seeder --seeder=RouteSeeder
+php artisan migrate:rollback
+php artisan migrate:rollback --step=1
+php artisan migrate:reset
 ```
-
 
 ## Test
 

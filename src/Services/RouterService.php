@@ -14,24 +14,24 @@ use MbcApiContent\Models\Route as RouteModel;
 class RouterService implements RouterServiceInterface
 {
 
-/*
- *
- * Les différents objets des routes:
- *
- *  RouteEntity: custom Route Object : \MbcApiContent\Entity\RouteEntity
- *  RouteModel : custom Route DB model : \MbcApiContent\Models\Route
- *  Route/LaravelRoute: laravel route Object : \Illuminate\Routing\Route
- *  Router: laravel router Object : \Illuminate\Routing\Router
- *
- *  \Illuminate\Support\Facades\Route as RouterFacade: laravel router Object facade
- *  \MbcApiContent\Services\RouterService as RouterFacade: custom router service Object facade
- *
- *  Collection RouterService::routesModelCollection : RouteModel[] Collection
- *  Collection RouterService::routesEntityCollection : RouteEntity[] Collection
- *  Collection RouterService::routesLaravelCollection : Route[] RouteCollectionInterface (collection de routes laravel)
- *
- *
- */
+    /*
+     *
+     * Les différents objets des routes:
+     *
+     *  RouteEntity: custom Route Object : \MbcApiContent\Entity\RouteEntity
+     *  RouteModel : custom Route DB model : \MbcApiContent\Models\Route
+     *  Route/LaravelRoute: laravel route Object : \Illuminate\Routing\Route
+     *  Router: laravel router Object : \Illuminate\Routing\Router
+     *
+     *  \Illuminate\Support\Facades\Route as RouterFacade: laravel router Object facade
+     *  \MbcApiContent\Services\RouterService as RouterFacade: custom router service Object facade
+     *
+     *  Collection RouterService::routesModelCollection : RouteModel[] Collection
+     *  Collection RouterService::routesEntityCollection : RouteEntity[] Collection
+     *  Collection RouterService::routesLaravelCollection : Route[] RouteCollectionInterface (collection de routes laravel)
+     *
+     *
+     */
 
     public RouteEntityCollectionInterface $routesEntityCollection;
 
@@ -58,7 +58,7 @@ class RouterService implements RouterServiceInterface
 
     public function getRoutesLaravelCollection() : RouteCollectionInterface
     {
-       return \Illuminate\Support\Facades\Route::getRoutes();
+        return \Illuminate\Support\Facades\Route::getRoutes();
     }
 
 
@@ -67,6 +67,8 @@ class RouterService implements RouterServiceInterface
 
     public function initCollections(): RouteEntityCollectionInterface
     {
+        $this->routesModelCollection = collect(RouteModel::all()); // collect(RouteModel::all()) // new Collection(),
+
         $this->routesModelCollection->each(function ($routeModel, $index) {
             $routeEntity = $this->createRouteEntityFromRouteModel($routeModel);
             $this->routesEntityCollection->add($routeEntity);
