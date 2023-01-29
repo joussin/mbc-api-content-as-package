@@ -9,43 +9,25 @@ class MigrationService
 {
 
 
-    public function seedAll($create = false)
+    public function seedAll()
     {
+        $routes = $this->seed(Route::class, 10, true, []);
+//        $page = $this->seed(Page::class, 1, true, []);
 
-//        $nb = fake()->numberBetween(1, 9);
-//
-//        $data = [
-//            'name'            => 'route-name-' . $nb,
-//            'uri'             => '/route-' . $nb,
-//            'static_uri'      => '/route-'.$nb.'/index.html',
-//            'static_doc_name' => 'index.html',
-//        ];
-
-        $route = $this->seed(Route::class, [], $create);
-
-
-//
-//        $data = [
-//            'name'            => 'page-nb-1',
-//            'route_id' => 1,
-//        ];
-
-
-        $page = $this->seed(Page::class, [], $create);
-
-
-        return [$route, $page];
+        return [
+            $routes,
+//            $page
+        ];
     }
 
 
-    public  function seed($model, $data, $create = false)
+    public function seed(string $model, ?int $count = null, bool $create = false, array $data = [])
     {
         $action = $create ? 'create' : 'make';
+        $count = ($count==1) ? null : $count;
 
-        return $model::factory()->create();
-        return $model::factory()->$action();
+        return $model::factory($count)->$action($data);
     }
-
 
 
 }

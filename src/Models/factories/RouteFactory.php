@@ -11,6 +11,7 @@ use MbcApiContent\Models\Route;
 class RouteFactory extends Factory
 {
 
+
     /**
      * The name of the factory's corresponding model.
      *
@@ -20,41 +21,14 @@ class RouteFactory extends Factory
 
 
 
-    public const DEFAULTS = [
-        // required
-        'method'          => 'GET',
-        'protocol'        => 'http',
-        'name'            => 'route-name',
-        'uri'             => '/',
-        'static_uri'      => '/',
-        'static_doc_name' => 'index.html',
-        'status'          => 'ONLINE',
-
-
-        // nullable
-        'controller_name'   => null,
-        'controller_action' => null,
-        'path_parameters'   => null,
-        'query_parameters'  => null,
-        'domain'            => null,
-        'rewrite_rule'      => null,
-        'active_start_at'   => null,
-        'active_end_at'     => null,
-    ];
-
-    /**
-     * @return array
-     */
-    public function getDefinition(): array
+    public function getDefaults() : array
     {
-        $nb = fake()->numberBetween(1, 9);
-        $uri = fake()->url();
-
         return [
+            // required
             'method'          => 'GET',
             'protocol'        => 'http',
-            'name'            => 'route-name-' . $nb,
-            'uri'             => $uri,
+            'name'            => 'route-name',
+            'uri'             => '/',
             'static_uri'      => '/',
             'static_doc_name' => 'index.html',
             'status'          => 'ONLINE',
@@ -72,6 +46,33 @@ class RouteFactory extends Factory
         ];
     }
 
+
+    public function getFakeDefinitions(string $key = null)
+    {
+        $fake = [
+            'numberBetween' => fake()->numberBetween(1, 9),
+            'name' => fake()->name(),
+            'url' => fake()->url(),
+            'domainName' => fake()->domainName(),
+            'domainWord' => fake()->domainWord(),
+        ];
+
+        return is_null($key) ? $fake : $fake[$key];
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefinitions(array $definitions = []): array
+    {
+        $definitions['name'] = 'route-name-' . $this->getFakeDefinitions('numberBetween');
+        $definitions['uri'] = $this->getFakeDefinitions('domainName');
+        $definitions['static_uri'] = $this->getFakeDefinitions('domainWord');
+        $definitions['static_doc_name'] = null;
+
+        return $definitions;
+    }
+
     /**
      * Define the model's default state.
      *
@@ -79,7 +80,7 @@ class RouteFactory extends Factory
      */
     public function definition()
     {
-        return self::getDefinition();
-        return self::DEFAULTS;
+        return $this->getDefinitions($this->getDefaults());
+
     }
 }

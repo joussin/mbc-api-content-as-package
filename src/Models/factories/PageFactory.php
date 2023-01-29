@@ -5,6 +5,7 @@ namespace MbcApiContent\Models\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use MbcApiContent\Models\Page;
+use MbcApiContent\Models\Route;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -20,30 +21,11 @@ class PageFactory extends Factory
     protected $model = Page::class;
 
 
-
-    // MODELS
-    public const DEFAULTS = [
-        // required
-        'name'     => 'page-name',
-        'version'  => 1,
-
-        // nullable
-        'route_id' => null, // ////
-        'path_parameters'   => null,
-    ];
-
-
-    /**
-     * @return array
-     */
-    public function getDefinition(): array
+    public function getDefaults() : array
     {
-        $nb = fake()->numberBetween(1, 9);
-
         return [
-
             // required
-            'name'     => 'page-name-' . $nb,
+            'name'     => 'page-name',
             'version'  => 1,
 
             // nullable
@@ -53,7 +35,24 @@ class PageFactory extends Factory
     }
 
 
+    /**
+     * @return array
+     */
+    public function getDefinitions($definitions): array
+    {
+        $nb = fake()->numberBetween(1, 9);
 
+        $definitions['name'] = 'page-name-' . $nb;
+
+        $definitions['route_id'] = Route::factory()->make([
+            'name' => 'name-route-dyn-1',
+            'uri' => '/dyn/{id}',
+            'static_uri' => '/static/dyn/1/index.html',
+            'static_doc_name' => 'dynamic.html',
+        ]);
+
+        return $definitions;
+    }
 
 
     /**
@@ -63,7 +62,6 @@ class PageFactory extends Factory
      */
     public function definition()
     {
-        return self::getDefinition();
-//        return self::DEFAULTS;
+        return $this->getDefinitions($this->getDefaults());
     }
 }
