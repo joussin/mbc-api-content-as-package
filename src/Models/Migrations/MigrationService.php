@@ -10,71 +10,79 @@ use MbcApiContent\Models\Route;
 class MigrationService
 {
 
+    public const FACTORIES_NAMESPACE = '\MbcApiContent\Models\Factories\\';
+    public const MODELS_NAMESPACE = '\MbcApiContent\Models\\';
 
     public function __construct()
     {
     }
 
-    public static function get_factories_class_name(string $model, $without_namespace = true ) {
-        $namespace = '\MbcApiContent\Models\Factories\\';
-        $model = ucfirst( $model );
-        return (!$without_namespace) ? $model . 'Factory' : $namespace . $model . 'Factory';
+    public static function getFactoriesClassName(string $modelClassName, $withNamespace = true ) {
+        $modelClassName = ucfirst( $modelClassName );
+        return ($withNamespace) ? self::FACTORIES_NAMESPACE .$modelClassName . 'Factory' :  $modelClassName . 'Factory';
     }
 
-    public static function get_model_class_name( string $class, $without_namespace = true ) {
+    public static function getModelClassName(string $modelClassName, $withNamespace = false ) {
+        $modelClassName = ucfirst( $modelClassName );
+        return ($withNamespace) ? self::MODELS_NAMESPACE .  $modelClassName  : $modelClassName ;
+    }
+
+    // pass get_called_class()
+    public static function cleanGetCalledClass($class) {
 //        $class = get_called_class();
-        if ( $without_namespace ) {
-            $class = explode( '\\', $class );
-            end( $class );
-            $last  = key( $class );
-            $class = $class[ $last ];
-        }
+        $class = explode( '\\', $class );
+        end( $class );
+        $last  = key( $class );
+        $class = $class[ $last ];
+
         return $class;
     }
 
 
     public static function getDefaults(string $modelName): ?array
     {
-        $factoryClass = self::get_factories_class_name($modelName);
+        $factoryClass = self::getFactoriesClassName($modelName);
 
         return $factoryClass::DEFAULTS;
     }
 
 
 
-    public function seedAll($create = true)
+    public static function seedAll($create = true)
     {
 
         $data = [
-            'name'            => 'route-nb-1',
-            'uri'             => '/',
-            'static_uri'      => '/',
+            'name'            => 'route-name-1',
+            'uri'             => '/route-1',
+            'static_uri'      => '/route-1/index.html',
             'static_doc_name' => 'index.html',
         ];
 
 
-        $route = $this->create(Route::class, $data);
+        $route = self::make(Route::class, $data);
 
 
 
-        $data = [
-            'name'            => 'page-nb-1',
-            'route_id' => 1,
-        ];
+//        $data = [
+//            'name'            => 'page-nb-1',
+//            'route_id' => 1,
+//        ];
+//
+//        $page = $this->make(Page::class, $data);
 
-        $page = $this->create(Page::class, $data);
 
+        return $route;
     }
 
 
-    public function create(string $modelClassName, array $data = []) : mixed
+    public static function create(string $modelClassName, array $data = []) : mixed
     {
         $modelInstance = $modelClassName::factory()->create($data);
 
         return $modelInstance;
     }
 
-    public function make(string $modelClassName, array $data = []) : mixed
+    public static function make(string $modelClassName, array $data = []) : mixed
     {
         $modelInstance = $modelClassName::factory()->make($data);
 

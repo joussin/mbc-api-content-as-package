@@ -18,13 +18,13 @@ class RouteFactory extends Factory
      */
     protected $model = Route::class;
 
-    public const DEFAULTS = [
-        // required to merge
-        'name'            => 'route-name',
 
+
+    public const DEFAULTS = [
         // required
         'method'          => 'GET',
         'protocol'        => 'http',
+        'name'            => 'route-name',
         'uri'             => '/',
         'static_uri'      => '/',
         'static_doc_name' => 'index.html',
@@ -41,15 +41,15 @@ class RouteFactory extends Factory
         'active_start_at'   => null,
         'active_end_at'     => null,
 
-        // required to merge
-        'version'         => 1,
 
 
-        // auto
-        'created_at' => null,
-        'updated_at' => null,
+//        // auto
+//        'created_at' => null,
+//        'updated_at' => null,
 
+    ];
 
+    public const UNIQUES = [
         // unique
         'unique'            => [
             ['id', 'name'],
@@ -59,6 +59,11 @@ class RouteFactory extends Factory
         ]
     ];
 
+    public const FOREIGNS = [
+
+        'foreign' => []
+
+    ];
 
 
     /**
@@ -68,26 +73,28 @@ class RouteFactory extends Factory
      */
     public function definition()
     {
-        return [
 
-            'name'            => 'route-name',
-
-            // required
-            'method'          => 'GET',
-            'protocol'        => 'http',
-            'uri'             => '/',
-            'static_uri'      => '/',
-            'static_doc_name' => 'index.html',
-            'status'          => 'ONLINE',
-
-//            'user_id' => User::factory(),
-//            'title' => fake()->title(),
-//            'content' => fake()->paragraph(),
-
-//            'user_type' => function (array $attributes) {
-//                return User::find($attributes['user_id'])->type;
-//            },
-        ];
+        return self::DEFAULTS;
+//        return [
+//
+//            'name'            => 'route-name',
+//
+//            // required
+//            'method'          => 'GET',
+//            'protocol'        => 'http',
+//            'uri'             => '/',
+//            'static_uri'      => '/',
+//            'static_doc_name' => 'index.html',
+//            'status'          => 'ONLINE',
+//
+////            'user_id' => User::factory(),
+////            'title' => fake()->title(),
+////            'content' => fake()->paragraph(),
+//
+////            'user_type' => function (array $attributes) {
+////                return User::find($attributes['user_id'])->type;
+////            },
+//        ];
     }
 
 

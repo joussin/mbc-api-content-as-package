@@ -17,31 +17,35 @@ return new class extends Migration
     {
         Schema::create('route', function (Blueprint $table) {
 
-            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('route');
+//            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('route');
+//            dd(
+//                $defaults
+//            );
+            $seed = \MbcApiContent\Models\Migrations\MigrationService::seedAll();
 
             dd(
-                $defaults
+                $seed
             );
 
             $table->increments('id');
 
-            $table->string('method')->default($defaults['method']);
-            $table->enum('protocol', ['http', 'https'])->default($defaults['protocol']);
+            $table->string('method')->default('GET');
+            $table->enum('protocol', ['http', 'https'])->default('http');
 
 
-            $table->string('name')->default( $defaults['name'] );
-            $table->string('uri')->default($defaults['uri'] );
+            $table->string('name');
+            $table->string('uri');
             $table->string('controller_name')->nullable();
             $table->string('controller_action')->nullable();
             $table->json('path_parameters')->nullable();
             $table->json('query_parameters')->nullable();
-            $table->string('static_uri')->nullable()->default($defaults['static_uri'] );
-            $table->string('static_doc_name')->nullable()->default($defaults['static_doc_name'] );
+            $table->string('static_uri');
+            $table->string('static_doc_name');
             $table->string('domain')->nullable();
             $table->string('rewrite_rule')->nullable();
 
 
-            $table->enum('status', ['ONLINE', 'OFFLINE'])->default($defaults['status']);
+            $table->enum('status', ['ONLINE', 'OFFLINE'])->default('ONLINE');
             $table->date('active_start_at')->nullable();
             $table->date('active_end_at')->nullable();
 

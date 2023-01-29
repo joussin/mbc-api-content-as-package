@@ -17,12 +17,9 @@ return new class extends Migration
     {
         Schema::create('page', function (Blueprint $table) {
 
-            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('page');
-
-
             $table->increments('id');
-            $table->integer('version')->default( $defaults['version'] );
-            $table->string('name')->default( $defaults['name'] );
+            $table->integer('version');
+            $table->string('name');
 
             $table->integer('route_id')->nullable()->unsigned();
             $table->json('path_parameters')->nullable();

@@ -23,10 +23,8 @@ class PageFactory extends Factory
 
     // MODELS
     public const DEFAULTS = [
-        // required to merge
-        'name'     => 'page-name',
-
         // required
+        'name'     => 'page-name',
         'version'  => 1,
 
         // nullable
@@ -35,16 +33,23 @@ class PageFactory extends Factory
 
 
 
-        // auto
-        'created_at' => null,
-        'updated_at' => null,
+//        // auto
+//        'created_at' => null,
+//        'updated_at' => null,
+
+    ];
 
 
+    public const UNIQUES = [
+        // unique
         // unique
         'unique'   => [
             ['version', 'id'],
             ['version', 'name'],
         ],
+    ];
+
+    public const FOREIGNS = [
 
         'foreign' => [
             [
@@ -58,6 +63,7 @@ class PageFactory extends Factory
     ];
 
 
+
     /**
      * Define the model's default state.
      *
@@ -65,12 +71,6 @@ class PageFactory extends Factory
      */
     public function definition()
     {
-        return [
-
-            'name' => 'page-name',
-            'route_id' => null,
-//                        'path_parameters' => json_encode(['id'=> 2]),
-
-        ];
+        return self::DEFAULTS;
     }
 }

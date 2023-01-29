@@ -11,7 +11,6 @@ class BaseModel extends Model implements ModelInterface
 {
     use HasFactory;
 
-
     /**
      * Create a new factory instance for the model.
      *
@@ -19,9 +18,10 @@ class BaseModel extends Model implements ModelInterface
      */
     protected static function newFactory()
     {
-        $model = MigrationService::get_model_class_name(get_called_class());
+        $parentClassName = get_called_class();
+        $cleanGetCalledClass = MigrationService::cleanGetCalledClass($parentClassName);
 
-        $factoryClass = MigrationService::get_factories_class_name($model);
+        $factoryClass = MigrationService::getFactoriesClassName($cleanGetCalledClass);
 
         return $factoryClass::new();
     }
