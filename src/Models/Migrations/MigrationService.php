@@ -11,7 +11,19 @@ class MigrationService
 
     public function seedAll()
     {
-        $routes = $this->seed(Route::class, 10, true, []);
+
+        $routes = [];
+
+        $routes[] = $this->seed(Route::class, 3, true, []);
+
+        $routes[] = $this->seed(Route::class, null, true, [
+            'name' => 'route-dyn-departement-nbdept',
+            'uri' => '/doc/departement/{id}',
+            'static_uri' => '/doc-departement-78/index.html'
+        ]);
+
+
+
 //        $page = $this->seed(Page::class, 1, true, []);
 
         return [

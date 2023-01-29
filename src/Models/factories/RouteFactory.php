@@ -53,8 +53,9 @@ class RouteFactory extends Factory
             'numberBetween' => fake()->numberBetween(1, 9),
             'name' => fake()->name(),
             'url' => fake()->url(),
-            'domainName' => fake()->domainName(),
-            'domainWord' => fake()->domainWord(),
+            'domainName' => fake()->domainName(), // carroll.com
+            'domainWord' => fake()->domainWord(), // carroll
+
         ];
 
         return is_null($key) ? $fake : $fake[$key];
@@ -65,10 +66,10 @@ class RouteFactory extends Factory
      */
     public function getDefinitions(array $definitions = []): array
     {
-        $definitions['name'] = 'route-name-' . $this->getFakeDefinitions('numberBetween');
-        $definitions['uri'] = $this->getFakeDefinitions('domainName');
-        $definitions['static_uri'] = $this->getFakeDefinitions('domainWord');
-        $definitions['static_doc_name'] = null;
+        $definitions['name'] = 'route-' . $this->getFakeDefinitions('name') . '-' . $this->getFakeDefinitions('numberBetween');
+        $definitions['uri'] = "/" . $this->getFakeDefinitions('domainWord');
+        $definitions['static_uri'] = "/" . $this->getFakeDefinitions('domainWord') . "/index.html";
+        $definitions['static_doc_name'] = "index.html";
 
         return $definitions;
     }
