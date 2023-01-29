@@ -40,29 +40,6 @@ class RouteFactory extends Factory
         'rewrite_rule'      => null,
         'active_start_at'   => null,
         'active_end_at'     => null,
-
-
-
-//        // auto
-//        'created_at' => null,
-//        'updated_at' => null,
-
-    ];
-
-    public const UNIQUES = [
-        // unique
-        'unique'            => [
-            ['id', 'name'],
-            ['id', 'method', 'uri'],
-            ['id', 'method', 'static_uri'],
-            ['id', 'method', 'static_doc_name']
-        ]
-    ];
-
-    public const FOREIGNS = [
-
-        'foreign' => []
-
     ];
 
 
@@ -73,54 +50,6 @@ class RouteFactory extends Factory
      */
     public function definition()
     {
-
         return self::DEFAULTS;
-//        return [
-//
-//            'name'            => 'route-name',
-//
-//            // required
-//            'method'          => 'GET',
-//            'protocol'        => 'http',
-//            'uri'             => '/',
-//            'static_uri'      => '/',
-//            'static_doc_name' => 'index.html',
-//            'status'          => 'ONLINE',
-//
-////            'user_id' => User::factory(),
-////            'title' => fake()->title(),
-////            'content' => fake()->paragraph(),
-//
-////            'user_type' => function (array $attributes) {
-////                return User::find($attributes['user_id'])->type;
-////            },
-//        ];
-    }
-
-
-
-
-//                    [
-//                        'name'            => 'route-nb-3',
-//                        'uri'             => '/route-nb-3/{id}',
-//                        'static_uri'      => '/route-nb-3/{id}/page.html',
-//                        'static_doc_name' => 'page.html',
-////                        'controller_name' => 'DynamicController',
-//                        'controller_action' => 'dynamic',
-//                        'path_parameters' => json_encode(['id']),
-//                    ],
-
-    /**
-     * Configure the model factory.
-     *
-     * @return $this
-     */
-    public function configure()
-    {
-        return $this->afterMaking(function (Route $route) {
-            //
-        })->afterCreating(function (Route $route) {
-            //
-        });
     }
 }

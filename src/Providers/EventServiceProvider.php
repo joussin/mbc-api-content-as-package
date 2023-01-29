@@ -27,9 +27,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(MigrationsEnded::class, function (MigrationsEnded $event) {
 
             try{
-                $migrationService = app()->make(MigrationService::class);
-
-                $migrationService->seedAll();
+                MigrationService::seedAll();
             }
             catch (\Exception $e)
             {

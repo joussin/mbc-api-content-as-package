@@ -17,16 +17,6 @@ return new class extends Migration
     {
         Schema::create('route', function (Blueprint $table) {
 
-//            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('route');
-//            dd(
-//                $defaults
-//            );
-            $seed = \MbcApiContent\Models\Migrations\MigrationService::seedAll();
-
-            dd(
-                $seed
-            );
-
             $table->increments('id');
 
             $table->string('method')->default('GET');

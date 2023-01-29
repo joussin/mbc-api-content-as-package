@@ -43,19 +43,48 @@ composer.json:
 
 
 
-"require": {
-"php": "^8.0",
-"guzzlehttp/guzzle": "^7.4",
-"illuminate/console": "^8.73|^9.0",
-"illuminate/contracts": "^8.73|^9.0",
-"illuminate/http": "^8.73|^9.0",
-"illuminate/support": "^8.73|^9.0",
-"nyholm/psr7": "^1.4",
-"psr/http-message": "^1.0",
-"spatie/crawler": "^7.0.5",
-"symfony/console": "^5.3|^6.0",
-"symfony/dom-crawler": "^5.3|^6.0",
-"symfony/http-foundation": "^5.3|^6.0",
-"symfony/process": "^5.3|^6.0",
-"symfony/psr-http-message-bridge": "^2.1"
-},
+
+
+
+
+    public const UNIQUES = [
+        // unique
+        // unique
+        'unique'   => [
+            ['version', 'id'],
+            ['version', 'name'],
+        ],
+    ];
+
+    public const FOREIGNS = [
+
+        'foreign' => [
+            [
+                'name' => 'page_route_id_foreign',
+                'column' => 'route_id',
+                'relation_table' => 'route',
+                'relation_column' => 'id',
+                'type' => 'manyToOne' // many page to one route
+            ]
+        ]
+    ];
+
+
+
+
+
+    public const UNIQUES = [
+        // unique
+        'unique'            => [
+            ['id', 'name'],
+            ['id', 'method', 'uri'],
+            ['id', 'method', 'static_uri'],
+            ['id', 'method', 'static_doc_name']
+        ]
+    ];
+
+    public const FOREIGNS = [
+
+        'foreign' => []
+
+    ];

@@ -51,10 +51,12 @@ class MigrationService
     public static function seedAll($create = true)
     {
 
+        $nb = fake()->numberBetween(1, 9);
+
         $data = [
-            'name'            => 'route-name-1',
-            'uri'             => '/route-1',
-            'static_uri'      => '/route-1/index.html',
+            'name'            => 'route-name-' . $nb,
+            'uri'             => '/route-' . $nb,
+            'static_uri'      => '/route-'.$nb.'/index.html',
             'static_doc_name' => 'index.html',
         ];
 

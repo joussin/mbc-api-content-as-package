@@ -28,38 +28,9 @@ class PageFactory extends Factory
         'version'  => 1,
 
         // nullable
-        'route_id' => null,
+        'route_id' => null, // ////
         'path_parameters'   => null,
 
-
-
-//        // auto
-//        'created_at' => null,
-//        'updated_at' => null,
-
-    ];
-
-
-    public const UNIQUES = [
-        // unique
-        // unique
-        'unique'   => [
-            ['version', 'id'],
-            ['version', 'name'],
-        ],
-    ];
-
-    public const FOREIGNS = [
-
-        'foreign' => [
-            [
-                'name' => 'page_route_id_foreign',
-                'column' => 'route_id',
-                'relation_table' => 'route',
-                'relation_column' => 'id',
-                'type' => 'manyToOne' // many page to one route
-            ]
-        ]
     ];
 
 
