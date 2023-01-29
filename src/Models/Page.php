@@ -4,6 +4,7 @@ namespace MbcApiContent\Models;
 
 
 use Illuminate\Support\Facades\Log;
+use MbcApiContent\Models\Factories\PageFactory;
 use MbcApiContent\Models\Route;
 
 
@@ -24,6 +25,10 @@ class Page  extends BaseModel
     protected $casts = [
         'path_parameters' => 'array',
     ];
+
+
+
+
 
 
     // doc

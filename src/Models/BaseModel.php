@@ -10,6 +10,25 @@ class BaseModel extends Model implements ModelInterface
 {
     use HasFactory;
 
+    public static function get_factories_class_name(string $model, $without_namespace = true ) {
+        $namespace = '\MbcApiContent\Models\Factories\\';
+
+        return (!$without_namespace) ? $model . 'Factory' : $namespace . $model . 'Factory';
+
+    }
+
+    public static function get_model_class_name( $without_namespace = true ) {
+        $class = get_called_class();
+        if ( $without_namespace ) {
+            $class = explode( '\\', $class );
+            end( $class );
+            $last  = key( $class );
+            $class = $class[ $last ];
+        }
+        return $class;
+    }
+
+
     /**
      * Create a new factory instance for the model.
      *
@@ -17,13 +36,11 @@ class BaseModel extends Model implements ModelInterface
      */
     protected static function newFactory()
     {
-        $model = 'Route';
+        $model = self::get_model_class_name();
 
-        $factory = $model . 'Factory';
-        $factory = 'RouteFactory';
+        $factoryClassLong = self::get_factories_class_name($model);
 
-
-        return RouteFactory::new();
+        return $factoryClassLong::new();
     }
 
 

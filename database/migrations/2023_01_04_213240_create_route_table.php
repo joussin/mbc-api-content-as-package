@@ -16,13 +16,9 @@ return new class extends Migration
      */
     public function up()
     {
-        $user = \MbcApiContent\Models\Route::factory()->make();
-
-        dd($user);
-
         Schema::create('route', function (Blueprint $table) {
 
-            $defaults = $this->getDefaults('route');
+            $defaults = \MbcApiContent\Models\Migrations\MigrationService::getDefaults('route');
 
             $table->increments('id');
 

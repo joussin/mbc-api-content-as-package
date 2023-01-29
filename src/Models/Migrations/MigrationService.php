@@ -7,16 +7,44 @@ use Illuminate\Support\Facades\DB;
 class MigrationService
 {
 
-    use MigrationHelperTrait;
+
 
 
     public function __construct()
     {
     }
 
+
+    public static function getDefaults($modelName): array
+    {
+        $modelName = ucfirst( $modelName );
+
+        $mynamespace = __NAMESPACE__;
+
+        dd(
+            $modelName,
+            $mynamespace
+        );
+
+
+//        return BaseModel::;
+    }
+
+
+
     public function seedAll($create = true)
     {
+        $this->seedRoute($create);
+        $this->seedPage($create);
 
+    }
+
+    /**
+     * @param $create
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
+     */
+    public function seedRoute($create = true) : mixed
+    {
         $data = [
             'name'            => 'route-nb-1',
             'uri'             => '/',
@@ -29,93 +57,34 @@ class MigrationService
         {
             $route = \MbcApiContent\Models\Route::factory()->create($data);
         } else {
-            $route = \MbcApiContent\Models\Route::factory()->make();
-
+            $route = \MbcApiContent\Models\Route::factory()->make($data);
         }
+
+        return $route;
     }
 
 
-//        public function seedAll()
-//    {
-//        $this->seed('route');
-//        $this->seed('page');
-//    }
+ /**
+     * @param $create
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|mixed
+     */
+    public function seedPage($create = true) : mixed
+    {
+        $data = [
+            'name'            => 'page-nb-1',
+            'route_id' => 1,
+        ];
 
 
+        if($create)
+        {
+            $page = \MbcApiContent\Models\Page::factory()->create($data);
+        } else {
+            $page = \MbcApiContent\Models\Page::factory()->make($data);
+        }
 
-//    public function seed($table)
-//    {
-//
-//        if ($table == 'route') {
-//
-//
-//            $datas = $this->getDatas('route', 3, 0,
-//                [
-//                    [
-//                        'name'            => 'route-nb-1',
-//                        'uri'             => '/',
-//                        'static_uri'      => '/',
-//                        'static_doc_name' => 'index.html',
-//                    ],
-//                    [
-//                        'name'            => 'route-nb-2',
-//                        'uri'             => '/route-nb-2',
-//                        'static_uri'      => '/route-nb-2/page.html',
-//                        'static_doc_name' => 'page.html',
-//                    ],
-//                    [
-//                        'name'            => 'route-nb-3',
-//                        'uri'             => '/route-nb-3/{id}',
-//                        'static_uri'      => '/route-nb-3/{id}/page.html',
-//                        'static_doc_name' => 'page.html',
-////                        'controller_name' => 'DynamicController',
-//                        'controller_action' => 'dynamic',
-//                        'path_parameters' => json_encode(['id']),
-//                    ],
-//                ]
-//            );
-//
-//
-//            DB::table('route')->insert($datas[0]);
-//            DB::table('route')->insert($datas[1]);
-//            DB::table('route')->insert($datas[2]);
-//
-//
-//        } else if ($table == 'page') {
-//
-//
-//            $datas = $this->getDatas('page', 4, 0,
-//                [
-//                    [
-//                        'name' => 'page-nb-1',
-//                        'route_id' => 1,
-//                    ],
-//                    [
-//                        'name' => 'page-nb-2',
-//                        'route_id' => 2,
-//                    ],
-//                    [
-//                        'name' => 'page-nb-3',
-//                        'route_id' => 3,
-//                        'path_parameters' => json_encode(['id'=> 1]),
-//                    ],
-//                    [
-//                        'name' => 'page-nb-4',
-//                        'route_id' => 3,
-//                        'path_parameters' => json_encode(['id'=> 2]),
-//                    ]
-//                ]
-//            );
-//
-//
-//            DB::table('page')->insert($datas[0]);
-//            DB::table('page')->insert($datas[1]);
-//            DB::table('page')->insert($datas[2]);
-//            DB::table('page')->insert($datas[3]);
-//
-//        }
-//
-//    }
+        return $page;
+    }
 
 
 }

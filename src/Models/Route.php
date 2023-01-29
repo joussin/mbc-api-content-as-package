@@ -3,6 +3,7 @@
 namespace MbcApiContent\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use MbcApiContent\Models\Factories\RouteFactory;
 use MbcApiContent\Models\Page;
 
 
@@ -35,6 +36,9 @@ class Route  extends BaseModel
         'path_parameters' => 'array',
         'query_parameters' => 'array',
     ];
+
+
+
 
     // $laravelRouteParameters = ['id'=> 1]
     public function pageWith(array $laravelRouteParameters = [])
