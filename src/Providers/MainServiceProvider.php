@@ -9,6 +9,7 @@ use MbcApiContent\Entity\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Entity\Collections\RouteEntityCollection;
 use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use MbcApiContent\Events\ApiContentEventListener;
+use MbcApiContent\Models\Migrations\MigrationService;
 use MbcApiContent\Models\Route as RouteModel;
 use MbcApiContent\Services\RenderService;
 use MbcApiContent\Services\RenderServiceInterface;
@@ -55,6 +56,7 @@ class MainServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(ApiContentEventListener::class);
+        $this->app->singleton(MigrationService::class);
 
 
 

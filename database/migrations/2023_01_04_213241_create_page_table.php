@@ -50,7 +50,7 @@ return new class extends Migration
                 ->nullOnDelete();
         });
 
-        $this->seed('page');
+
 
     }
 

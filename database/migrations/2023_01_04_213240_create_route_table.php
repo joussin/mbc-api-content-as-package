@@ -55,7 +55,7 @@ return new class extends Migration
 
         });
 
-        $this->seed('route');
+
     }
 
 

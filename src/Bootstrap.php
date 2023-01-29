@@ -20,20 +20,20 @@ class Bootstrap
 
     public function init(bool $initRouter = true, bool $initListener = true )
     {
-        $this->initRouter();
-
-        $this->apiContentEventListener->initListener($initListener);
-    }
-
-    public function initRouter()
-    {
         try{
-            $router = RouterFacade::initCollections();
+            $this->initRouter();
+
+            $this->apiContentEventListener->initListener($initListener);
         }
         catch (\Exception $e)
         {
             throw new \Exception('Project not configured ' . $e->getMessage());
         }
+    }
+
+    public function initRouter()
+    {
+        $router = RouterFacade::initCollections();
     }
 
 

@@ -44,6 +44,9 @@ trait MigrationHelperTrait
     }
 
 
+
+
+
     public function seed($table)
     {
 

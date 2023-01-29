@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Support\Facades\Event;
+use MbcApiContent\Models\Migrations\MigrationService;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,8 +26,15 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen(MigrationsEnded::class, function (MigrationsEnded $event) {
 
-            dump('You can set your logic here');
+            try{
+                $migrationService = app()->make(MigrationService::class);
 
+                $migrationService->seedAll();
+            }
+            catch (\Exception $e)
+            {
+                throw new \Exception('Error seeding ' . $e->getMessage());
+            }
 
         });
 
