@@ -28,7 +28,10 @@ class Page  extends BaseModel
 
 
 
-
+    protected static function newFactory()
+    {
+        return PageFactory::new();
+    }
 
 
     // doc

@@ -38,6 +38,10 @@ class Route  extends BaseModel
     ];
 
 
+    protected static function newFactory()
+    {
+        return RouteFactory::new();
+    }
 
 
     // $laravelRouteParameters = ['id'=> 1]
