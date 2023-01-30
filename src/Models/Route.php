@@ -5,6 +5,7 @@ namespace MbcApiContent\Models;
 use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\Models\Factories\RouteFactory;
 use MbcApiContent\Models\Page;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Route  extends BaseModel
 {
@@ -42,31 +43,34 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
-    public function page($requestUri)
+    public function page(string $requestUri)
     {
         $pages = $this->pages()->getResults();
 
-        if( count($pages->all()) > 0 )
+        if( count($pages->all()) == 0 )
         {
-            if( count($pages->all()) > 1 )
+            throw new NotFoundHttpException();
+        }
+        elseif (count($pages->all()) == 1)
+        {
+            return $pages->first();
+        }
+        elseif (count($pages->all()) > 1)
+        {
+            if(true) // chack if page->uri not null
             {
-                return $this->pageWithUri($requestUri);
+                return $this->pageWithUri($pages, $requestUri);
             }
-            else {
-                return $pages->first();
-            }
+            throw new NotFoundHttpException();
         }
 
-        return null;
+        throw new NotFoundHttpException();
     }
 
 
-    public function pageWithUri(string $uri)
+    public function pageWithUri(mixed $pages, string $uri)
     {
-        $pages = $this->pages()->getResults();
-
         $pages = $pages->filter(function($page) use($uri) {
-
             if($page->uri == $uri)
             {
                 return true;
