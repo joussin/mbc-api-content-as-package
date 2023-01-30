@@ -50,7 +50,7 @@ class Route  extends BaseModel
         {
             if( count($pages->all()) > 1 )
             {
-                $this->pageWithUri($requestUri);
+                return $this->pageWithUri($requestUri);
             }
             else {
                 return $pages->first();

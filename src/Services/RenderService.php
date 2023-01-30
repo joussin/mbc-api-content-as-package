@@ -171,16 +171,7 @@ class RenderService implements RenderServiceInterface
 
     public function getPageModel(RouteModel $routeModel, string $requestUri): ?PageModel
     {
-
-
-        dd(
-            $routeModel,
-            $routeModel->pages()->getResults(),
-            $routeModel->page($requestUri)
-
-        );
-
-        return $routeModel->pageWithUri($requestUri);
+        return $routeModel->page($requestUri);
     }
 
 
