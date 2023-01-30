@@ -31,11 +31,11 @@ class MigrationService
     {
         $pages = Page::factory(3)->create([]);
 
-        $definitions = PageFactory::getDynamicDefinitions();
-
-        $page = Page::factory()->create($definitions);
-
-        $pages[] = $page;
+//        $definitions = PageFactory::getDynamicDefinitions();
+//
+//        $page = Page::factory()->create($definitions);
+//
+//        $pages[] = $page;
 
         return $pages;
     }

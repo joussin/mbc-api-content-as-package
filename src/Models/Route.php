@@ -43,38 +43,6 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
-//    // to check
-//    // $this->path_parameters
-//    // to check in
-//    // $page->path_parameters
-//    // with
-//    // $laravelRouteParameters = $laravelRoute->parameters = ['id'=> 1]
-//    public function pageWithPathParameters(array $laravelRouteParameters = [])
-//    {
-//        $pages = $this->pages()->getResults();
-//
-//        $pages = $pages->filter(function($page) use($laravelRouteParameters) {
-//
-//            $isThatPage = true;
-//
-//                    foreach($this->path_parameters as $parameter)
-//                    {
-//                        if(
-//                            !isset($page->path_parameters[$parameter]) ||
-//                            !isset($laravelRouteParameters[$parameter]) ||
-//                            !($page->path_parameters[$parameter] == $laravelRouteParameters[$parameter])
-//                        )
-//                        {
-//                            $isThatPage = false;
-//                        }
-//                    }
-//
-//            return $isThatPage;
-//        });
-//
-//        return $pages->first();
-//    }
-//
 //    public function pageAlone()
 //    {
 //        $pages = $this->pages()->getResults();
@@ -86,19 +54,33 @@ class Route  extends BaseModel
 //        return null;
 //    }
 
-    public function page()
+
+
+    public function pageWithUri(string $uri)
     {
-        return $this->hasOne(Page::class);
+        $pages = $this->pages()->getResults();
+
+        $pages = $pages->filter(function($page) use($uri) {
+
+            if($page->uri == $uri)
+            {
+                return true;
+            }
+            return false;
+        });
+
+        return $pages->first();
     }
 
-    public function route()
+    public function page()
     {
-        return $this->hasOne(Route::class);
+        return $this->hasMany(Page::class);
     }
+
+
 
     public function index(){
         $route = Route::with('page')->get();
-//        $route = Route::with('route')->get();
     }
 }
 

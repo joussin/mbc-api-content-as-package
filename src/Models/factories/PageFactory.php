@@ -31,7 +31,7 @@ class PageFactory extends Factory
 
             // nullable
             'route_id' => null, // ////
-            'path_parameters'   => null,
+            'uri'   => null,
         ];
     }
 
@@ -43,15 +43,23 @@ class PageFactory extends Factory
     {
         $id = fake()->numberBetween(1, 9);
         $name = Str::slug(fake()->name());
+        $domainName = fake()->domainName();// carroll.com
+        $domainWord = fake()->domainWord();// carroll
+
 
         $pageName = 'page-' . $name . '-' . $id;
+        $routeNameDyn = 'route-' . $name . '-dyn' ;
         $routeName = 'route-' . $name . '-' . $id;
 
+        $uri = "/$domainWord/dynamic/";
+        $path = $uri . "{id}";
+        $pathWithId = $uri . "$id";
+        $staticPathWithId = $uri . "$id".'/index.html';
+
         $routeData = [
-            'name'            => $routeName,
-            'uri'             => '/url/dynamic/{id}',
-            'static_uri'      => '/url/static/dynamic/' . $id . '/index.html',
-            'path_parameters' => ['id'],
+            'name'            => $routeNameDyn,
+            'uri'             => $path,
+            'controller_name' => 'DynamicController',
             'controller_action' => 'dynamic',
         ];
 
@@ -61,7 +69,7 @@ class PageFactory extends Factory
             'name'            => $pageName,
             'version'         => 1,
             'route_id'        => $route,
-            'path_parameters' => ['id' => $id]
+            'url'             => $pathWithId
         ];
 
         return $pageData;

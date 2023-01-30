@@ -170,12 +170,8 @@ class RenderService implements RenderServiceInterface
 
     public function getPageModel(RouteModel $routeModel, LaravelRoute $laravelRoute): ?PageModel
     {
-        if( count($routeModel->pages()->getResults()->all() ) == 1)
-        {
-            return $routeModel->pages()->getResults()->first();
-        }
 
-        return $routeModel->pageWithPathParameters($laravelRoute->parameters);
+        return $routeModel->pageWithUri($laravelRoute->uri());
     }
 
 

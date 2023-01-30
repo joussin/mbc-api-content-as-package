@@ -16,4 +16,10 @@ class DynamicController extends Controller
         return 'DynamicController-dynamic';
     }
 
+
+    public function static(Request $request, $id)
+    {
+        return 'DynamicController-static';
+    }
+
 }

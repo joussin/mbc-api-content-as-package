@@ -19,7 +19,7 @@ class Page  extends BaseModel
         "version",
         "name",
         "route_id",
-        "path_parameters"
+        "uri"
     ];
 
     protected $casts = [
