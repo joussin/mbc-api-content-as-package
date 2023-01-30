@@ -47,6 +47,7 @@ class Route  extends BaseModel
     {
         $pages = $this->pages()->getResults();
 
+
         if( count($pages->all()) == 0 )
         {
             throw new NotFoundHttpException();
@@ -57,11 +58,18 @@ class Route  extends BaseModel
         }
         elseif (count($pages->all()) > 1)
         {
-            if(true) // chack if page->uri not null
+
+            $pagesAttrs = array_column($pages->all(), 'attributes');
+            $pagesAttrsUri = array_column($pagesAttrs, 'uri');
+
+            if( in_array($requestUri, $pagesAttrsUri))
             {
                 return $this->pageWithUri($pages, $requestUri);
             }
-            throw new NotFoundHttpException();
+            else{
+
+                throw new NotFoundHttpException();
+            }
         }
 
         throw new NotFoundHttpException();
@@ -71,6 +79,7 @@ class Route  extends BaseModel
     public function pageWithUri(mixed $pages, string $uri)
     {
         $pages = $pages->filter(function($page) use($uri) {
+
             if($page->uri == $uri)
             {
                 return true;
