@@ -4,6 +4,7 @@ namespace MbcApiContent\Models\Factories;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route;
 
@@ -30,7 +31,7 @@ class PageFactory extends Factory
 
             // nullable
             'route_id' => null, // ////
-            'path_parameters'   => null,
+            'uri'   => null,
         ];
     }
 
@@ -38,18 +39,52 @@ class PageFactory extends Factory
     /**
      * @return array
      */
-    public function getDefinitions($definitions): array
+    public static function getDynamicDefinitions(): array
     {
-        $nb = fake()->numberBetween(1, 9);
+        $id = fake()->numberBetween(1, 9);
+        $name = Str::slug(fake()->name());
+        $domainName = fake()->domainName();// carroll.com
+        $domainWord = fake()->domainWord();// carroll
 
-        $definitions['name'] = 'page-name-' . $nb;
 
-        $definitions['route_id'] = Route::factory()->make([
-            'name' => 'name-route-dyn-1',
-            'uri' => '/dyn/{id}',
-            'static_uri' => '/static/dyn/1/index.html',
-            'static_doc_name' => 'dynamic.html',
-        ]);
+        $pageName = 'page-' . $name . '-' . $id;
+        $routeNameDyn = 'route-' . $name . '-dyn' ;
+        $routeName = 'route-' . $name . '-' . $id;
+
+        $uri = "/$domainWord/dynamic/";
+        $path = $uri . "{id}";
+        $pathWithId = $uri . "$id";
+        $staticPathWithId = $uri . "$id".'/index.html';
+
+        $routeData = [
+            'name'            => $routeNameDyn,
+            'uri'             => $path,
+            'controller_action' => 'dynamic',
+        ];
+
+        $route = Route::factory()->create($routeData);
+
+        $pageData = [
+            'name'            => $pageName,
+            'version'         => 1,
+            'route_id'        => $route,
+            'uri'             => $pathWithId
+        ];
+
+        return $pageData;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefinitions(array $definitions = []): array
+    {
+        $id = fake()->numberBetween(1, 9);
+        $name = Str::slug(fake()->name());
+
+        $pageName = 'page-' . $name . '-' . $id;
+
+        $definitions['name'] = $pageName;
 
         return $definitions;
     }

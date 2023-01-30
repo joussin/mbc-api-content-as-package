@@ -26,6 +26,13 @@ class MainController extends Controller
     }
 
 
+    public function static(Request $request, $id)
+    {
+
+        return 'MainController-dynamic-static' . $id;
+    }
+
+
 //    public function test(Request $request)
 //    {
 //

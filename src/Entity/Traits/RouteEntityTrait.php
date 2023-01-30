@@ -16,6 +16,7 @@ trait RouteEntityTrait
     }
 
 
+
     /**
      * @return mixed|string
      */

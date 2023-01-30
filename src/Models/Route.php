@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\Models\Factories\RouteFactory;
 use MbcApiContent\Models\Page;
 
-
 class Route  extends BaseModel
 {
 
@@ -43,46 +42,47 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
-
-    // $laravelRouteParameters = ['id'=> 1]
-    public function pageWith(array $laravelRouteParameters = [])
+    public function page($requestUri)
     {
         $pages = $this->pages()->getResults();
 
-        $pages = $pages->filter(function($page) use($laravelRouteParameters) {
+        if( count($pages->all()) > 0 )
+        {
+            if( count($pages->all()) > 1 )
+            {
+                return $this->pageWithUri($requestUri);
+            }
+            else {
+                return $pages->first();
+            }
+        }
 
-            $isThatPage = true;
+        return null;
+    }
 
-            // to check
-//            $this->path_parameters
-//                // to check in
-//            $page->path_parameters
-//            // with
-//                $laravelRouteParameters
 
-                    foreach($this->path_parameters as $parameter)
-                    {
-                        if(
-                            !isset($page->path_parameters[$parameter]) ||
-                            !isset($laravelRouteParameters[$parameter]) ||
-                            !($page->path_parameters[$parameter] == $laravelRouteParameters[$parameter])
-                        )
-                        {
-                            $isThatPage = false;
-                        }
-                    }
+    public function pageWithUri(string $uri)
+    {
+        $pages = $this->pages()->getResults();
 
-            return $isThatPage;
+        $pages = $pages->filter(function($page) use($uri) {
+
+            if($page->uri == $uri)
+            {
+                return true;
+            }
+            return false;
         });
 
         return $pages->first();
     }
 
-
     public function pages()
     {
         return $this->hasMany(Page::class);
     }
+
+
 
     public function index(){
         $route = Route::with('page')->get();

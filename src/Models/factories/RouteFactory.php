@@ -3,6 +3,7 @@
 namespace MbcApiContent\Models\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use MbcApiContent\Models\Route;
 
 /**
@@ -20,18 +21,17 @@ class RouteFactory extends Factory
     protected $model = Route::class;
 
 
-
-    public function getDefaults() : array
+    public function getDefaults(): array
     {
         return [
             // required
-            'method'          => 'GET',
-            'protocol'        => 'http',
-            'name'            => 'route-name',
-            'uri'             => '/',
-            'static_uri'      => '/',
-            'static_doc_name' => 'index.html',
-            'status'          => 'ONLINE',
+            'method'            => 'GET',
+            'protocol'          => 'http',
+            'name'              => 'route-name',
+            'uri'               => '/',
+            'static_uri'        => '/',
+            'static_doc_name'   => 'index.html',
+            'status'            => 'ONLINE',
 
 
             // nullable
@@ -47,28 +47,21 @@ class RouteFactory extends Factory
     }
 
 
-    public function getFakeDefinitions(string $key = null)
-    {
-        $fake = [
-            'numberBetween' => fake()->numberBetween(1, 9),
-            'name' => fake()->name(),
-            'url' => fake()->url(),
-            'domainName' => fake()->domainName(), // carroll.com
-            'domainWord' => fake()->domainWord(), // carroll
-
-        ];
-
-        return is_null($key) ? $fake : $fake[$key];
-    }
-
     /**
      * @return array
      */
     public function getDefinitions(array $definitions = []): array
     {
-        $definitions['name'] = 'route-' . $this->getFakeDefinitions('name') . '-' . $this->getFakeDefinitions('numberBetween');
-        $definitions['uri'] = "/" . $this->getFakeDefinitions('domainWord');
-        $definitions['static_uri'] = "/" . $this->getFakeDefinitions('domainWord') . "/index.html";
+        $id = fake()->numberBetween(1, 9);
+        $name = Str::slug(fake()->name());
+        $url = fake()->url();
+        $domainName = fake()->domainName();// carroll.com
+        $domainWord = fake()->domainWord();// carroll
+
+
+        $definitions['name'] = 'route-' . $name . '-' . $id;
+        $definitions['uri'] = "/" . $domainWord;
+        $definitions['static_uri'] = "/" . $domainWord . "/index.html";
         $definitions['static_doc_name'] = "index.html";
 
         return $definitions;
