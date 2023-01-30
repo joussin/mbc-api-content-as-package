@@ -59,7 +59,6 @@ class PageFactory extends Factory
         $routeData = [
             'name'            => $routeNameDyn,
             'uri'             => $path,
-            'controller_name' => 'DynamicController',
             'controller_action' => 'dynamic',
         ];
 
@@ -69,7 +68,7 @@ class PageFactory extends Factory
             'name'            => $pageName,
             'version'         => 1,
             'route_id'        => $route,
-            'url'             => $pathWithId
+            'uri'             => $pathWithId
         ];
 
         return $pageData;
