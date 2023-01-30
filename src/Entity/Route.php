@@ -60,6 +60,10 @@ class Route implements EntityInterface
     protected $uri;
 
     // nullable properties
+
+    protected $route_id;
+
+
     protected $controller_name = MainController::class;
 
     protected $controller_action = 'any';

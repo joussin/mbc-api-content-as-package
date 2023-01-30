@@ -175,7 +175,7 @@ class RenderService implements RenderServiceInterface
             return $routeModel->pages()->getResults()->first();
         }
 
-        return $routeModel->pageWith($laravelRoute->parameters);
+        return $routeModel->pageWithPathParameters($laravelRoute->parameters);
     }
 
 

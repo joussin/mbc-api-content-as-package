@@ -2,6 +2,8 @@
 
 namespace MbcApiContent\Models\Migrations;
 
+use Illuminate\Support\Str;
+use MbcApiContent\Models\Factories\PageFactory;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route;
 
@@ -9,37 +11,36 @@ class MigrationService
 {
 
 
+
     public function seedAll()
     {
-
-        $routes = [];
-
-        $routes[] = $this->seed(Route::class, 3, true, []);
-
-        $routes[] = $this->seed(Route::class, null, true, [
-            'name' => 'route-dyn-departement-nbdept',
-            'uri' => '/doc/departement/{id}',
-            'static_uri' => '/doc-departement-78/index.html'
-        ]);
-
-
-
-//        $page = $this->seed(Page::class, 1, true, []);
-
         return [
-            $routes,
-//            $page
+            $routes = $this->createRoutes(),
+            $pages = $this->createPages(),
         ];
     }
 
-
-    public function seed(string $model, ?int $count = null, bool $create = false, array $data = [])
+    public function createRoutes()
     {
-        $action = $create ? 'create' : 'make';
-        $count = ($count==1) ? null : $count;
+        $routes = Route::factory(3)->create([]);
 
-        return $model::factory($count)->$action($data);
+        return $routes;
     }
+
+    public function createPages()
+    {
+        $pages = Page::factory(3)->create([]);
+
+        $definitions = PageFactory::getDynamicDefinitions();
+
+        $page = Page::factory()->create($definitions);
+
+        $pages[] = $page;
+
+        return $pages;
+    }
+
+
 
 
 }

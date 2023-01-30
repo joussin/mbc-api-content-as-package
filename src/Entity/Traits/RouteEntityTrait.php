@@ -15,6 +15,10 @@ trait RouteEntityTrait
         return $this->id;
     }
 
+    public function getRouteId()
+    {
+        return $this->route_id;
+    }
 
     /**
      * @return mixed|string

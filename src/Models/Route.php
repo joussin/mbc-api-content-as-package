@@ -43,49 +43,62 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
+//    // to check
+//    // $this->path_parameters
+//    // to check in
+//    // $page->path_parameters
+//    // with
+//    // $laravelRouteParameters = $laravelRoute->parameters = ['id'=> 1]
+//    public function pageWithPathParameters(array $laravelRouteParameters = [])
+//    {
+//        $pages = $this->pages()->getResults();
+//
+//        $pages = $pages->filter(function($page) use($laravelRouteParameters) {
+//
+//            $isThatPage = true;
+//
+//                    foreach($this->path_parameters as $parameter)
+//                    {
+//                        if(
+//                            !isset($page->path_parameters[$parameter]) ||
+//                            !isset($laravelRouteParameters[$parameter]) ||
+//                            !($page->path_parameters[$parameter] == $laravelRouteParameters[$parameter])
+//                        )
+//                        {
+//                            $isThatPage = false;
+//                        }
+//                    }
+//
+//            return $isThatPage;
+//        });
+//
+//        return $pages->first();
+//    }
+//
+//    public function pageAlone()
+//    {
+//        $pages = $this->pages()->getResults();
+//
+//        if( count($pages->all()) > 0 )
+//        {
+//            return $pages->first();
+//        }
+//        return null;
+//    }
 
-    // $laravelRouteParameters = ['id'=> 1]
-    public function pageWith(array $laravelRouteParameters = [])
+    public function page()
     {
-        $pages = $this->pages()->getResults();
-
-        $pages = $pages->filter(function($page) use($laravelRouteParameters) {
-
-            $isThatPage = true;
-
-            // to check
-//            $this->path_parameters
-//                // to check in
-//            $page->path_parameters
-//            // with
-//                $laravelRouteParameters
-
-                    foreach($this->path_parameters as $parameter)
-                    {
-                        if(
-                            !isset($page->path_parameters[$parameter]) ||
-                            !isset($laravelRouteParameters[$parameter]) ||
-                            !($page->path_parameters[$parameter] == $laravelRouteParameters[$parameter])
-                        )
-                        {
-                            $isThatPage = false;
-                        }
-                    }
-
-            return $isThatPage;
-        });
-
-        return $pages->first();
+        return $this->hasOne(Page::class);
     }
 
-
-    public function pages()
+    public function route()
     {
-        return $this->hasMany(Page::class);
+        return $this->hasOne(Route::class);
     }
 
     public function index(){
         $route = Route::with('page')->get();
+//        $route = Route::with('route')->get();
     }
 }
 

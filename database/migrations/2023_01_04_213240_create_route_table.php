@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('route', function (Blueprint $table) {
 
             $table->increments('id');
+            $table->integer('route_id')->nullable()->unsigned();
 
             $table->string('method')->default('GET');
             $table->enum('protocol', ['http', 'https'])->default('http');
@@ -51,6 +52,15 @@ return new class extends Migration
 
         });
 
+        // one to one route
+        Schema::table('route', function (Blueprint $table) {
+            $table->foreign(
+                'route_id',
+                'route_route_id_foreign')
+                ->references('id')
+                ->on('route')
+                ->nullOnDelete();
+        });
 
     }
 
@@ -63,6 +73,10 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::table('route', function (Blueprint $table) {
+            $table->dropForeign('route_route_id_foreign');
+        });
+
         Schema::dropIfExists('route');
     }
 };

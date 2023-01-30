@@ -4,6 +4,7 @@ namespace MbcApiContent\Models\Factories;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route;
 
@@ -38,18 +39,45 @@ class PageFactory extends Factory
     /**
      * @return array
      */
-    public function getDefinitions($definitions): array
+    public static function getDynamicDefinitions(): array
     {
-        $nb = fake()->numberBetween(1, 9);
+        $id = fake()->numberBetween(1, 9);
+        $name = Str::slug(fake()->name());
 
-        $definitions['name'] = 'page-name-' . $nb;
+        $pageName = 'page-' . $name . '-' . $id;
+        $routeName = 'route-' . $name . '-' . $id;
 
-        $definitions['route_id'] = Route::factory()->make([
-            'name' => 'name-route-dyn-1',
-            'uri' => '/dyn/{id}',
-            'static_uri' => '/static/dyn/1/index.html',
-            'static_doc_name' => 'dynamic.html',
-        ]);
+        $routeData = [
+            'name'            => $routeName,
+            'uri'             => '/url/dynamic/{id}',
+            'static_uri'      => '/url/static/dynamic/' . $id . '/index.html',
+            'path_parameters' => ['id'],
+            'controller_action' => 'dynamic',
+        ];
+
+        $route = Route::factory()->create($routeData);
+
+        $pageData = [
+            'name'            => $pageName,
+            'version'         => 1,
+            'route_id'        => $route,
+            'path_parameters' => ['id' => $id]
+        ];
+
+        return $pageData;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDefinitions(array $definitions = []): array
+    {
+        $id = fake()->numberBetween(1, 9);
+        $name = Str::slug(fake()->name());
+
+        $pageName = 'page-' . $name . '-' . $id;
+
+        $definitions['name'] = $pageName;
 
         return $definitions;
     }
