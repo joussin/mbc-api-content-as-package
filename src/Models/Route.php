@@ -72,7 +72,7 @@ class Route  extends BaseModel
         return $pages->first();
     }
 
-    public function page()
+    public function pages()
     {
         return $this->hasMany(Page::class);
     }
