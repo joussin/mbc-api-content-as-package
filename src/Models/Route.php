@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\Models\Factories\RouteFactory;
 use MbcApiContent\Models\Page;
 
-
 class Route  extends BaseModel
 {
 
@@ -43,17 +42,23 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
-//    public function pageAlone()
-//    {
-//        $pages = $this->pages()->getResults();
-//
-//        if( count($pages->all()) > 0 )
-//        {
-//            return $pages->first();
-//        }
-//        return null;
-//    }
+    public function page($requestUri)
+    {
+        $pages = $this->pages()->getResults();
 
+        if( count($pages->all()) > 0 )
+        {
+            if( count($pages->all()) > 1 )
+            {
+                $this->pageWithUri($requestUri);
+            }
+            else {
+                return $pages->first();
+            }
+        }
+
+        return null;
+    }
 
 
     public function pageWithUri(string $uri)

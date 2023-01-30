@@ -109,11 +109,12 @@ class RenderService implements RenderServiceInterface
             return false;
         }
 
-        $pageModel = $this->getPageModel($routeModel, $laravelRoute);
+        $pageModel = $this->getPageModel($routeModel, $request->getRequestUri());
         if(is_null($pageModel))
         {
             return false;
         }
+
 
         $pageEntity = $this->getPageEntityByPageModel($pageModel);
         if(is_null($pageEntity))
@@ -168,10 +169,18 @@ class RenderService implements RenderServiceInterface
         return null;
     }
 
-    public function getPageModel(RouteModel $routeModel, LaravelRoute $laravelRoute): ?PageModel
+    public function getPageModel(RouteModel $routeModel, string $requestUri): ?PageModel
     {
 
-        return $routeModel->pageWithUri($laravelRoute->uri());
+
+        dd(
+            $routeModel,
+            $routeModel->pages()->getResults(),
+            $routeModel->page($requestUri)
+
+        );
+
+        return $routeModel->pageWithUri($requestUri);
     }
 
 
