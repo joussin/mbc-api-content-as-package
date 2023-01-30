@@ -34,11 +34,21 @@ class Page  extends BaseModel
     }
 
 
+
+    public function pageContents()
+    {
+        return $this->hasMany(PageContent::class);
+    }
+
+
+
+
     // doc
     public function route()
     {
         return $this->belongsTo(Route::class, 'route_id', 'id');
     }
+
 
 
     public function updatedEventCallback() : bool
