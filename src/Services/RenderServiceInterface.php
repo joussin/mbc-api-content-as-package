@@ -18,6 +18,6 @@ interface RenderServiceInterface
 
     public function requestToContentCollection(LaravelRequest $request): bool;
 
-    public function getRouteEntityByLaravelRoute(LaravelRoute $route, string $filter = 'name'): ?RouteEntity;
+    public function getRouteEntityByLaravelRoute(LaravelRoute $route): ?RouteEntity;
 
 }

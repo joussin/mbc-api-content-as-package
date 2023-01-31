@@ -115,12 +115,12 @@ class RenderService implements RenderServiceInterface
     }
 
 
-    public function getRouteEntityByLaravelRoute(LaravelRoute $route, string $filter = 'name'): ?RouteEntity
+    public function getRouteEntityByLaravelRoute(LaravelRoute $route): ?RouteEntity
     {
         $entities = $this->routesEntityCollection->all();
 
         foreach ($entities as $k => $entity) {
-            if ($filter == 'name' && $entity->getName() == $route->getName()) {
+            if ($entity->getUri() == '/' . $route->uri()) {
                 return $entity;
             }
         }
