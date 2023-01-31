@@ -56,12 +56,12 @@ class RenderService implements RenderServiceInterface
     {
         $this->laravelRequest = $request;
 
-        $success = $this->requestToContentCollection($request);
+        $success = $this->requestToContentCollection($this->laravelRequest);
 
-        if(!$success)
-        {
-            throw new \Exception('Unable to generate content entity. Unable to parse request into route then page and template entities');
-        }
+//        if(!$success)
+//        {
+//            throw new \Exception('Unable to generate content entity. Unable to parse request into route then page and template entities');
+//        }
     }
 
 
