@@ -18,6 +18,7 @@ class Page  extends BaseModel
     protected $fillable = [
         "version",
         "name",
+        "template_name",
         "route_id"
     ];
 

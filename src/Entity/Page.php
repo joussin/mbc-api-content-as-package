@@ -27,6 +27,8 @@ class Page  implements EntityInterface
 
     public string $name;
 
+    public ?string $template_name;
+
 
     public ?int $route_id;
 

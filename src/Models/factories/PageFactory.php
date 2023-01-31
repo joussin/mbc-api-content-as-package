@@ -30,6 +30,7 @@ class PageFactory extends Factory
             'version'  => 1,
 
             // nullable
+            'template_name' => null, // ////
             'route_id' => null, // ////
         ];
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('version');
             $table->string('name');
+            $table->string('template_name')->nullable();
 
             $table->integer('route_id')->nullable()->unsigned();
 
