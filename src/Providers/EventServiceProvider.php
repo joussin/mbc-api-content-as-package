@@ -28,7 +28,7 @@ class EventServiceProvider extends ServiceProvider
 
             try{
                 $migrationService = app()->make(MigrationService::class);
-                $models = $migrationService->seedAll();
+                $migrationService->seedAll();
             }
             catch (\Exception $e)
             {

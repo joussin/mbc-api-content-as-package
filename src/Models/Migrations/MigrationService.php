@@ -13,11 +13,9 @@ class MigrationService
 
     public function seedAll()
     {
-        return [
-            $routes = $this->createRoutes(),
-            $pages = $this->createPages(),
-            $pageContents = $this->createPageContents(),
-        ];
+        $routes = $this->createRoutes();
+        $pages = $this->createPages();
+        $pageContents = $this->createPageContents();
     }
 
     public function createRoutes()
