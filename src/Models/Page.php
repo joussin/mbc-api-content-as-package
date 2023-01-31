@@ -35,10 +35,10 @@ class Page  extends BaseModel
 
 
 
-    public function pageContents()
-    {
-        return $this->hasMany(PageContent::class);
-    }
+//    public function pageContents()
+//    {
+//        return $this->hasMany(PageContent::class);
+//    }
 
 
 

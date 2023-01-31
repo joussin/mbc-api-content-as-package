@@ -22,18 +22,20 @@ class PageContent  implements EntityInterface
 
     public int $version;
 
-    public function __construct()
+    public function __construct($model)
     {
+
+        $this->model = $model;
     }
 
 
     public function getName(): string
     {
-        // TODO: Implement getName() method.
+        return '';
     }
 
     public function getModel(): ?Model
     {
-        // TODO: Implement getModel() method.
+        return $this->model;
     }
 }

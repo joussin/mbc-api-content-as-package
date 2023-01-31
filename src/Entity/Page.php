@@ -25,7 +25,7 @@ class Page  implements EntityInterface
 
     public int $version;
 
-    public string $alias;
+    public string $name;
 
 
     public ?int $route_id;
@@ -60,7 +60,7 @@ class Page  implements EntityInterface
 
     public function getName(): string
     {
-        return (isset($this->alias) ? $this->alias : '');
+        return (isset($this->name) ? $this->name : '');
     }
 
 
