@@ -109,7 +109,7 @@ class RenderService implements RenderServiceInterface
             return false;
         }
 
-        $pageModel = $this->getPageModel($routeModel, $request->getRequestUri());
+        $pageModel = $this->getPageModel($routeModel);
         if(is_null($pageModel))
         {
             return false;
@@ -169,9 +169,9 @@ class RenderService implements RenderServiceInterface
         return null;
     }
 
-    public function getPageModel(RouteModel $routeModel, string $requestUri): ?PageModel
+    public function getPageModel(RouteModel $routeModel): ?PageModel
     {
-        return $routeModel->page($requestUri);
+        return $routeModel->page();
     }
 
 

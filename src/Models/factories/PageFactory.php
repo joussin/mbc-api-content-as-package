@@ -31,7 +31,6 @@ class PageFactory extends Factory
 
             // nullable
             'route_id' => null, // ////
-            'uri'   => null,
         ];
     }
 
@@ -47,9 +46,9 @@ class PageFactory extends Factory
         $domainWord = fake()->domainWord();// carroll
 
 
-        $pageName = 'page-' . $name . '-' . $id;
-        $routeNameDyn = 'route-' . $name . '-dyn' ;
-        $routeName = 'route-' . $name . '-' . $id;
+        $pageName = 'page-' . $domainWord . '-' . $id;
+        $routeNameDyn = 'route-' . $domainWord . '-dyn' ;
+        $routeName = 'route-' . $domainWord . '-' . $id;
 
         $uri = "/$domainWord/dynamic/";
         $path = $uri . "{id}";
@@ -67,8 +66,7 @@ class PageFactory extends Factory
         $pageData = [
             'name'            => $pageName,
             'version'         => 1,
-            'route_id'        => $route,
-            'uri'             => $pathWithId
+            'route_id'        => $route
         ];
 
         return $pageData;
@@ -81,8 +79,9 @@ class PageFactory extends Factory
     {
         $id = fake()->numberBetween(1, 9);
         $name = Str::slug(fake()->name());
+        $domainWord = fake()->domainWord();// carroll
 
-        $pageName = 'page-' . $name . '-' . $id;
+        $pageName = 'page-' . $domainWord . '-' . $id;
 
         $definitions['name'] = $pageName;
 

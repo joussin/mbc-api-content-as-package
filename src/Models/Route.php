@@ -43,56 +43,10 @@ class Route  extends BaseModel
         return RouteFactory::new();
     }
 
-    public function page(string $requestUri)
+
+    public function page()
     {
-        $pages = $this->pages()->getResults();
-
-
-        if( count($pages->all()) == 0 )
-        {
-            throw new NotFoundHttpException();
-        }
-        elseif (count($pages->all()) == 1)
-        {
-            return $pages->first();
-        }
-        elseif (count($pages->all()) > 1)
-        {
-
-            $pagesAttrs = array_column($pages->all(), 'attributes');
-            $pagesAttrsUri = array_column($pagesAttrs, 'uri');
-
-            if( in_array($requestUri, $pagesAttrsUri))
-            {
-                return $this->pageWithUri($pages, $requestUri);
-            }
-            else{
-
-                throw new NotFoundHttpException();
-            }
-        }
-
-        throw new NotFoundHttpException();
-    }
-
-
-    public function pageWithUri(mixed $pages, string $uri)
-    {
-        $pages = $pages->filter(function($page) use($uri) {
-
-            if($page->uri == $uri)
-            {
-                return true;
-            }
-            return false;
-        });
-
-        return $pages->first();
-    }
-
-    public function pages()
-    {
-        return $this->hasMany(Page::class);
+        return $this->hasOne(Page::class);
     }
 
 

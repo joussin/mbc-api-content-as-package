@@ -20,7 +20,14 @@ class PageContent  implements EntityInterface
 
     public int $id;
 
-    public int $version;
+    public ?int $page_id;
+
+    public ?string $content;
+
+    public string $created_at;
+
+    public string $updated_at; //\DateTimeInterface
+
 
     public function __construct($model)
     {

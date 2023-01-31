@@ -59,7 +59,7 @@ class RouteFactory extends Factory
         $domainWord = fake()->domainWord();// carroll
 
 
-        $definitions['name'] = 'route-' . $name . '-' . $id;
+        $definitions['name'] = 'route-' . $domainWord . '-' . $id;
         $definitions['uri'] = "/" . $domainWord;
         $definitions['static_uri'] = "/" . $domainWord . "/index.html";
         $definitions['static_doc_name'] = "index.html";

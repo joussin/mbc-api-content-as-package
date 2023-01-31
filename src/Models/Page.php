@@ -18,12 +18,10 @@ class Page  extends BaseModel
     protected $fillable = [
         "version",
         "name",
-        "route_id",
-        "uri"
+        "route_id"
     ];
 
     protected $casts = [
-        'path_parameters' => 'array',
     ];
 
 
@@ -35,10 +33,10 @@ class Page  extends BaseModel
 
 
 
-//    public function pageContents()
-//    {
-//        return $this->hasMany(PageContent::class);
-//    }
+    public function pageContents()
+    {
+        return $this->hasMany(PageContent::class);
+    }
 
 
 

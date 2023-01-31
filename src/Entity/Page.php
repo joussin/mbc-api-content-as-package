@@ -30,7 +30,6 @@ class Page  implements EntityInterface
 
     public ?int $route_id;
 
-    public ?string $uri;
 
     public string $created_at;
 

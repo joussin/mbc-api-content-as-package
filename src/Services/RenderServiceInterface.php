@@ -37,7 +37,7 @@ interface RenderServiceInterface
 
     public function getRouteEntityByLaravelRoute(LaravelRoute $route, string $filter = 'name'): ?RouteEntity;
 
-    public function getPageModel(RouteModel $routeModel, string $requestUri): ?PageModel;
+    public function getPageModel(RouteModel $routeModel): ?PageModel;
 
 
     public function getPageEntityByPageModel(PageModel $pageModel): ?PageEntity;
