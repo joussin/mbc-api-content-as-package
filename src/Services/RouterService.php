@@ -79,12 +79,10 @@ class RouterService implements RouterServiceInterface
     }
 
 
-    public function getLaravelRequestRoute(?LaravelRequest $request = null) : ?LaravelRoute
+    public function getLaravelRequestRoute() : ?LaravelRoute
     {
-        $request = $request ?? request();
-        return is_null($request) ? null : $request->route();
+        return is_null(request()) ? null :  request()->route();
     }
-
 
 
 

@@ -15,7 +15,7 @@ interface RouterServiceInterface
 
     public function getRoutesLaravelCollection() : RouteCollectionInterface;
 
-    public function getLaravelRequestRoute(?LaravelRequest $request) : ?LaravelRoute;
+    public function getLaravelRequestRoute() : ?LaravelRoute;
 
     public function initCollections(): void;
 

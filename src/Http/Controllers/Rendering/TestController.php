@@ -25,7 +25,8 @@ class TestController extends \App\Http\Controllers\Controller
 
 
         $pageModel = $routeModel->page();
-        $pageContentsCollection = $pageModel ? $pageModel->pageContents()->all() : null;
+        $pageContentsCollection = $routeModel->pageContents();
+//        $pageContentsCollection = $pageModel ? $pageModel->pageContents()->all() : null;
 
 
         $result = [
