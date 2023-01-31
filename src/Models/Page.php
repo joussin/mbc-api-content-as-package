@@ -36,7 +36,7 @@ class Page  extends BaseModel
 
     public function pageContents()
     {
-        return $this->hasMany(PageContent::class);
+        return $this->hasMany(PageContent::class)->getResults();
     }
 
 

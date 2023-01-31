@@ -109,21 +109,14 @@ class RouterService implements RouterServiceInterface
         switch ($method) {
             case 'GET':
                 return RouterFacade::get($uri, $routeAction);
-                break;
             case 'POST':
                 return RouterFacade::post($uri, $routeAction);
-                break;
             case 'PUT':
                 return RouterFacade::put($uri, $routeAction);
-                break;
             case 'PATCH':
                 return RouterFacade::patch($uri, $routeAction);
-                break;
             case 'DELETE':
                 return RouterFacade::delete($uri, $routeAction);
-                break;
-            default:
-                return RouterFacade::get($uri, $routeAction);
         }
     }
 
