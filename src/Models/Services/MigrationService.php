@@ -1,9 +1,8 @@
 <?php
 
-namespace MbcApiContent\Models\Migrations;
+namespace MbcApiContent\Models\Services;
 
-use Illuminate\Support\Str;
-use MbcApiContent\Models\Factories\PageFactory;
+use MbcApiContent\Models\Factory\PageFactory;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\PageContent;
 use MbcApiContent\Models\Route;

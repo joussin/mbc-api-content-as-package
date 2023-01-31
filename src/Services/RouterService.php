@@ -4,8 +4,9 @@ namespace MbcApiContent\Services;
 
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route as RouterFacade;
+use MbcApiContent\Models\Collections\RouteModelCollection;
+use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -30,17 +31,17 @@ class RouterService implements RouterServiceInterface
      *
      */
 
-    public Collection $routesModelCollection;
+    public RouteModelCollectionInterface $routesModelCollection;
 
     public RouteCollectionInterface $routesLaravelCollection;
 
-    public function __construct(Collection $routesModelCollection)
+    public function __construct()
     {
-        $this->routesModelCollection = $routesModelCollection;
+        $this->routesModelCollection = new RouteModelCollection();
         $this->routesLaravelCollection = $this->getRoutesLaravelCollection();
     }
 
-    public function getRoutesModelCollection(): Collection
+    public function getRoutesModelCollection(): RouteModelCollectionInterface
     {
         return $this->routesModelCollection;
     }
@@ -56,7 +57,7 @@ class RouterService implements RouterServiceInterface
 
     public function initCollections(): void
     {
-        $this->routesModelCollection = collect(RouteModel::all()); // collect(RouteModel::all()) // new Collection(),
+        $this->routesModelCollection = new RouteModelCollection(RouteModel::all()); // collect(RouteModel::all()) // new Collection(),
 
         $this->routesModelCollection->each(function ($routeModel, $index) {
             $route = $this->addRouteToRouter(

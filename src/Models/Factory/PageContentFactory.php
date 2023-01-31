@@ -1,11 +1,11 @@
 <?php
 
-namespace MbcApiContent\Models\Factories;
+namespace MbcApiContent\Models\Factory;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use MbcApiContent\Models\PageContent;
+use function MbcApiContent\Models\Factories\fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>

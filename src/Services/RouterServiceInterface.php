@@ -5,12 +5,12 @@ namespace MbcApiContent\Services;
 
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
+use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 
 interface RouterServiceInterface
 {
 
-    public function getRoutesModelCollection(): Collection;
+    public function getRoutesModelCollection(): RouteModelCollectionInterface;
 
     public function getRoutesLaravelCollection() : RouteCollectionInterface;
 

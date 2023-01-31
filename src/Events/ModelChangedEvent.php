@@ -2,7 +2,7 @@
 
 namespace MbcApiContent\Events;
 
-use MbcApiContent\Models\ModelInterface;
+use MbcApiContent\Models\Interfaces\ModelInterface;
 
 class ModelChangedEvent extends BaseEvent
 {

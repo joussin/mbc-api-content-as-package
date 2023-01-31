@@ -3,9 +3,10 @@
 namespace MbcApiContent\Models;
 
 use MbcApiContent\Http\Controllers\Rendering\MainController;
-use MbcApiContent\Models\Factories\RouteFactory;
+use MbcApiContent\Models\Factory\RouteFactory;
+use MbcApiContent\Models\Interfaces\AbstractModel;
 
-class Route  extends BaseModel
+class Route  extends AbstractModel
 {
 
     protected $table = 'route';
@@ -13,22 +14,22 @@ class Route  extends BaseModel
     protected $connection = "mysql";
 
 
-    public const DEFAULT_NAMESPACE = "MbcApiContent\Http\Controllers\Rendering\\";
 
-    public const CONTROLLER_NAME = MainController::class;
+    public const DEFAULT_CONTROLLER_NAME = MainController::class;
+
+    public const DEFAULT_CONTROLLER_ACTION = "any";
 
 
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
 
-        if (is_null($this->controller_name)) {
-            $this->controller_name = self::DEFAULT_NAMESPACE . self::CONTROLLER_NAME;
+
+        if (is_null($this->controller_action)) {
+            $this->controller_action = self::DEFAULT_CONTROLLER_ACTION;
         }
-        else if (!\str_contains($this->controller_name, '\\')){
-             {
-                 $this->controller_name = self::DEFAULT_NAMESPACE . $this->controller_name;
-            }
+        if (is_null($this->controller_name)) {
+            $this->controller_name = self::DEFAULT_CONTROLLER_NAME;
         }
 
         $this->method = strtoupper($this->method);

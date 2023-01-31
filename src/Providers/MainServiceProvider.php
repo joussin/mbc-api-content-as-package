@@ -5,7 +5,9 @@ namespace MbcApiContent\Providers;
 use Illuminate\Support\Collection;
 use MbcApiContent\Bootstrap;
 use MbcApiContent\Events\ApiContentEventListener;
-use MbcApiContent\Models\Migrations\MigrationService;
+use MbcApiContent\Events\ApiContentMigrationsEventListener;
+use MbcApiContent\Events\ApiContentModelsEventListener;
+use MbcApiContent\Models\Services\MigrationService;
 use MbcApiContent\Services\RouterService;
 use MbcApiContent\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -42,13 +44,22 @@ class MainServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
 
 
-        $this->app->singleton(Bootstrap::class, function(){
+        $this->app->singleton(Bootstrap::class, function($app){
             return new Bootstrap(
-                app()->make(ApiContentEventListener::class)
+                $app->make(ApiContentEventListener::class),
+                $app->make(ApiContentModelsEventListener::class),
+                $app->make(ApiContentMigrationsEventListener::class),
             );
         });
 
         $this->app->singleton(ApiContentEventListener::class);
+        $this->app->singleton(ApiContentModelsEventListener::class);
+
+        $this->app->singleton(ApiContentMigrationsEventListener::class, function($app) {
+            return new ApiContentMigrationsEventListener(
+                $app->make(MigrationService::class),
+            );
+        });
 
         $this->app->singleton(MigrationService::class);
 
@@ -56,19 +67,17 @@ class MainServiceProvider extends ServiceProvider
 
         // RouterFacade::
         $this->app->singleton('router_service_facade_accessor', function ($app) {
-            return app()->make(RouterServiceInterface::class);
+            return $app->make(RouterServiceInterface::class);
         });
+
+        $this->app->singleton(RouterServiceInterface::class, function($app) {
+            return new RouterService();
+        });
+
 //        // RenderFacade::
 //        $this->app->singleton('render_service_facade_accessor', function ($app) {
 //            return app()->make(RenderServiceInterface::class);
 //        });
-
-        $this->app->singleton(RouterServiceInterface::class, function() {
-            return new RouterService(
-                new Collection(),
-            );
-        });
-
 
 //        $this->app->singleton(RenderServiceInterface::class, function() {
 //            return new RenderService(

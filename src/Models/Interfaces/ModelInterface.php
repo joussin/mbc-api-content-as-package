@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\Models;
+namespace MbcApiContent\Models\Interfaces;
 
 interface ModelInterface
 {
