@@ -40,7 +40,17 @@ class MigrationService
 
     public function createPageContents()
     {
-        $pageContents = PageContent::factory(1)->create();
+        $route = Route::factory(1)->create([]);
+
+        $page = Page::factory(1)->create([
+            'route_id' => $route
+        ]);
+
+
+        $pageContents = PageContent::factory(1)->create([
+            'page_id' => $page
+        ]);
+
         return $pageContents;
     }
 

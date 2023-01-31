@@ -38,7 +38,7 @@ class PageContentFactory extends Factory
     public function getDefinitions(array $definitions = []): array
     {
         $id = fake()->numberBetween(1, 9);
-        $content = fake()->paragraphs();
+        $content = fake()->paragraph();
         $domainWord = fake()->domainWord();// carroll
 
         $definitions["name"] = $domainWord;
