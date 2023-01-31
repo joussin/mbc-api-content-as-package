@@ -2,13 +2,14 @@
 
 namespace MbcApiContent\Services;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Route as RouterFacade;
 use MbcApiContent\Models\Collections\RouteModelCollection;
 use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
-use MbcApiContent\Models\Page;
+use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -79,11 +80,49 @@ class RouterService implements RouterServiceInterface
     }
 
 
-    public function getLaravelRequestRoute() : ?LaravelRoute
+    public function getLaravelRoute() : ?LaravelRoute
     {
         return is_null(request()) ? null :  request()->route();
     }
 
+
+    public function getRouteModel(): ?RouteModel
+    {
+        $route = $this->getLaravelRoute();
+        if(is_null($route))
+        {
+            return null;
+        }
+        $routeModels = $this->routesModelCollection->all();
+
+        foreach ($routeModels as $routeModel) {
+            if ($routeModel->uri == '/' . $route->uri()) {
+                return $routeModel;
+            }
+        }
+        return null;
+    }
+
+    public function getPageModel() : ?PageModel
+    {
+        $route = $this->getRouteModel();
+        if(is_null($route))
+        {
+            return null;
+        }
+        return $route->page();
+    }
+
+    public function getPageContentModels() : ?Collection
+    {
+        $page = $this->getPageModel();
+        if(is_null($page))
+        {
+            return null;
+        }
+
+        return is_null($page->pageContents()) ? null : $page->pageContents();
+    }
 
 
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
@@ -122,15 +161,4 @@ class RouterService implements RouterServiceInterface
         }
     }
 
-    public function getRouteModelByLaravelRoute(LaravelRoute $route): ?RouteModel
-    {
-        $routeModels = $this->routesModelCollection->all();
-
-        foreach ($routeModels as $routeModel) {
-            if ($routeModel->toArray()['uri'] == '/' . $route->uri()) {
-                return $routeModel;
-            }
-        }
-        return null;
-    }
 }

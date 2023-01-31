@@ -71,10 +71,6 @@ class Route  extends AbstractModel
         return $this->hasOne(Page::class)->getResults();
     }
 
-    public function pageContents()
-    {
-        return is_null($this->page()) ? null : $this->page()->pageContents();
-    }
 
 }
 

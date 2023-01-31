@@ -19,14 +19,13 @@ class TestController extends \App\Http\Controllers\Controller
         $routesLaravelCollection = RouterFacade::getRoutesLaravelCollection();
 
 
-        $laravelRoute = RouterFacade::getLaravelRequestRoute($request);
-        $routeModel = RouterFacade::getRouteModelByLaravelRoute($laravelRoute);
+        $laravelRoute = RouterFacade::getLaravelRoute();
+        $routeModel = RouterFacade::getRouteModel();
+        $pageModel = RouterFacade::getPageModel();
+
+        $pageContentsCollection = RouterFacade::getPageContentModels();
 
 
-
-        $pageModel = $routeModel->page();
-        $pageContentsCollection = $routeModel->pageContents();
-//        $pageContentsCollection = $pageModel ? $pageModel->pageContents()->all() : null;
 
 
         $result = [
