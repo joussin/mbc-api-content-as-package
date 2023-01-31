@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route;
-use function MbcApiContent\Models\Factory\fake;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
