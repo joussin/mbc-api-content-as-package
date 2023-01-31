@@ -52,14 +52,14 @@ class PageFactory extends Factory
         $routeName = 'route-' . $domainWord . '-' . $id;
 
         $uri = "/$domainWord/dynamic/";
-        $path = $uri . $id;
+        $path = $uri . '{id}';
         $pathWithId = $uri . "$id";
         $staticPathWithId = $uri . "$id".'/index.html';
 
         $routeData = [
             'name'            => $routeNameDyn,
-            'uri'             => $path,
-            'controller_action' => 'dynamic',
+            'uri'             => $pathWithId,
+            'pattern'             => $path,
         ];
 
         $route = Route::factory()->create($routeData);
