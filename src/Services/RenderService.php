@@ -35,10 +35,10 @@ class RenderService implements RenderServiceInterface
     public ?RouteEntity $routeEntity;
     public ?PageEntity $pageEntity;
 
-
-
     public ?PageModel $pageModel;
     public ?RouteModel $routeModel;
+
+    public bool $initiate = false;
 
     public function __construct(RouterServiceInterface $routerService)
     {
@@ -56,7 +56,7 @@ class RenderService implements RenderServiceInterface
     {
         $this->laravelRequest = $request;
 
-        $success = $this->requestToContentCollection($this->laravelRequest);
+        $this->initiate = $this->requestToContentCollection($this->laravelRequest);
 
 //        if(!$success)
 //        {
