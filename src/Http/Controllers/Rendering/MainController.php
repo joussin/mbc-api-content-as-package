@@ -12,16 +12,11 @@ use MbcApiContent\Http\Controllers\Rendering\Commons\Controller;
 class MainController extends Controller
 {
 
-
     public function any(Request $request)
     {
-
+        dd(
+            $this->getRenderService()
+        );
         return 'MainController-any';
-    }
-
-    public function dynamic(Request $request)
-    {
-
-        return 'MainController-dynamic';
     }
 }

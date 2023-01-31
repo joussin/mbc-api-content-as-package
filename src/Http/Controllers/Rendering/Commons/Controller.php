@@ -17,4 +17,14 @@ class Controller extends \App\Http\Controllers\Controller
         $this->renderService->requestToRender($request);
     }
 
+    /**
+     * @return RenderServiceInterface
+     */
+    public function getRenderService(): RenderServiceInterface
+    {
+        return $this->renderService;
+    }
+
+
+
 }
