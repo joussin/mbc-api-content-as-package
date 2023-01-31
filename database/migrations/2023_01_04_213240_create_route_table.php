@@ -25,6 +25,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('uri');
+            $table->string('pattern')->nullable();
             $table->string('controller_name')->nullable();
             $table->string('controller_action')->nullable();
             $table->json('path_parameters')->nullable();
