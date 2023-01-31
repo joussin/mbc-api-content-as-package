@@ -91,38 +91,39 @@ class RouterService implements RouterServiceInterface
     {
         $routeEntity = new RouteEntity($routeModel);
 
-        $route = $this->addRouteEntityToRouter($routeEntity);
+        $route = $this->addRouteToRouter(
+            $routeEntity->getMethod(),
+            $routeEntity->getUri(),
+            $routeEntity->getRouteAction()
+        );
 
         $routeEntity->setRoute($route);
-        $routeEntity->addRouteOptions();
-
-        $routeEntity->addRouteDefaults('alias', $routeEntity->getName());
+        $routeEntity->addRouteMiddleware("router.middleware");
 
         return $routeEntity;
     }
 
 
-    public function addRouteEntityToRouter(RouteEntity $routeEntity): LaravelRoute
+    public function addRouteToRouter(string $method, string $uri, array $routeAction): LaravelRoute
     {
-
-        switch ($routeEntity->getMethod()) {
+        switch ($method) {
             case 'GET':
-                return RouterFacade::get($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::get($uri, $routeAction);
                 break;
             case 'POST':
-                return RouterFacade::post($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::post($uri, $routeAction);
                 break;
             case 'PUT':
-                return RouterFacade::put($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::put($uri, $routeAction);
                 break;
             case 'PATCH':
-                return RouterFacade::patch($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::patch($uri, $routeAction);
                 break;
             case 'DELETE':
-                return RouterFacade::delete($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::delete($uri, $routeAction);
                 break;
             default:
-                return RouterFacade::get($routeEntity->getUri(), $routeEntity->getRouteAction());
+                return RouterFacade::get($uri, $routeAction);
         }
     }
 

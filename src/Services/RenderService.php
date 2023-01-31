@@ -11,10 +11,7 @@ use Illuminate\Routing\Route as LaravelRoute;
 use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
 use MbcApiContent\Entity\Route as RouteEntity;
-use MbcApiContent\Entity\Traits\HydrateEntityTrait;
-use MbcApiContent\Facades\RouterFacade;
 use MbcApiContent\Models\Route as RouteModel;
 
 use MbcApiContent\Entity\Page as PageEntity;
@@ -66,19 +63,6 @@ class RenderService implements RenderServiceInterface
         {
             throw new \Exception('Unable to generate content entity. Unable to parse request into route then page and template entities');
         }
-
-        $html = $this->getHtml();
-
-        if(is_null($html))
-        {
-            throw new \Exception('Unable to parse Content from page.');
-        }
-    }
-
-
-    public function getHtml() :?string
-    {
-        return '';
     }
 
 
@@ -109,51 +93,26 @@ class RenderService implements RenderServiceInterface
             return false;
         }
 
-        $pageModel = $this->getPageModel($routeModel);
+        $pageModel = $routeModel->page();
         if(is_null($pageModel))
         {
             return false;
         }
 
 
-        $pageEntity = $this->getPageEntityByPageModel($pageModel);
+        $pageEntity = new PageEntity($pageModel);
         if(is_null($pageEntity))
         {
             return false;
         }
 
+        $this->laravelRoute = $laravelRoute;
+        $this->routeModel = $routeModel;
+        $this->routeEntity = $routeEntity;
+        $this->pageModel = $pageModel;
+        $this->pageEntity = $pageEntity;
 
-
-
-        if( count($this->propertiesEquals(null)) == 5)
-        {
-            $this->laravelRoute = $laravelRoute;
-            $this->routeModel = $routeModel;
-            $this->routeEntity = $routeEntity;
-            $this->pageModel = $pageModel;
-            $this->pageEntity = $pageEntity;
-
-        }
-
-        if( count($this->propertiesEquals(null)) == 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    public function propertiesEquals(mixed $value = null) : array
-    {
-        $propertiesSet = get_object_vars($this);
-        $allProperties = get_class_vars(self::class);
-        $allPropertiesSet = array_replace($allProperties, $propertiesSet);
-
-        return array_filter($allPropertiesSet, function($prop) use ($value) {
-            if($value == $prop) return true;
-            else return false;
-        });
+        return true;
     }
 
 
@@ -168,16 +127,4 @@ class RenderService implements RenderServiceInterface
         }
         return null;
     }
-
-    public function getPageModel(RouteModel $routeModel): ?PageModel
-    {
-        return $routeModel->page();
-    }
-
-
-    public function getPageEntityByPageModel(PageModel $pageModel): ?PageEntity
-    {
-        return new PageEntity($pageModel);
-    }
-
 }

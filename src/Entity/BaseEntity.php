@@ -1,11 +1,34 @@
 <?php
 
-namespace MbcApiContent\Entity\Traits;
+namespace MbcApiContent\Entity;
 
 use Illuminate\Support\Facades\Validator;
+use MbcApiContent\Entity\Interfaces\EntityInterface;
+use MbcApiContent\Models\ModelInterface;
 
-trait HydrateEntityTrait
+abstract class BaseEntity implements EntityInterface
 {
+
+
+    public ?ModelInterface $model;
+
+
+    public function __construct(ModelInterface $model)
+    {
+        $this->assignProp($model->toArray());
+
+        $this->model = $model;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function getModel(): ?ModelInterface
+    {
+        return $this->model;
+    }
 
     public function assignProp($modelAsArray) : array
     {
@@ -32,16 +55,6 @@ trait HydrateEntityTrait
     }
 
 
-    public function cleanProp(mixed $newValue, \Closure $callable) : mixed
-    {
-        return $callable($newValue);
-    }
-
-
-
-
-
-
     /**
      * @param array $arrayToValidate
      * @param array $rules
@@ -65,50 +78,4 @@ trait HydrateEntityTrait
     }
 
 
-//    public function __get(string $key) : mixed
-//    {
-//        if( !isset($this->$key) ){
-//            return "null";
-//        } else {
-//            return $this->$key;
-//        }
-//    }
-//
-//
-//    public function __set(string $key, mixed $value): void
-//    {
-//        $this->$key = $value;
-//    }
-//
-//
-//    public function __isset(string $key) : bool
-//    {
-//        return isset($this->$key);
-//    }
-//
-//
-//
-//    public function __call($method, $arguments)
-//    {
-//        $snakeName = Str::snake($method);
-//        // get set has
-//        $subMethod = substr($snakeName, 0, 3);
-//        // prop
-//        $propertyName = substr($snakeName, 4);
-//
-//        switch ($subMethod) {
-//            case "get":
-//                return $this->$propertyName;
-//            case "set":
-//                $this->$propertyName = $arguments[0];
-//                break;
-//            case "has":
-//                return isset($this->$propertyName);
-//            default:
-//                throw new \Exception("Undefined method $method");
-//        }
-//    }
-
-
 }
-

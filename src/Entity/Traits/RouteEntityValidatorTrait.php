@@ -2,8 +2,6 @@
 
 namespace MbcApiContent\Entity\Traits;
 
-use Illuminate\Support\Str;
-use function MbcApiContent\Entity\str_contains;
 
 trait RouteEntityValidatorTrait
 {
@@ -72,32 +70,6 @@ trait RouteEntityValidatorTrait
         return true;
     }
 
-
-
-    /**
-     * Try to find RouteEntity by its name in RouteEntityCollection
-     *
-     * Only for RouteEntity
-     * $patterns can be string, string[]
-     * pattern wildcard * : '*-*-r*'
-     *
-     * @param ...$patterns
-     * @return bool
-     */
-    public function named(...$patterns) : bool
-    {
-        if (is_null($routeName = $this->getName())) {
-            return false;
-        }
-
-        foreach ($patterns as $pattern) {
-            if (Str::is($pattern, $routeName)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
 
 

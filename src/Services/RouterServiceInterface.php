@@ -23,7 +23,6 @@ interface RouterServiceInterface
 
     public function createRouteEntityFromRouteModel(RouteModel $routeModel) : RouteEntity;
 
-
-    public function addRouteEntityToRouter(RouteEntity $routeEntity): LaravelRoute;
+    public function addRouteToRouter(string $method, string $uri, array $routeAction): LaravelRoute;
 
 }

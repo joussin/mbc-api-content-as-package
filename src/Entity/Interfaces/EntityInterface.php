@@ -2,13 +2,12 @@
 
 namespace MbcApiContent\Entity\Interfaces;
 
-use Illuminate\Database\Eloquent\Model;
+use MbcApiContent\Models\ModelInterface;
 
 interface EntityInterface
 {
 
-    // pour EntityTrait::named()
-    public function getName(): string;
+    public function getName(): ?string;
 
-    public function getModel(): ?Model;
+    public function getModel(): ?ModelInterface;
 }

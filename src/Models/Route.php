@@ -2,10 +2,7 @@
 
 namespace MbcApiContent\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use MbcApiContent\Models\Factories\RouteFactory;
-use MbcApiContent\Models\Page;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Route  extends BaseModel
 {
