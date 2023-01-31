@@ -71,10 +71,5 @@ class Route  extends AbstractModel
         return $this->hasOne(Page::class)->getResults();
     }
 
-
-
-    public function index(){
-        $route = Route::with('page')->get();
-    }
 }
 

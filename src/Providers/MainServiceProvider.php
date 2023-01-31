@@ -7,6 +7,8 @@ use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Events\ApiContentMigrationsEventListener;
 use MbcApiContent\Events\ApiContentModelsEventListener;
 use MbcApiContent\Models\Services\MigrationService;
+use MbcApiContent\Services\RenderingService;
+use MbcApiContent\Services\RenderingServiceInterface;
 use MbcApiContent\Services\RouterService;
 use MbcApiContent\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;

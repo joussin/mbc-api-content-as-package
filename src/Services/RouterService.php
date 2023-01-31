@@ -2,11 +2,13 @@
 
 namespace MbcApiContent\Services;
 
+use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Route as RouterFacade;
 use MbcApiContent\Models\Collections\RouteModelCollection;
 use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
+use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -43,6 +45,17 @@ class RouterService implements RouterServiceInterface
      *  Collection RouterService::routesLaravelCollection : Route[] RouteCollectionInterface (collection de routes laravel)
      *
      *
+     *
+     *
+     *     // Route creation dans le Router:
+    // la facade Illuminate\Support\Facades\Route est une instance de \Illuminate\Routing\Router
+    //      Route::get('get', 'url', 'action')
+    //          Route::addRoute('GET', $uri, $action);
+    //              $this->routes : \Illuminate\Routing\RouteCollectionInterface
+    //              $this->routes->add($this->createRoute($methods, $uri, $action));
+    //                  return route
+
+     *
      */
 
     public RouteModelCollectionInterface $routesModelCollection;
@@ -66,6 +79,15 @@ class RouterService implements RouterServiceInterface
     }
 
 
+    public function getLaravelRequestRoute(?LaravelRequest $request = null) : ?LaravelRoute
+    {
+        $request = $request ?? request();
+        return is_null($request) ? null : $request->route();
+    }
+
+
+
+
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 
 
@@ -85,13 +107,6 @@ class RouterService implements RouterServiceInterface
 
 
 
-    // Route creation dans le Router:
-    // la facade Illuminate\Support\Facades\Route est une instance de \Illuminate\Routing\Router
-    //      Route::get('get', 'url', 'action')
-    //          Route::addRoute('GET', $uri, $action);
-    //              $this->routes : \Illuminate\Routing\RouteCollectionInterface
-    //              $this->routes->add($this->createRoute($methods, $uri, $action));
-    //                  return route
 
     private function addRouteToRouter(string $method, string $uri, string $controllerName, string $controllerAction): LaravelRoute
     {
@@ -109,4 +124,15 @@ class RouterService implements RouterServiceInterface
         }
     }
 
+    public function getRouteModelByLaravelRoute(LaravelRoute $route): ?RouteModel
+    {
+        $routeModels = $this->routesModelCollection->all();
+
+        foreach ($routeModels as $routeModel) {
+            if ($routeModel->toArray()['uri'] == '/' . $route->uri()) {
+                return $routeModel;
+            }
+        }
+        return null;
+    }
 }
