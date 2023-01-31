@@ -42,24 +42,22 @@ class PageFactory extends Factory
     public static function getDynamicDefinitions(): array
     {
         $id = fake()->numberBetween(1, 9);
-        $name = Str::slug(fake()->name());
-        $domainName = fake()->domainName();// carroll.com
         $domainWord = fake()->domainWord();// carroll
 
 
         $pageName = 'page-' . $domainWord . '-' . $id;
-        $routeNameDyn = 'route-' . $domainWord . '-dyn' ;
         $routeName = 'route-' . $domainWord . '-' . $id;
 
-        $uri = "/$domainWord/dynamic/";
+        $uri = "/route/dynamic/";
         $path = $uri . '{id}';
         $pathWithId = $uri . "$id";
         $staticPathWithId = $uri . "$id".'/index.html';
 
         $routeData = [
-            'name'            => $routeNameDyn,
+            'name'            => $routeName,
             'uri'             => $pathWithId,
-            'pattern'             => $path,
+            'pattern'         => $path,
+            'static_uri'      => $staticPathWithId,
         ];
 
         $route = Route::factory()->create($routeData);
