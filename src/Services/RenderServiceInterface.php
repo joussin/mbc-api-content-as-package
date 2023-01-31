@@ -2,7 +2,6 @@
 
 namespace MbcApiContent\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use MbcApiContent\Entity\Route as RouteEntity;
@@ -15,7 +14,7 @@ interface RenderServiceInterface
      * @return void
      * @throws \Exception
      */
-    public function requestToRender(Request $request) : void;
+    public function requestToRender(LaravelRequest $request) : void;
 
     public function requestToContentCollection(LaravelRequest $request): bool;
 

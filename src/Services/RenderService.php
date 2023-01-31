@@ -2,8 +2,6 @@
 
 namespace MbcApiContent\Services;
 
-
-use Illuminate\Http\Request;
 use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 
@@ -34,12 +32,13 @@ class RenderService implements RenderServiceInterface
     // -----------------------OUTPUT--------------------------------
 
     public ?LaravelRoute $laravelRoute;
-
     public ?RouteEntity $routeEntity;
-    public ?RouteModel $routeModel;
-
     public ?PageEntity $pageEntity;
+
+
+
     public ?PageModel $pageModel;
+    public ?RouteModel $routeModel;
 
     public function __construct(RouterServiceInterface $routerService)
     {
@@ -53,7 +52,7 @@ class RenderService implements RenderServiceInterface
      * @return void
      * @throws \Exception
      */
-    public function requestToRender(Request $request) : void
+    public function requestToRender(LaravelRequest $request) : void
     {
         $this->laravelRequest = $request;
 
