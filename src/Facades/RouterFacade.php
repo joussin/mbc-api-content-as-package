@@ -7,19 +7,14 @@ use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\Entity\Route as RouteEntity;
-use MbcApiContent\Models\Route as RouteModel;
 
 /**
  *
  *
- * @method static RouteEntityCollectionInterface getRoutesEntityCollection()
  * @method static Collection getRoutesModelCollection()
  * @method static RouteCollectionInterface getRoutesLaravelCollection()
- * @method static RouteEntityCollectionInterface initCollections()
- * @method static RouteEntity createRouteEntityFromRouteModel(RouteModel $routeModel)
- * @method static LaravelRoute addRouteEntityToRouter(RouteEntity $routeEntity)
+ * @method static void initCollections()
+ * @method static LaravelRoute addRouteEntityToRouter(string $method, string $uri, string $controllerName, string $controllerAction)
  *
  * @see \MbcApiContent\Services\RouterService;
  */

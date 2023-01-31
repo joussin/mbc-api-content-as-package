@@ -3,11 +3,11 @@
 namespace MbcApiContent\Http\Controllers\Api;
 
 
-use MbcApiContent\Entity\Validators\ValidationRules;
-use MbcApiContent\Services\ApiService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use MbcApiContent\Services\ApiService;
+use MbcApiContent\Validators\ValidationRules;
 
 class ApiController extends Controller
 {

@@ -15,8 +15,10 @@ class MainController extends Controller
     public function any(Request $request)
     {
         dd(
-            $this->getRenderService()->pageModel->pageContents()->getResults()->all()
+            RouterFacade::getRoutesModelCollection(),
+            RouterFacade::getRoutesLaravelCollection(),
         );
+
         return 'MainController-any';
     }
 }

@@ -4,15 +4,8 @@ namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Collection;
 use MbcApiContent\Bootstrap;
-use MbcApiContent\Entity\Collections\LaravelRouteCollection;
-use MbcApiContent\Entity\Collections\LaravelRouteCollectionInterface;
-use MbcApiContent\Entity\Collections\RouteEntityCollection;
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Models\Migrations\MigrationService;
-use MbcApiContent\Models\Route as RouteModel;
-use MbcApiContent\Services\RenderService;
-use MbcApiContent\Services\RenderServiceInterface;
 use MbcApiContent\Services\RouterService;
 use MbcApiContent\Services\RouterServiceInterface;
 use Illuminate\Support\ServiceProvider;
@@ -65,36 +58,25 @@ class MainServiceProvider extends ServiceProvider
         $this->app->singleton('router_service_facade_accessor', function ($app) {
             return app()->make(RouterServiceInterface::class);
         });
-        // RenderFacade::
-        $this->app->singleton('render_service_facade_accessor', function ($app) {
-            return app()->make(RenderServiceInterface::class);
-        });
+//        // RenderFacade::
+//        $this->app->singleton('render_service_facade_accessor', function ($app) {
+//            return app()->make(RenderServiceInterface::class);
+//        });
 
         $this->app->singleton(RouterServiceInterface::class, function() {
             return new RouterService(
-                app()->make(RouteEntityCollectionInterface::class),
                 new Collection(),
             );
         });
 
 
-        $this->app->singleton(RenderServiceInterface::class, function() {
-            return new RenderService(
-                app()->make(RouterServiceInterface::class)
-            );
-        });
+//        $this->app->singleton(RenderServiceInterface::class, function() {
+//            return new RenderService(
+//                app()->make(RouterServiceInterface::class)
+//            );
+//        });
 
 
-
-        $this->app->bind(RouteEntityCollectionInterface::class, function() {
-            return new RouteEntityCollection(
-                new Collection(),
-                app()->make(LaravelRouteCollectionInterface::class)
-            );
-        });
-
-
-        $this->app->bind(LaravelRouteCollectionInterface::class, LaravelRouteCollection::class);
 
         $this->mergeConfigFrom(
             file_exists( config_path('mbc-api-content-config.php') ) ? config_path('mbc-api-content-config.php') : (__DIR__ . './../../config/mbc-api-content-config.php') ,
