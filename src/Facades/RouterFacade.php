@@ -3,18 +3,16 @@
 namespace MbcApiContent\Facades;
 
 
-use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
+use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 
 /**
  *
  *
- * @method static Collection getRoutesModelCollection()
+ * @method static RouteModelCollectionInterface getRoutesModelCollection()
  * @method static RouteCollectionInterface getRoutesLaravelCollection()
  * @method static void initCollections()
- * @method static LaravelRoute addRouteEntityToRouter(string $method, string $uri, string $controllerName, string $controllerAction)
  *
  * @see \MbcApiContent\Services\RouterService;
  */

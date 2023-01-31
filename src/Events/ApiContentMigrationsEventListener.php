@@ -22,7 +22,7 @@ class ApiContentMigrationsEventListener
         Event::listen(MigrationsEnded::class, function (MigrationsEnded $event) {
 
             try{
-                $this->migrationService->seedAll();
+                $this->migrationService->seed();
             }
             catch (\Exception $e)
             {

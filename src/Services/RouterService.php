@@ -11,8 +11,22 @@ use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
 {
-
-    /*
+    /**
+     *
+     *         // request life
+    // kernel -> handle
+    //  providers -> register ()
+    // ROUTE/WEB.php
+    //  providers -> boot()
+    // db, validation, queue, components ...
+    // routing - RouteServiceProvider
+    // routes definitions
+    //controller contruct
+    // midleware
+    // controller action
+    //response
+     */
+    /**
      *
      * Les différents objets des routes:
      *
@@ -22,7 +36,7 @@ class RouterService implements RouterServiceInterface
      *  Router: laravel router Object : \Illuminate\Routing\Router
      *
      *  \Illuminate\Support\Facades\Route as RouterFacade: laravel router Object facade
-     *  \MbcApiContent\Services\RouterService as RouterFacade: custom router service Object facade
+     *  \MbcApiContent\Services\RouterService as RouteFacade: custom router service Object facade
      *
      *  Collection RouterService::routesModelCollection : RouteModel[] Collection
      *  Collection RouterService::routesEntityCollection : RouteEntity[] Collection
@@ -57,7 +71,7 @@ class RouterService implements RouterServiceInterface
 
     public function initCollections(): void
     {
-        $this->routesModelCollection = new RouteModelCollection(RouteModel::all()); // collect(RouteModel::all()) // new Collection(),
+        $this->routesModelCollection = new RouteModelCollection(RouteModel::all());
 
         $this->routesModelCollection->each(function ($routeModel, $index) {
             $route = $this->addRouteToRouter(
@@ -79,7 +93,7 @@ class RouterService implements RouterServiceInterface
     //              $this->routes->add($this->createRoute($methods, $uri, $action));
     //                  return route
 
-    public function addRouteToRouter(string $method, string $uri, string $controllerName, string $controllerAction): LaravelRoute
+    private function addRouteToRouter(string $method, string $uri, string $controllerName, string $controllerAction): LaravelRoute
     {
         switch ($method) {
             case 'GET':

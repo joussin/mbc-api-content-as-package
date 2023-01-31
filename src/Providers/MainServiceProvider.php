@@ -2,7 +2,6 @@
 
 namespace MbcApiContent\Providers;
 
-use Illuminate\Support\Collection;
 use MbcApiContent\Bootstrap;
 use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Events\ApiContentMigrationsEventListener;
@@ -17,28 +16,13 @@ class MainServiceProvider extends ServiceProvider
 {
 
     /**
+     *
      * Register any application services.
      *
      * @return void
      */
     public function register()
     {
-        // request life
-        // kernel -> handle
-        //  providers -> register ()
-        // ROUTE/WEB.php
-        //  providers -> boot()
-        // db, validation, queue, components ...
-        // routing - RouteServiceProvider
-        // routes definitions
-
-        //controller contruct
-        // midleware
-        // controller action
-        //response
-
-
-
         $this->app->register(ConsoleServiceProvider::class);
         $this->app->register(EventServiceProvider::class);
         $this->app->register(RouteServiceProvider::class);
@@ -64,15 +48,12 @@ class MainServiceProvider extends ServiceProvider
         $this->app->singleton(MigrationService::class);
 
 
-
         // RouterFacade::
         $this->app->singleton('router_service_facade_accessor', function ($app) {
             return $app->make(RouterServiceInterface::class);
         });
 
-        $this->app->singleton(RouterServiceInterface::class, function($app) {
-            return new RouterService();
-        });
+        $this->app->singleton(RouterServiceInterface::class, RouterService::class);
 
 //        // RenderFacade::
 //        $this->app->singleton('render_service_facade_accessor', function ($app) {
@@ -84,7 +65,6 @@ class MainServiceProvider extends ServiceProvider
 //                app()->make(RouterServiceInterface::class)
 //            );
 //        });
-
 
 
         $this->mergeConfigFrom(
@@ -107,33 +87,26 @@ class MainServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
 
-            $this->install();
-        }
-    }
+            try{
+
+                $this->publishes([
+                    __DIR__.'/../../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
+                ]);
+
+                $this->publishes([
+                    __DIR__.'/../../public/api/' => public_path('api/'),
+                ]);
 
 
-    public function install()
-    {
+                $this->publishes([
+                    __DIR__.'/../../resources/views/' => resource_path('views/vendor/api_content_views/'),
+                ]);
 
-        try{
-
-            $this->publishes([
-                __DIR__.'/../../config/mbc-api-content-config.php' => config_path('mbc-api-content-config.php'),
-            ]);
-
-            $this->publishes([
-                __DIR__.'/../../public/api/' => public_path('api/'),
-            ]);
-
-
-            $this->publishes([
-                __DIR__.'/../../resources/views/' => resource_path('views/vendor/api_content_views/'),
-            ]);
-
-        }
-        catch (\Exception $e)
-        {
-            throw new \Exception('Error installing ' . $e->getMessage());
+            }
+            catch (\Exception $e)
+            {
+                throw new \Exception('Error installing ' . $e->getMessage());
+            }
         }
     }
 }
