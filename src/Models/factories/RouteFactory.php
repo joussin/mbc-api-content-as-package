@@ -34,6 +34,7 @@ class RouteFactory extends Factory
             'status'            => 'ONLINE',
 
 
+            'pattern'           => null,
             // nullable
             'controller_name'   => null,
             'controller_action' => null,

@@ -37,6 +37,8 @@ class Route extends BaseEntity
 
     public $uri;
 
+    public $pattern;
+
     // nullable properties
     public $controller_name = MainController::class;
     public $controller_action = 'any';
@@ -202,6 +204,14 @@ class Route extends BaseEntity
     public function getUri()
     {
         return $this->uri;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPattern()
+    {
+        return $this->pattern;
     }
 
     /**

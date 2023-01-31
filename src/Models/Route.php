@@ -16,6 +16,7 @@ class Route  extends BaseModel
         "protocol",
         "name",
         "uri",
+        "pattern",
         "controller_name",
         "controller_action",
         "path_parameters",
