@@ -46,7 +46,7 @@ class Route  extends BaseModel
 
     public function page()
     {
-        return $this->hasOne(Page::class);
+        return $this->hasOne(Page::class)->getResults();
     }
 
 

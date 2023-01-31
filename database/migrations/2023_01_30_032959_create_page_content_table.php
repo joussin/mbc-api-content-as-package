@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('page_id')->nullable()->unsigned();
 
+            $table->string('name')->nullable();
             $table->string('content')->nullable();
             $table->timestamps();
         });

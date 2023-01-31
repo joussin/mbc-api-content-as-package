@@ -22,6 +22,7 @@ class PageContent  implements EntityInterface
 
     public ?int $page_id;
 
+    public ?string $name;
     public ?string $content;
 
     public string $created_at;
@@ -38,7 +39,7 @@ class PageContent  implements EntityInterface
 
     public function getName(): string
     {
-        return '';
+        return $this->name ?? '';
     }
 
     public function getModel(): ?Model

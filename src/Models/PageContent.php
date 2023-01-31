@@ -17,6 +17,7 @@ class PageContent extends BaseModel
 
 
     protected $fillable = [
+        "name",
         "content",
         "page_id",
     ];

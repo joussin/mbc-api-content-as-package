@@ -24,6 +24,7 @@ class PageContentFactory extends Factory
     public function getDefaults() : array
     {
         return [
+            "name" => null,
             "content" => null,
             "page_id" => null,
         ];
@@ -36,6 +37,7 @@ class PageContentFactory extends Factory
      */
     public function getDefinitions(array $definitions = []): array
     {
+        $definitions["name"] = null;
         $definitions["content"] = null;
         $definitions["page_id"] = null;
 
