@@ -5,8 +5,7 @@ namespace MbcApiContent\Http\Controllers\Rendering;
 
 use Illuminate\Http\Request;
 use MbcApiContent\Facades\RouterFacade;
-use MbcApiContent\Http\Controllers\Rendering\Commons\Controller;
-
+use App\Http\Controllers\Controller;
 
 class MainController extends Controller
 {

@@ -4,7 +4,7 @@ namespace MbcApiContent\Events;
 
 use Illuminate\Database\Events\MigrationsEnded;
 use Illuminate\Support\Facades\Event;
-use MbcApiContent\Models\Services\MigrationService;
+use MbcApiContent\Services\MigrationService;
 
 class ApiContentMigrationsEventListener
 {

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use MbcApiContent\Http\Resources\RouteResource;
 use MbcApiContent\Models\Route;
 use MbcApiContent\Validators\ValidationRules;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteController extends Controller
 {

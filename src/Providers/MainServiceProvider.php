@@ -3,14 +3,15 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\ServiceProvider;
 use MbcApiContent\Bootstrap;
 use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Events\ApiContentMigrationsEventListener;
 use MbcApiContent\Events\ApiContentModelsEventListener;
-use MbcApiContent\Models\Services\MigrationService;
+use MbcApiContent\Services\MigrationService;
+use MbcApiContent\Services\MigrationServiceInterface;
 use MbcApiContent\Services\RouterService;
 use MbcApiContent\Services\RouterServiceInterface;
-use Illuminate\Support\ServiceProvider;
 
 
 class MainServiceProvider extends ServiceProvider
@@ -42,11 +43,11 @@ class MainServiceProvider extends ServiceProvider
 
         $this->app->singleton(ApiContentMigrationsEventListener::class, function($app) {
             return new ApiContentMigrationsEventListener(
-                $app->make(MigrationService::class),
+                $app->make(MigrationServiceInterface::class),
             );
         });
 
-        $this->app->singleton(MigrationService::class);
+        $this->app->singleton(MigrationServiceInterface::class, MigrationService::class);
 
 
         // RouterFacade::

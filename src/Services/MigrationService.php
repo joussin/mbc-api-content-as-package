@@ -1,16 +1,16 @@
 <?php
 
-namespace MbcApiContent\Models\Services;
+namespace MbcApiContent\Services;
 
 use MbcApiContent\Models\Factory\PageFactory;
 use MbcApiContent\Models\Page;
 use MbcApiContent\Models\PageContent;
 use MbcApiContent\Models\Route;
 
-class MigrationService
+class MigrationService implements MigrationServiceInterface
 {
 
-    public function seed(string $type = 'all')
+    public function seed(string $type = 'all') : void
     {
         $route = Route::factory(1)->create([]);
 

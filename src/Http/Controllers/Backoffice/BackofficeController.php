@@ -2,10 +2,6 @@
 
 namespace MbcApiContent\Http\Controllers\Backoffice;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use MbcApiContent\Facades\RouterFacade;
-use MbcApiContent\Services\ApiService;
 use App\Http\Controllers\Controller;
 
 class BackofficeController extends Controller
