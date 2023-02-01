@@ -3,6 +3,7 @@
 namespace MbcApiContent\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use MbcApiContent\Models\Page;
 
 class PageContentResource extends JsonResource
 {
@@ -24,7 +25,10 @@ class PageContentResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
+
             'page_id'    => $this->page_id,
+//            'page_id'      => new PageResource(Page::find($this->page_id)),
+
             'content'    => $this->content,
 
             'created_at' => $this->created_at,

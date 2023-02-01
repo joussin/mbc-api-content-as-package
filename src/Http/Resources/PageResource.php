@@ -3,6 +3,7 @@
 namespace MbcApiContent\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use MbcApiContent\Models\Route;
 
 class PageResource extends JsonResource
 {
@@ -26,10 +27,14 @@ class PageResource extends JsonResource
             'version'       => $this->version,
             'name'          => $this->name,
             'template_name' => $this->template_name,
+
             'route_id'      => $this->route_id,
+//            'route_id'      => new RouteResource(Route::find($this->route_id)),
 
             'created_at'    => $this->created_at,
             'updated_at'    => $this->updated_at,
+
+            'pageContents' => PageContentResource::collection($this->whenLoaded('pageContents')),
         ];
     }
 }
