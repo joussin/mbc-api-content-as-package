@@ -28,6 +28,7 @@ class TestController extends \App\Http\Controllers\Controller
 
 
  dd(
+     $routesLaravelCollection,
      $pageContents,
      $pageContent,
  );

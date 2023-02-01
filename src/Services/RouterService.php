@@ -2,13 +2,10 @@
 
 namespace MbcApiContent\Services;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request as LaravelRequest;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Route as RouterFacade;
-use MbcApiContent\Models\Collections\RouteModelCollection;
-use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
@@ -60,17 +57,17 @@ class RouterService implements RouterServiceInterface
      *
      */
 
-    public RouteModelCollectionInterface $routesModelCollection;
+    public EloquentCollection $routesModelCollection;
 
     public RouteCollectionInterface $routesLaravelCollection;
 
     public function __construct()
     {
-        $this->routesModelCollection = new RouteModelCollection();
+        $this->routesModelCollection = new EloquentCollection();
         $this->routesLaravelCollection = $this->getRoutesLaravelCollection();
     }
 
-    public function getRoutesModelCollection(): RouteModelCollectionInterface
+    public function getRoutesModelCollection() : EloquentCollection
     {
         return $this->routesModelCollection;
     }
@@ -114,7 +111,7 @@ class RouterService implements RouterServiceInterface
         return $route->page();
     }
 
-    public function getPageContentModels() : ?Collection
+    public function getPageContentModels() : ?EloquentCollection
     {
         $page = $this->getPageModel();
         if(is_null($page))
@@ -134,15 +131,10 @@ class RouterService implements RouterServiceInterface
             return null;
         }
 
-        $item = $items->each(function($item) use($name) {
-            if($item->name == $name)
-            {
-                return $item;
-            }
-            return null;
+        $items = $items->filter(function($item) use($name) {
+            return ($item->name == $name);
         });
-
-        return $item->first();
+        return $items->first();
     }
 
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
@@ -150,7 +142,7 @@ class RouterService implements RouterServiceInterface
 
     public function initCollections(): void
     {
-        $this->routesModelCollection = new RouteModelCollection(RouteModel::all());
+        $this->routesModelCollection = new EloquentCollection(RouteModel::all());
 
         $this->routesModelCollection->each(function ($routeModel, $index) {
             $route = $this->addRouteToRouter(

@@ -2,26 +2,25 @@
 
 namespace MbcApiContent\Facades;
 
-use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Facade;
-use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 /**
  *
  * @method static void initCollections()
  *
  * @method static null|PageContentModel getPageContentModelByName(string $name)
- * @method static null|Illuminate\Database\Eloquent\Collection getPageContentModels()
+ * @method static null|EloquentCollection getPageContentModels()
  * @method static null|PageModel getPageModel()
  * @method static null|RouteModel getRouteModel()
  * @method static null|LaravelRoute getLaravelRoute()
  *
- * @method static RouteModelCollectionInterface getRoutesModelCollection()
+ * @method static EloquentCollection getRoutesModelCollection()
  * @method static RouteCollectionInterface getRoutesLaravelCollection()
  *
  * @see \MbcApiContent\Services\RouterService;
