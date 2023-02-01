@@ -70,7 +70,18 @@
                             "type": "string",
                             "example": "/kreiger"
                         }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Route to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "full"
+                        }
                     }
+
                 ],
                 "responses": {
                     "200": {

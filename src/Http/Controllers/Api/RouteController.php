@@ -37,8 +37,15 @@ class RouteController extends Controller
     public function showByUri(Request $request)
     {
         $uri = $request->query->get('uri');
+        $relations = $request->query->get('relations') ?? null;
 
-        $route = Route::where('uri', $uri)->first();
+        if(!is_null($relations))
+        {
+            $route = Route::where('uri', $uri)->first()->loadMissing(['page']);
+        }
+        else {
+            $route = Route::where('uri', $uri)->first();
+        }
 
         if($route)
         {
