@@ -23,8 +23,8 @@ class MainController extends Controller
         return view('api_content_views::template/' . $page->template_name, [
             'page' => $page->toArray(),
             'route' => $route->toArray(),
-            'page_contents' => $pageContents->toArray(),
-            'page_content_by_name' => $pageContent->toArray(),
+            'page_contents' => ($pageContents) ? $pageContents->toArray() : null,
+            'page_content_by_name' => ($pageContent) ? $pageContent->toArray() : null,
         ]);
     }
 }

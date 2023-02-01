@@ -8,7 +8,7 @@
 </head>
 <body>
 
-simple template
+simple-blade-template
 
 <h1>Route</h1>
 uri: {{ $route['uri'] }}<br>
@@ -20,8 +20,6 @@ template_name: {{ $page['template_name'] }}<br>
 
 <h1>Content list</h1>
 
-Total: {{count($page_contents)}} content<br><br>
-
 @foreach($page_contents as $page_content)
 
     id: {{ $page_content['id'] }}<br>
@@ -32,8 +30,8 @@ Total: {{count($page_contents)}} content<br><br>
 
 <h1>Content by name</h1>
 
-name: {{ $page_content_by_name['name'] }}<br>
-content: {{ $page_content_by_name['content'] }}<br>
+name: {{ $page_content_by_name['name'] ?? '' }}<br>
+content: {{ $page_content_by_name['content'] ?? '' }}<br>
 
 
 
