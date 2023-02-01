@@ -49,4 +49,10 @@ class RouteResource extends JsonResource
             'page' => new PageResource($this->whenLoaded('page'))
         ];
     }
+
+    public function load()
+    {
+        $page = $this['page'] ?? null;
+        $pageContents = $page ? $page['pageContents'] : null;
+    }
 }
