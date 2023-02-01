@@ -16,7 +16,7 @@ class PageController extends Controller
         return PageResource::collection(Page::all());
     }
 
-    public function indexComplete()
+    public function indexWithRelations()
     {
         return PageResource::collection(Page::all()->loadMissing(['pageContents', 'route']));
     }
@@ -64,7 +64,7 @@ class PageController extends Controller
         return new PageResource($page);
     }
 
-    public function showComplete(Page $page)
+    public function showWithRelations(Page $page)
     {
         return new PageResource($page->loadMissing(['pageContents', 'route']));
     }

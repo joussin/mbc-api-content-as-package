@@ -88,7 +88,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "full"
+                            "example": "true"
                         }
                     }
 
@@ -180,7 +180,7 @@
                 }
             }
         },
-        "/route/full" : {
+        "/route/relations" : {
             "get": {
                 "tags": [
                     "Route"
@@ -211,7 +211,7 @@
                 }
             }
         },
-        "/route/{id}/full": {
+        "/route/{id}/relations": {
             "get": {
                 "tags": [
                     "Route"
@@ -417,7 +417,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "full"
+                            "example": "true"
                         }
                     }
                 ],
@@ -507,7 +507,7 @@
                 }
             }
         },
-        "/page/full" : {
+        "/page/relations" : {
             "get": {
                 "tags": [
                     "Page"
@@ -538,7 +538,7 @@
                 }
             }
         },
-        "/page/{id}/full": {
+        "/page/{id}/relations": {
             "get": {
                 "tags": [
                     "Page"
@@ -745,7 +745,7 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "full"
+                            "example": "true"
                         }
                     }
                 ],
@@ -835,7 +835,7 @@
                 }
             }
         },
-        "/page-content/{id}/full": {
+        "/page-content/{id}/relations": {
             "get": {
                 "tags": [
                     "PageContent"
@@ -876,7 +876,7 @@
             }
         },
 
-        "/page-content/full" : {
+        "/page-content/relations" : {
             "get": {
                 "tags": [
                     "PageContent"

@@ -17,7 +17,7 @@ class RouteController extends Controller
     }
 
 
-    public function indexComplete()
+    public function indexWithRelations()
     {
         return RouteResource::collection(Route::all()->loadMissing(['page']));
     }
@@ -80,7 +80,7 @@ class RouteController extends Controller
         return new RouteResource($route);
     }
 
-    public function showComplete(Route $route)
+    public function showWithRelations(Route $route)
     {
         $routeResource = new RouteResource($route->loadMissing(['page']));
 
