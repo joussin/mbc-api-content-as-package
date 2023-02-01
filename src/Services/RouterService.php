@@ -158,7 +158,7 @@ class RouterService implements RouterServiceInterface
 
         $this->routesModelCollection->each(function ($routeModel) {
             $route = $this->addRouteToRouter(
-                $routeModel->method,
+                strtoupper($routeModel->method),
                 $routeModel->uri,
                 $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
                 $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION

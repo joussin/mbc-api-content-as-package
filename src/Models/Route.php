@@ -14,18 +14,9 @@ class Route  extends AbstractModel
     protected $connection = "mysql";
 
 
-
     public const DEFAULT_CONTROLLER_NAME = MainController::class;
 
     public const DEFAULT_CONTROLLER_ACTION = "any";
-
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-
-        $this->method = strtoupper($this->method);
-    }
 
 
     protected $fillable = [
