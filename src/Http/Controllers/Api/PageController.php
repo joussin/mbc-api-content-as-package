@@ -12,7 +12,8 @@ class PageController extends Controller
 
     public function index()
     {
-        return PageResource::collection(Page::all());
+        $c = PageResource::collection(Page::all());
+        return $c;
     }
 
 

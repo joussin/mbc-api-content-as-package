@@ -121,7 +121,7 @@ class RouterService implements RouterServiceInterface
         {
             return null;
         }
-        return $route->page();
+        return $route->page()->getResults();
     }
 
     public function getPageContentModels() : ?EloquentCollection
@@ -132,7 +132,7 @@ class RouterService implements RouterServiceInterface
             return null;
         }
 
-        return is_null($page->pageContents()) ? null : $page->pageContents();
+        return is_null($page->pageContents()->getResults()) ? null : $page->pageContents()->getResults();
     }
 
     // pour recupérer un PageContent par son nom

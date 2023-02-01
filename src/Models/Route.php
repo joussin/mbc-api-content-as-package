@@ -49,9 +49,9 @@ class Route  extends AbstractModel
     }
 
 
-    public function page() : ?Page
+    public function page()
     {
-        return $this->hasOne(Page::class)->getResults();
+        return $this->hasOne(Page::class);
     }
 
     // to test : $routeModel = RouterFacade::getRouteModel()->extractPathParameters()

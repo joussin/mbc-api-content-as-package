@@ -33,15 +33,15 @@ class Page  extends AbstractModel
     }
 
 
-    public function pageContents() : ?Collection
+    public function pageContents()
     {
-        return $this->hasMany(PageContent::class)->getResults();
+        return $this->hasMany(PageContent::class);
     }
 
 
 
     public function route()
     {
-        return $this->belongsTo(Route::class, 'route_id', 'id')->getResults();
+        return $this->belongsTo(Route::class, 'route_id', 'id');
     }
 }
