@@ -34,17 +34,20 @@ class RouteController extends Controller
             "name"              => $request->post('name'),
             "uri"               => $request->post('uri'),
             "pattern"           => $request->post('pattern') ?? null,
-            "controller_name"   => null,
-            "controller_action" => null,
-            "path_parameters"   => null,
-            "query_parameters"  => null,
+            "controller_name"   => null, //$request->post('controller_name') ?? null,
+            "controller_action" => null, //$request->post('controller_action') ?? null,
+
+            "path_parameters"   => null, //$request->post('path_parameters') ?? null,
+            "query_parameters"  => null, //$request->post('query_parameters') ?? null,
+
             "static_doc_name"   => $request->post('static_doc_name') ?? 'index.html',
             "static_uri"        => $request->post('static_uri') ?? $request->post('uri') .'/index.html',
-            "domain"            => null,
-            "rewrite_rule"      => null,
+
+            "domain"            => $request->post('domain') ?? null,
+            "rewrite_rule"      => $request->post('rewrite_rule') ?? null,
             "status"            => $request->post('status') ?? 'ONLINE',
-            "active_start_at"   => null,
-            "active_end_at"     => null
+            "active_start_at"   => $request->post('active_start_at') ?? null,
+            "active_end_at"     => $request->post('active_end_at') ?? null
         ]);
 
         return new RouteResource($route);
@@ -84,7 +87,7 @@ class RouteController extends Controller
     }
 
 
-    public function update(Request $request, $route)
+    public function update(Request $request, Route $route)
     {
         //$validated = $this->validate($request, str_replace('required|', '', ValidationRules::ROUTE_RULES));
 
@@ -95,17 +98,17 @@ class RouteController extends Controller
                 "name",
                 "uri",
                 "pattern",
-//                "controller_name",
-//                "controller_action",
-//                "path_parameters",
-//                "query_parameters",
+                "controller_name",
+                "controller_action",
+                "path_parameters",
+                "query_parameters",
                 "static_doc_name",
                 "static_uri",
-//                "domain",
-//                "rewrite_rule",
+                "domain",
+                "rewrite_rule",
                 "status",
-//                "active_start_at",
-//                "active_end_at"
+                "active_start_at",
+                "active_end_at"
             ]
         ));
 

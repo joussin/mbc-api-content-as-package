@@ -70,7 +70,7 @@ class PageController extends Controller
     }
 
 
-    public function update(Request $request, $page)
+    public function update(Request $request, Page $page)
     {
         //        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_RULES));
         $page->update($request->only(
@@ -78,7 +78,7 @@ class PageController extends Controller
                 "version",
                 "name",
                 "template_name",
-//                "route_id"
+                "route_id"
             ]
         ));
 

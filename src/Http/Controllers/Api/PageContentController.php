@@ -24,7 +24,7 @@ class PageContentController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $this->validate($request, ValidationRules::PAGE_CONTENT_RULES);
+//        $validated = $this->validate($request, ValidationRules::PAGE_CONTENT_RULES);
 
         $pageContent = PageContent::create([
             "name"    => $request->post('name') ?? '',
@@ -68,13 +68,15 @@ class PageContentController extends Controller
         return new PageContentResource($pageContent->loadMissing(['page']));
     }
 
-    public function update(Request $request, $pageContent)
+    public function update(Request $request, PageContent $pageContent)
     {
+        //        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_CONTENT_RULES));
+
         $pageContent->update($request->only(
             [
                 'name',
                 'content',
-//                'page_id',
+                'page_id',
             ]
         ));
 
