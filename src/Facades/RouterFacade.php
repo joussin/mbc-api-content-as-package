@@ -16,8 +16,6 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
  * @method static void initCollections()
  *
  * @method static array getRoutesDatasForExporter()
- * @method static array getRoutesModelCollectionToArray()
- * @method static array getStaticRoutesCollection()
  * @method static null|PageContentModel getPageContentModelByName(string $name)
  * @method static null|EloquentCollection getPageContentModels()
  * @method static null|PageModel getPageModel()

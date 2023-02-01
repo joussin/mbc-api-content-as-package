@@ -201,41 +201,4 @@ class RouterService implements RouterServiceInterface
                 return LaravelRouterFacade::delete($uri, [$controllerName, $controllerAction]);
         }
     }
-
-    public function debug()
-    {
-
-        $request = request();
-
-        $routesModelsCollection = RouterFacade::getRoutesModelCollection();
-        $routesLaravelCollection = RouterFacade::getRoutesLaravelCollection();
-        $routesFrameworkCollection = RouterFacade::getRoutesFrameworkCollection();
-
-
-        $laravelRoute = RouterFacade::getLaravelRoute();
-        $routeModel = RouterFacade::getRouteModel();
-        $pageModel = RouterFacade::getPageModel();
-
-        $pageContents = RouterFacade::getPageContentModels();
-        $pageContent = RouterFacade::getPageContentModelByName('content_no_1');
-
-
-        $result = [
-            'TestController::any'       => 'TestController::any',
-            '---------ROUTES---------'  => '---------ROUTES---------',
-            '$routesModelsCollection'   => $routesModelsCollection->all(),
-            '$routesLaravelCollection'   => $routesLaravelCollection->all(),
-            '$routesFrameworkCollection'  => $routesFrameworkCollection->getRoutes(),
-            '---------REQUEST---------' => '---------REQUEST---------',
-            '$request'                  => $request,
-            '$laravelRoute'             => $laravelRoute,
-            '---------MODELS---------'  => '---------MODELS---------',
-            '$routeModel'               => $routeModel,
-            '$pageModel'                => $pageModel,
-            '$pageContents'   => $pageContents,
-            '$pageContent'   => $pageContent
-        ];
-
-        return $result;
-    }
 }
