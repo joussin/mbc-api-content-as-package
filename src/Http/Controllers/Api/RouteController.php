@@ -45,10 +45,10 @@ class RouteController extends Controller
 
         if(!is_null($relations))
         {
-            $route = Route::where($column, $column_value)->first()->loadMissing(['page']);
+            $route = Route::where($column, $column_value)->get()->loadMissing(['page']);
         }
         else {
-            $route = Route::where($column, $column_value)->first();
+            $route = Route::where($column, $column_value)->get();
         }
 
         if($route && count($route) > 1)

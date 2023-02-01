@@ -42,10 +42,10 @@ class PageContentController extends Controller
 
         if(!is_null($relations))
         {
-            $pageContent = PageContent::where($column, $column_value)->first()->loadMissing(['page']);
+            $pageContent = PageContent::where($column, $column_value)->get()->loadMissing(['page']);
         }
         else {
-            $pageContent = PageContent::where($column, $column_value)->first();
+            $pageContent = PageContent::where($column, $column_value)->get();
         }
 
         if($pageContent && count($pageContent) > 1)
