@@ -24,13 +24,13 @@ class PageController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $this->validate($request, ValidationRules::PAGE_RULES);
+//        $validated = $this->validate($request, ValidationRules::PAGE_RULES);
 
         $page = Page::create([
-            "version"       => $request->post('version'),
+            "version"       => $request->post('version') ?? 1,
             "name"          => $request->post('name'),
             "template_name" => $request->post('template_name'),
-            "route_id"      => $request->post('route_id'),
+            "route_id"      => $request->post('route_id') ?? null,
         ]);
 
         return new PageResource($page);
@@ -73,7 +73,14 @@ class PageController extends Controller
     public function update(Request $request, $page)
     {
         //        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_RULES));
-        $page->update($request->only(['title', 'description']));
+        $page->update($request->only(
+            [
+                "version",
+                "name",
+                "template_name",
+//                "route_id"
+            ]
+        ));
 
         return new PageResource($page);
     }

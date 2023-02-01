@@ -26,23 +26,20 @@ class RouteController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $this->validate($request, ValidationRules::ROUTE_RULES);
-        $validated['path_parameters'] = ($request->post('path_parameters')) ? json_encode($request->post('path_parameters')) : null;
-        $validated['query_parameters'] = ($request->post('query_parameters')) ? json_encode($request->post('query_parameters')) : null;
-
+//        $validated = $this->validate($request, ValidationRules::ROUTE_RULES);
 
         $route = Route::create([
             "method"            => $request->post('method') ?? 'GET',
             "protocol"          => $request->post('protocol') ?? 'http',
             "name"              => $request->post('name'),
             "uri"               => $request->post('uri'),
-            "pattern"           => null,
+            "pattern"           => $request->post('pattern') ?? null,
             "controller_name"   => null,
             "controller_action" => null,
             "path_parameters"   => null,
             "query_parameters"  => null,
-            "static_doc_name"   => null,
-            "static_uri"        => $request->post('static_uri'),
+            "static_doc_name"   => $request->post('static_doc_name') ?? 'index.html',
+            "static_uri"        => $request->post('static_uri') ?? $request->post('uri') .'/index.html',
             "domain"            => null,
             "rewrite_rule"      => null,
             "status"            => $request->post('status') ?? 'ONLINE',
@@ -90,7 +87,27 @@ class RouteController extends Controller
     public function update(Request $request, $route)
     {
         //$validated = $this->validate($request, str_replace('required|', '', ValidationRules::ROUTE_RULES));
-        $route->update($request->only(['title', 'description']));
+
+        $route->update($request->only(
+            [
+                "method",
+                "protocol",
+                "name",
+                "uri",
+                "pattern",
+//                "controller_name",
+//                "controller_action",
+//                "path_parameters",
+//                "query_parameters",
+                "static_doc_name",
+                "static_uri",
+//                "domain",
+//                "rewrite_rule",
+                "status",
+//                "active_start_at",
+//                "active_end_at"
+            ]
+        ));
 
         return new RouteResource($route);
     }

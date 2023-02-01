@@ -27,9 +27,9 @@ class PageContentController extends Controller
         $validated = $this->validate($request, ValidationRules::PAGE_CONTENT_RULES);
 
         $pageContent = PageContent::create([
-            "name"    => $request->post('name'),
-            "content" => $request->post('content'),
-            "page_id" => $request->post('page_id'),
+            "name"    => $request->post('name') ?? '',
+            "content" => $request->post('content') ?? '',
+            "page_id" => $request->post('page_id') ?? null,
         ]);
 
         return new PageContentResource($pageContent);
@@ -70,7 +70,13 @@ class PageContentController extends Controller
 
     public function update(Request $request, $pageContent)
     {
-        $pageContent->update($request->only(['title', 'description']));
+        $pageContent->update($request->only(
+            [
+                'name',
+                'content',
+//                'page_id',
+            ]
+        ));
 
         return new PageContentResource($pageContent);
     }
