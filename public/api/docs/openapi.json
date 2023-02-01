@@ -122,6 +122,18 @@
                 "summary": "Find all Route",
                 "description": "Returns a all Route",
                 "operationId": "getRouteAll",
+                "parameters": [
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Route to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -268,6 +280,16 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Route to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
                         }
                     }
                 ],
@@ -449,6 +471,18 @@
                 "summary": "Find all Page",
                 "description": "Returns a all Page",
                 "operationId": "getPageAll",
+                "parameters": [
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Page to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -595,6 +629,16 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Page to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
                         }
                     }
                 ],
@@ -777,6 +821,18 @@
                 "summary": "Find all PageContent",
                 "description": "Returns a all PageContent",
                 "operationId": "getPagePageContent",
+                "parameters": [
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of PageContent to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -924,6 +980,16 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of PageContent to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "true"
                         }
                     }
                 ],

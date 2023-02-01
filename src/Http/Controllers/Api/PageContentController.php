@@ -11,9 +11,17 @@ use MbcApiContent\Validators\ValidationRules;
 class PageContentController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return PageContentResource::collection(PageContent::all());
+        $relations = $request->query->get('relations') ?? null;
+
+        if (!is_null($relations)) {
+            $pageContent = PageContent::all()->loadMissing(['page']);
+        } else {
+            $pageContent = PageContent::all();
+        }
+
+        return PageContentResource::collection($pageContent);
     }
 
     public function indexWithRelations()
@@ -58,8 +66,14 @@ class PageContentController extends Controller
         }
     }
 
-    public function show(PageContent $pageContent)
+    public function show(Request $request, PageContent $pageContent)
     {
+        $relations = $request->query->get('relations') ?? null;
+
+        if (!is_null($relations)) {
+            $pageContent = $pageContent->loadMissing(['page']);
+        }
+
         return new PageContentResource($pageContent);
     }
 

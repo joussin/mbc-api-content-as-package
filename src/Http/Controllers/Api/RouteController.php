@@ -5,15 +5,24 @@ namespace MbcApiContent\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MbcApiContent\Http\Resources\RouteResource;
+use MbcApiContent\Models\Page;
 use MbcApiContent\Models\Route;
 use MbcApiContent\Validators\ValidationRules;
 
 class RouteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return RouteResource::collection(Route::all());
+        $relations = $request->query->get('relations') ?? null;
+
+        if (!is_null($relations)) {
+            $route = Route::all()->loadMissing(['page']);
+        } else {
+            $route = Route::all();
+        }
+
+        return RouteResource::collection($route);
     }
 
 
@@ -75,8 +84,14 @@ class RouteController extends Controller
         }
     }
 
-    public function show(Route $route)
+    public function show(Request $request, Route $route)
     {
+        $relations = $request->query->get('relations') ?? null;
+
+        if (!is_null($relations)) {
+            $route = $route->loadMissing(['page']);
+        }
+
         return new RouteResource($route);
     }
 
