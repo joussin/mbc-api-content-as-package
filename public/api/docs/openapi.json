@@ -1111,7 +1111,7 @@
                     },
                     "controller_action": {
                         "type": "string",
-                        "example": "any"
+                        "example": ""
                     },
 
 

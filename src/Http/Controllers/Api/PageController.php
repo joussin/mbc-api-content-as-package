@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MbcApiContent\Http\Resources\PageResource;
 use MbcApiContent\Models\Page;
+use MbcApiContent\Validators\ValidationRules;
 
 class PageController extends Controller
 {
@@ -23,10 +24,13 @@ class PageController extends Controller
 
     public function store(Request $request)
     {
-        $page = Page::create([
+        $validated = $this->validate($request, ValidationRules::PAGE_RULES);
 
-            'title' => $request->title,
-            'description' => $request->description,
+        $page = Page::create([
+            "version"       => $request->post('version'),
+            "name"          => $request->post('name'),
+            "template_name" => $request->post('template_name'),
+            "route_id"      => $request->post('route_id'),
         ]);
 
         return new PageResource($page);
@@ -39,23 +43,17 @@ class PageController extends Controller
         $relations = $request->query->get('relations') ?? null;
 
 
-        if(!is_null($relations))
-        {
+        if (!is_null($relations)) {
             $page = Page::where($column, $column_value)->get()->loadMissing(['pageContents', 'route']);
-        }
-        else {
+        } else {
             $page = Page::where($column, $column_value)->get();
         }
 
-        if($page && count($page) > 1)
-        {
+        if ($page && count($page) > 1) {
             return PageResource::collection($page);
-        }
-        elseif($page && count($page) == 1)
-        {
+        } elseif ($page && count($page) == 1) {
             return new PageResource($page);
-        }
-        else {
+        } else {
             return response()->json(null, 404);
         }
     }
@@ -72,9 +70,9 @@ class PageController extends Controller
     }
 
 
-
     public function update(Request $request, $page)
     {
+        //        $validated = $this->validate($request, str_replace('required|', '', ValidationRules::PAGE_RULES));
         $page->update($request->only(['title', 'description']));
 
         return new PageResource($page);

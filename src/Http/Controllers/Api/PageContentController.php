@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MbcApiContent\Http\Resources\PageContentResource;
 use MbcApiContent\Models\PageContent;
+use MbcApiContent\Validators\ValidationRules;
 
 class PageContentController extends Controller
 {
@@ -23,10 +24,12 @@ class PageContentController extends Controller
 
     public function store(Request $request)
     {
-        $pageContent = PageContent::create([
+        $validated = $this->validate($request, ValidationRules::PAGE_CONTENT_RULES);
 
-            'title' => $request->title,
-            'description' => $request->description,
+        $pageContent = PageContent::create([
+            "name"    => $request->post('name'),
+            "content" => $request->post('content'),
+            "page_id" => $request->post('page_id'),
         ]);
 
         return new PageContentResource($pageContent);
@@ -40,23 +43,17 @@ class PageContentController extends Controller
         $relations = $request->query->get('relations') ?? null;
 
 
-        if(!is_null($relations))
-        {
+        if (!is_null($relations)) {
             $pageContent = PageContent::where($column, $column_value)->get()->loadMissing(['page']);
-        }
-        else {
+        } else {
             $pageContent = PageContent::where($column, $column_value)->get();
         }
 
-        if($pageContent && count($pageContent) > 1)
-        {
+        if ($pageContent && count($pageContent) > 1) {
             return PageContentResource::collection($pageContent);
-        }
-        elseif($pageContent && count($pageContent) == 1)
-        {
+        } elseif ($pageContent && count($pageContent) == 1) {
             return new PageContentResource($pageContent);
-        }
-        else {
+        } else {
             return response()->json(null, 404);
         }
     }

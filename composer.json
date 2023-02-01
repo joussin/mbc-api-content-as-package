@@ -29,12 +29,41 @@
         "illuminate/support": "^9.18|^10.0",
         "intervention/image": "^2.7",
 
+        "symfony/http-foundation": "^6.0",
+        "symfony/http-kernel": "^6.0",
         "symfony/routing": "^5.4|^6.0",
         "illuminate/routing": "^9.18|^10.0",
         "illuminate/http": "^8.73|^9.0",
 
 
-        "symfony/console": "^6.0"
+        "symfony/console": "^6.0",
+
+
+
+        "illuminate/collections": "^9.18|^10.0",
+        "illuminate/conditionable": "^9.18|^10.0",
+        "illuminate/config": "^9.18|^10.0",
+
+        "illuminate/container": "^9.18|^10.0",
+        "illuminate/contracts": "^9.18|^10.0",
+        "illuminate/cookie": "^9.18|^10.0",
+
+        "illuminate/encryption": "^9.18|^10.0",
+        "illuminate/events": "^9.18|^10.0",
+        "illuminate/filesystem": "^9.18|^10.0",
+        "illuminate/hashing": "^9.18|^10.0",
+
+        "illuminate/log": "^9.18|^10.0",
+        "illuminate/macroable": "^9.18|^10.0",
+        "illuminate/notifications": "^9.18|^10.0",
+
+
+
+        "illuminate/session": "^9.18|^10.0",
+
+
+        "illuminate/validation": "^9.18|^10.0",
+        "illuminate/view": "^9.18|^10.0"
     },
     "require-dev": {
 
