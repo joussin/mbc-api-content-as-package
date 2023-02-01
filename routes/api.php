@@ -37,15 +37,5 @@
      Route::put('/page/{id}', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@updatePage'])
         ;
 
-    Route::post('/page', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@postPage'])
-        ;
+    Route::post('/page', ['uses' => '\MbcApiContent\Http\Controllers\Api\ApiController@postPage']);
 
-
-
-Route::get('/resource/route/{id}', function ($id) {
-    return new \MbcApiContent\Http\Resources\RouteResource(\Illuminate\Support\Facades\Route::findOrFail($id));
-});
-
-Route::get('/resource/routes', function () {
-    return \MbcApiContent\Http\Resources\RouteCollection::collection(\Illuminate\Support\Facades\Route::all());
-});
