@@ -7,10 +7,10 @@ use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Route as RouterFacade;
-use MbcApiContent\Models\Collections\PageContentModelCollectionInterface;
 use MbcApiContent\Models\Collections\RouteModelCollection;
 use MbcApiContent\Models\Collections\RouteModelCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
+use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -125,17 +125,25 @@ class RouterService implements RouterServiceInterface
         return is_null($page->pageContents()) ? null : $page->pageContents();
     }
 
-    public function getPageContentModelCollection() : ?PageContentModelCollectionInterface
+
+    public function getPageContentModelByName(string $name) : ?PageContentModel
     {
-        $page = $this->getPageModel();
-        if(is_null($page))
+        $items = $this->getPageContentModels();
+        if(is_null($items) || empty($items))
         {
             return null;
         }
 
-        return is_null($page->pageContentCollection()) ? null : $page->pageContentCollection();
-    }
+        $item = $items->each(function($item) use($name) {
+            if($item->name == $name)
+            {
+                return $item;
+            }
+            return null;
+        });
 
+        return $item->first();
+    }
 
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 

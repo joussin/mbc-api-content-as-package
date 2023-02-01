@@ -24,12 +24,12 @@ class TestController extends \App\Http\Controllers\Controller
         $pageModel = RouterFacade::getPageModel();
 
         $pageContents = RouterFacade::getPageContentModels();
-        $pageContentCollection = RouterFacade::getPageContentModelCollection();
+        $pageContent = RouterFacade::getPageContentModelByName('content_no_1');
 
 
  dd(
      $pageContents,
-     $pageContentCollection,
+     $pageContent,
  );
 
         $result = [

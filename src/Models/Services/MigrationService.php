@@ -22,7 +22,8 @@ class MigrationService
 
 
         $pageContents = PageContent::factory(1)->create([
-            'page_id' => $page
+            'page_id' => $page,
+            'name' => 'content_no_1',
         ]);
     }
 }
