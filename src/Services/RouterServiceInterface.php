@@ -32,5 +32,7 @@ interface RouterServiceInterface
 
     public function getRoutesModelCollectionToArray() : array;
 
+    public function getStaticRoutesCollection() : array;
+
     public function initCollections(): void;
 }

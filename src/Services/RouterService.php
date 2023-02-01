@@ -160,6 +160,15 @@ class RouterService implements RouterServiceInterface
 
         return $routesModelsCollectionAsArray;
     }
+    public function getStaticRoutesCollection() : array
+    {
+        $staticRoutesCollection = [];
+        $this->routesModelCollection->each(function($item) use(&$staticRoutesCollection) {
+            $staticRoutesCollection[] =  $item->toArray()['static_uri'];
+        });
+
+        return $staticRoutesCollection;
+    }
 
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 
@@ -177,18 +186,6 @@ class RouterService implements RouterServiceInterface
             );
 
             $this->routesLaravelCollection->add($route);
-
-            $route = $this->addRouteToRouter(
-                strtoupper($routeModel->method),
-                $routeModel->static_uri,
-                $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
-                $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
-            );
-
-            $this->routesLaravelCollection->add($route);
-
-
-
         });
     }
 
