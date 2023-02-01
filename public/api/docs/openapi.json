@@ -211,6 +211,46 @@
                 }
             }
         },
+        "/route/{id}/full": {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find Route with relations",
+                "description": "Returns a single Route with relations",
+                "operationId": "getRouteByIdWithRelations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Route to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            }
+        },
         "/route/{id}": {
             "get": {
                 "tags": [
@@ -349,23 +389,47 @@
                 }
             }
         },
-        "/route/{id}/full": {
+
+
+
+
+        "/page/search": {
             "get": {
                 "tags": [
-                    "Route"
+                    "Page"
                 ],
-                "summary": "Find Route with relations",
-                "description": "Returns a single Route with relations",
-                "operationId": "getRouteByIdWithRelations",
+                "summary": "Find Page by filter",
+                "description": "Returns a single Page by filter",
+                "operationId": "getPageByIdWithRelationsByfilter",
                 "parameters": [
                     {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Route to return",
+                        "name": "column",
+                        "in": "query",
+                        "description": "column of Page to filter",
                         "required": true,
                         "schema": {
-                            "type": "integer",
-                            "format": "int64"
+                            "type": "string",
+                            "example": "template_name"
+                        }
+                    },
+                    {
+                        "name": "column_value",
+                        "in": "query",
+                        "description": "Column value of Page to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "simple-blade-template"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Page to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "full"
                         }
                     }
                 ],
@@ -375,7 +439,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Route"
+                                    "$ref": "#/components/schemas/Page"
                                 }
                             }
                         }
@@ -384,14 +448,11 @@
                         "description": "Invalid ID supplied"
                     },
                     "404": {
-                        "description": "Route not found"
+                        "description": "Page not found"
                     }
                 }
             }
         },
-
-
-
         "/page" : {
             "get": {
                 "tags": [
@@ -476,6 +537,46 @@
                                     "items": {
                                         "$ref": "#/components/schemas/Page"
                                     }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
+        "/page/{id}/full": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find Page with relations",
+                "description": "Returns a single Page with relations",
+                "operationId": "getPageByIdWithRelations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of Page to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
                                 }
                             }
                         }
@@ -627,79 +728,43 @@
                 }
             }
         },
-        "/page/{id}/full": {
+
+
+
+
+        "/page-content/search": {
             "get": {
                 "tags": [
-                    "Page"
+                    "PageContent"
                 ],
-                "summary": "Find Page with relations",
-                "description": "Returns a single Page with relations",
-                "operationId": "getPageByIdWithRelations",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of Page to return",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Page"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Page not found"
-                    }
-                }
-            }
-        },
-        "/page/search": {
-            "get": {
-                "tags": [
-                    "Page"
-                ],
-                "summary": "Find Page by filter",
-                "description": "Returns a single Page by filter",
-                "operationId": "getPageByIdWithRelationsByfilter",
+                "summary": "Find PageContent with filter",
+                "description": "Returns a single PageContent",
+                "operationId": "getPageContentByfilter",
                 "parameters": [
                     {
                         "name": "column",
                         "in": "query",
-                        "description": "column of Page to filter",
+                        "description": "column of PageContent to filter",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "template_name"
+                            "example": "name"
                         }
                     },
                     {
                         "name": "column_value",
                         "in": "query",
-                        "description": "Column value of Page to return",
+                        "description": "Column value of PageContent to return",
                         "required": true,
                         "schema": {
                             "type": "string",
-                            "example": "simple-blade-template"
+                            "example": "content_no_1"
                         }
                     },
                     {
                         "name": "relations",
                         "in": "query",
-                        "description": "Relations of Page to return",
+                        "description": "Relations of PageContent to return",
                         "required": false,
                         "schema": {
                             "type": "string",
@@ -713,7 +778,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Page"
+                                    "$ref": "#/components/schemas/PageContent"
                                 }
                             }
                         }
@@ -722,15 +787,11 @@
                         "description": "Invalid ID supplied"
                     },
                     "404": {
-                        "description": "Page not found"
+                        "description": "PageContent not found"
                     }
                 }
             }
         },
-
-
-
-
         "/page-content" : {
             "get": {
                 "tags": [
@@ -797,6 +858,47 @@
                 }
             }
         },
+        "/page-content/{id}/full": {
+            "get": {
+                "tags": [
+                    "PageContent"
+                ],
+                "summary": "Find PageContent with relations",
+                "description": "Returns a single PageContent with relations",
+                "operationId": "getPageContentByIdWithRelations",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of PageContent to return",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "PageContent not found"
+                    }
+                }
+            }
+        },
+
         "/page-content/full" : {
             "get": {
                 "tags": [
@@ -965,108 +1067,9 @@
                     }
                 }
             }
-        },
-        "/page-content/{id}/full": {
-            "get": {
-                "tags": [
-                    "PageContent"
-                ],
-                "summary": "Find PageContent with relations",
-                "description": "Returns a single PageContent with relations",
-                "operationId": "getPageContentByIdWithRelations",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of PageContent to return",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PageContent"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "PageContent not found"
-                    }
-                }
-            }
-        },
-
-        "/page-content/search": {
-            "get": {
-                "tags": [
-                    "PageContent"
-                ],
-                "summary": "Find PageContent with filter",
-                "description": "Returns a single PageContent",
-                "operationId": "getPageContentByfilter",
-                "parameters": [
-                    {
-                        "name": "column",
-                        "in": "query",
-                        "description": "column of PageContent to filter",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "name"
-                        }
-                    },
-                    {
-                        "name": "column_value",
-                        "in": "query",
-                        "description": "Column value of PageContent to return",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "content_no_1"
-                        }
-                    },
-                    {
-                        "name": "relations",
-                        "in": "query",
-                        "description": "Relations of PageContent to return",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "example": "full"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/PageContent"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "PageContent not found"
-                    }
-                }
-            }
         }
+
+
 
 
 

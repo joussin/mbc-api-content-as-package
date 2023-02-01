@@ -35,7 +35,6 @@ class PageContentController extends Controller
 
     public function search(Request $request)
     {
-
         $column = $request->query->get('column');
         $column_value = $request->query->get('column_value');
         $relations = $request->query->get('relations') ?? null;
@@ -49,10 +48,15 @@ class PageContentController extends Controller
             $pageContent = PageContent::where($column, $column_value)->first();
         }
 
-        if($pageContent)
+        if($pageContent && count($pageContent) > 1)
+        {
+            return PageContentResource::collection($pageContent);
+        }
+        elseif($pageContent && count($pageContent) == 1)
         {
             return new PageContentResource($pageContent);
-        } else {
+        }
+        else {
             return response()->json(null, 404);
         }
     }

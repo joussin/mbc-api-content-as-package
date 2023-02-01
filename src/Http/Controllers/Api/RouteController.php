@@ -51,10 +51,15 @@ class RouteController extends Controller
             $route = Route::where($column, $column_value)->first();
         }
 
-        if($route)
+        if($route && count($route) > 1)
+        {
+            return RouteResource::collection($route);
+        }
+        elseif($route && count($route) == 1)
         {
             return new RouteResource($route);
-        } else {
+        }
+        else {
             return response()->json(null, 404);
         }
     }

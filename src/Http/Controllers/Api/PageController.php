@@ -41,16 +41,21 @@ class PageController extends Controller
 
         if(!is_null($relations))
         {
-            $page = Page::where($column, $column_value)->first()->loadMissing(['pageContents', 'route']);
+            $page = Page::where($column, $column_value)->get()->loadMissing(['pageContents', 'route']);
         }
         else {
-            $page = Page::where($column, $column_value)->first();
+            $page = Page::where($column, $column_value)->get();
         }
 
-        if($page)
+        if($page && count($page) > 1)
+        {
+            return PageResource::collection($page);
+        }
+        elseif($page && count($page) == 1)
         {
             return new PageResource($page);
-        } else {
+        }
+        else {
             return response()->json(null, 404);
         }
     }
