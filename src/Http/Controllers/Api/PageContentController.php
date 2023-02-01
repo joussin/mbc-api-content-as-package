@@ -30,28 +30,34 @@ class PageContentController extends Controller
     }
 
 
-
     public function search(Request $request)
     {
         $column = $request->query->get('column');
         $column_value = $request->query->get('column_value');
         $relations = $request->query->get('relations') ?? null;
 
-        if (!is_null($relations)) {
-            $pageContent = PageContent::where($column, $column_value)->get()->loadMissing(['pageContents', 'route']);
-        } else {
-            $pageContent = PageContent::where($column, $column_value)->get();
-        }
+        $pageContent = PageContent::where($column, $column_value)->get();
 
         $pageContentResource = PageContentResource::collection($pageContent);
 
-        $pageContentResource->collection->each(function($res)
-        {
-            $res->load();
-        });
-        return $pageContentResource;
-    }
+        if (!is_null($relations)) {
+            $pageContentResource->collection->each(function ($res) {
+                $res->load();
+            });
+        }
 
+        if(count($pageContent) > 1)
+        {
+            return $pageContentResource;
+        }
+        elseif (count($pageContent) == 1)
+        {
+            return $pageContentResource[0];
+        }
+        else {
+            return response()->json(null, 404);
+        }
+    }
 
     public function show(Request $request, PageContent $pageContent)
     {

@@ -37,19 +37,27 @@ class PageController extends Controller
         $column_value = $request->query->get('column_value');
         $relations = $request->query->get('relations') ?? null;
 
-        if (!is_null($relations)) {
-            $page = Page::where($column, $column_value)->get()->loadMissing(['pageContents', 'route']);
-        } else {
-            $page = Page::where($column, $column_value)->get();
-        }
+        $page = Page::where($column, $column_value)->get();
 
         $pageResource = PageResource::collection($page);
 
-        $pageResource->collection->each(function($res)
+        if (!is_null($relations)) {
+            $pageResource->collection->each(function ($res) {
+                $res->load();
+            });
+        }
+
+        if(count($page) > 1)
         {
-            $res->load();
-        });
-        return $pageResource;
+            return $pageResource;
+        }
+        elseif (count($page) == 1)
+        {
+            return $pageResource[0];
+        }
+        else {
+            return response()->json(null, 404);
+        }
     }
 
 
