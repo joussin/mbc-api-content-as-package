@@ -2,6 +2,7 @@
 
 namespace MbcApiContent\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use MbcApiContent\Bootstrap;
 use MbcApiContent\Events\ApiContentEventListener;
 use MbcApiContent\Events\ApiContentMigrationsEventListener;
@@ -71,6 +72,8 @@ class MainServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        JsonResource::withoutWrapping();
+
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'api_content_views'); // return view('api_content_views::dashboard');
 
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
