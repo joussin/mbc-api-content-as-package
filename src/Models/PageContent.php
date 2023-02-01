@@ -27,9 +27,8 @@ class PageContent extends AbstractModel
 
     public function page()
     {
-        return $this->belongsTo(Page::class, 'page_id', 'id');
+        return $this->belongsTo(Page::class, 'page_id', 'id')->getResults();
     }
-
 
 
     protected static function newFactory()

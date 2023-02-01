@@ -23,10 +23,14 @@ class TestController extends \App\Http\Controllers\Controller
         $routeModel = RouterFacade::getRouteModel();
         $pageModel = RouterFacade::getPageModel();
 
-        $pageContentsCollection = RouterFacade::getPageContentModels();
+        $pageContents = RouterFacade::getPageContentModels();
+        $pageContentCollection = RouterFacade::getPageContentModelCollection();
 
 
-
+ dd(
+     $pageContents,
+     $pageContentCollection,
+ );
 
         $result = [
             'TestController::any'       => 'TestController::any',

@@ -3,6 +3,7 @@
 namespace MbcApiContent\Services;
 
 use Illuminate\Database\Eloquent\Collection;
+use MbcApiContent\Models\Collections\PageContentModelCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\Route as RouteModel;
 use Illuminate\Http\Request as LaravelRequest;
@@ -24,6 +25,8 @@ interface RouterServiceInterface
     public function getPageModel() : ?PageModel;
 
     public function getPageContentModels() : ?Collection;
+
+    public function getPageContentModelCollection() : ?PageContentModelCollectionInterface;
 
     public function initCollections(): void;
 }
