@@ -15,7 +15,7 @@ class MigrationService
         $route = Route::factory(1)->create([]);
 
         $page = Page::factory(1)->create([
-            'route_id' => $route
+            'route_id' => 1
         ]);
 
         $definitions = PageFactory::getDynamicDefinitions();
