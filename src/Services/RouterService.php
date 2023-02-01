@@ -180,7 +180,7 @@ class RouterService implements RouterServiceInterface
                     'static_uri'      => $routeModel->static_uri,
                     'static_doc_name' => $routeModel->static_doc_name,
                 ],
-                'extractPathParameters' => $route->extractPathParameters()
+                'extractPathParameters' => $routeModel->extractPathParameters()
             ]);
             $this->routesLaravelCollection->add($route);
         });
