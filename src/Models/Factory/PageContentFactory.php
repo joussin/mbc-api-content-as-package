@@ -1,11 +1,11 @@
 <?php
 
-namespace MbcApiContent\Models\Factories;
+namespace MbcApiContent\Models\Factory;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use MbcApiContent\Models\PageContent;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -37,7 +37,6 @@ class PageContentFactory extends Factory
      */
     public function getDefinitions(array $definitions = []): array
     {
-        $id = fake()->numberBetween(1, 9);
         $content = fake()->paragraph();
         $domainWord = fake()->domainWord();// carroll
 

@@ -2,27 +2,33 @@
 
 namespace MbcApiContent\Services;
 
-
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\Models\Page as PageModel;
+use MbcApiContent\Models\PageContent as PageContentModel;
+use MbcApiContent\Models\Route as RouteModel;
+use Illuminate\Http\Request as LaravelRequest;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\Entity\Route as RouteEntity;
-use MbcApiContent\Models\Route as RouteModel;
 
 interface RouterServiceInterface
 {
 
-    public function getRoutesEntityCollection(): RouteEntityCollectionInterface;
+    public function getRoutesModelCollection(): EloquentCollection;
 
-    public function getRoutesModelCollection(): Collection;
+    public function getRoutesFrameworkCollection() : RouteCollectionInterface;
 
-    public function getRoutesLaravelCollection() : RouteCollectionInterface;
+    public function getRoutesLaravelCollection() : LaravelRouteCollectionInterface;
 
-    public function initCollections(): RouteEntityCollectionInterface;
+    public function getLaravelRoute() : ?LaravelRoute;
 
-    public function createRouteEntityFromRouteModel(RouteModel $routeModel) : RouteEntity;
+    public function getRouteModel(): ?RouteModel;
 
-    public function addRouteToRouter(string $method, string $uri, array $routeAction): LaravelRoute;
+    public function getPageModel() : ?PageModel;
 
+    public function getPageContentModels() : ?EloquentCollection;
+
+    public function getPageContentModelByName(string $name) : ?PageContentModel;
+
+    public function initCollections(): void;
 }

@@ -2,20 +2,27 @@
 
 namespace MbcApiContent;
 
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
 use MbcApiContent\Events\ApiContentEventListener;
+use MbcApiContent\Events\ApiContentMigrationsEventListener;
+use MbcApiContent\Events\ApiContentModelsEventListener;
 use MbcApiContent\Facades\RouterFacade;
 
 class Bootstrap
 {
 
     public ApiContentEventListener $apiContentEventListener;
+    public ApiContentModelsEventListener $apiContentModelsEventListener;
+    public ApiContentMigrationsEventListener $apiContentMigrationsEventListener;
 
     public const TABLES = ['page', 'route'];
 
-    public function __construct(ApiContentEventListener $apiContentEventListener)
+    public function __construct(ApiContentEventListener $apiContentEventListener,
+                                ApiContentModelsEventListener $apiContentModelsEventListener,
+                                ApiContentMigrationsEventListener $apiContentMigrationsEventListener)
     {
         $this->apiContentEventListener = $apiContentEventListener;
+        $this->apiContentModelsEventListener = $apiContentModelsEventListener;
+        $this->apiContentMigrationsEventListener = $apiContentMigrationsEventListener;
 
     }
 
@@ -27,30 +34,35 @@ class Bootstrap
         {
             throw new \Exception('Project not configured incorrect db : ' . $check["databaseName"] );
         }
+
+        if(!$check["isMissingDb"] && $check["isMissingTables"] && $this->isCli())
+        {
+            $this->apiContentMigrationsEventListener->initListener();
+        }
+
         if(!$check["isMissingDb"] && $check["isMissingTables"] && !$this->isCli())
         {
             throw new \Exception('Project not configured missing tables : ' . implode(', ', $check["tablesToCheck"]));
-
         }
 
-        if(!$check["isMissingDb"] && !$check["isMissingTables"])
+        if(!$check["isMissingDb"] && !$check["isMissingTables"] )
         {
-            $this->initRouter();
+            $this->initRouter($initRouter);
 
             $this->apiContentEventListener->initListener($initListener);
+            $this->apiContentModelsEventListener->initListener($initListener);
         }
 
     }
 
-    public function initRouter()
+    public function initRouter(bool $initRouter = true)
     {
-        $router = RouterFacade::initCollections();
+        if($initRouter)
+        {
+            RouterFacade::initCollections();
+        }
     }
 
-    public function getRoutesEntityCollection(): RouteEntityCollectionInterface
-    {
-        return RouterFacade::getRoutesEntityCollection();
-    }
 
     public function isCli() : bool
     {

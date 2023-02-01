@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\Models\Factories;
+namespace MbcApiContent\Models\Factory;
 
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,7 +30,7 @@ class PageFactory extends Factory
             'version'  => 1,
 
             // nullable
-            'template_name' => null, // ////
+            'template_name' => 'simple-blade-template', // ////
             'route_id' => null, // ////
         ];
     }

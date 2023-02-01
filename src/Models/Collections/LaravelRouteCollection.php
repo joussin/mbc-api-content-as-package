@@ -1,6 +1,6 @@
 <?php
 
-namespace MbcApiContent\Entity\Collections;
+namespace MbcApiContent\Models\Collections;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;

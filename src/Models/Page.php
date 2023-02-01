@@ -3,12 +3,12 @@
 namespace MbcApiContent\Models;
 
 
-use Illuminate\Support\Facades\Log;
-use MbcApiContent\Models\Factories\PageFactory;
-use MbcApiContent\Models\Route;
+use Illuminate\Database\Eloquent\Collection;
+use MbcApiContent\Models\Factory\PageFactory;
+use MbcApiContent\Models\Interfaces\AbstractModel;
 
 
-class Page  extends BaseModel
+class Page  extends AbstractModel
 {
 
     protected $table = 'page';
@@ -33,26 +33,15 @@ class Page  extends BaseModel
     }
 
 
-
-    public function pageContents()
+    public function pageContents() : ?Collection
     {
         return $this->hasMany(PageContent::class)->getResults();
     }
 
 
 
-
-    // doc
     public function route()
     {
-        return $this->belongsTo(Route::class, 'route_id', 'id');
+        return $this->belongsTo(Route::class, 'route_id', 'id')->getResults();
     }
-
-
-
-    public function updatedEventCallback() : bool
-    {
-        return true;
-    }
-
 }

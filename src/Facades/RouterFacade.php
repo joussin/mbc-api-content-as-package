@@ -2,24 +2,28 @@
 
 namespace MbcApiContent\Facades;
 
-
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Facade;
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\Models\Page as PageModel;
+use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 /**
  *
+ * @method static void initCollections()
  *
- * @method static RouteEntityCollectionInterface getRoutesEntityCollection()
- * @method static Collection getRoutesModelCollection()
- * @method static RouteCollectionInterface getRoutesLaravelCollection()
- * @method static RouteEntityCollectionInterface initCollections()
- * @method static RouteEntity createRouteEntityFromRouteModel(RouteModel $routeModel)
- * @method static LaravelRoute addRouteEntityToRouter(RouteEntity $routeEntity)
+ * @method static null|PageContentModel getPageContentModelByName(string $name)
+ * @method static null|EloquentCollection getPageContentModels()
+ * @method static null|PageModel getPageModel()
+ * @method static null|RouteModel getRouteModel()
+ * @method static null|LaravelRoute getLaravelRoute()
+ *
+ * @method static EloquentCollection getRoutesModelCollection()
+ * @method static RouteCollectionInterface getRoutesFrameworkCollection()
+ * @method static LaravelRouteCollectionInterface getRoutesLaravelCollection()
  *
  * @see \MbcApiContent\Services\RouterService;
  */

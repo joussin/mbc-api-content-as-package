@@ -2,19 +2,34 @@
 
 namespace MbcApiContent\Services;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route as RouterFacade;
-use MbcApiContent\Entity\Collections\RouteEntityCollectionInterface;
-use MbcApiContent\Entity\Route as RouteEntity;
+use MbcApiContent\Models\Collections\LaravelRouteCollection;
+use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
+use MbcApiContent\Models\Page as PageModel;
+use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
 {
-
-    /*
+    /**
+     *
+     *         // request life
+    // kernel -> handle
+    //  providers -> register ()
+    // ROUTE/WEB.php
+    //  providers -> boot()
+    // db, validation, queue, components ...
+    // routing - RouteServiceProvider
+    // routes definitions
+    //controller contruct
+    // midleware
+    // controller action
+    //response
+     */
+    /**
      *
      * Les différents objets des routes:
      *
@@ -31,55 +46,9 @@ class RouterService implements RouterServiceInterface
      *  Collection RouterService::routesLaravelCollection : Route[] RouteCollectionInterface (collection de routes laravel)
      *
      *
-     */
-
-    public RouteEntityCollectionInterface $routesEntityCollection;
-
-    public Collection $routesModelCollection;
-
-    public RouteCollectionInterface $routesLaravelCollection;
-
-    public function __construct(RouteEntityCollectionInterface $routeEntityCollection, Collection $routesModelCollection)
-    {
-        $this->routesEntityCollection = $routeEntityCollection;
-        $this->routesModelCollection = $routesModelCollection;
-        $this->routesLaravelCollection = $this->getRoutesLaravelCollection();
-    }
-
-    public function getRoutesEntityCollection(): RouteEntityCollectionInterface
-    {
-        return $this->routesEntityCollection;
-    }
-
-    public function getRoutesModelCollection(): Collection
-    {
-        return $this->routesModelCollection;
-    }
-
-    public function getRoutesLaravelCollection() : RouteCollectionInterface
-    {
-        return \Illuminate\Support\Facades\Route::getRoutes();
-    }
-
-
-    // -----------------creation des routes et du router de laravel-------------------------------------------------------
-
-
-    public function initCollections(): RouteEntityCollectionInterface
-    {
-        $this->routesModelCollection = collect(RouteModel::all()); // collect(RouteModel::all()) // new Collection(),
-
-        $this->routesModelCollection->each(function ($routeModel, $index) {
-            $routeEntity = $this->createRouteEntityFromRouteModel($routeModel);
-            $this->routesEntityCollection->add($routeEntity);
-        });
-
-        return $this->routesEntityCollection;
-    }
-
-
-
-    // Route creation dans le Router:
+     *
+     *
+     *     // Route creation dans le Router:
     // la facade Illuminate\Support\Facades\Route est une instance de \Illuminate\Routing\Router
     //      Route::get('get', 'url', 'action')
     //          Route::addRoute('GET', $uri, $action);
@@ -87,37 +56,168 @@ class RouterService implements RouterServiceInterface
     //              $this->routes->add($this->createRoute($methods, $uri, $action));
     //                  return route
 
-    public function createRouteEntityFromRouteModel(RouteModel $routeModel) : RouteEntity
+     *
+     */
+
+    public EloquentCollection $routesModelCollection;
+
+    public RouteCollectionInterface $routesFrameworkCollection;
+
+    public  LaravelRouteCollectionInterface $routesLaravelCollection;
+
+    public function __construct()
     {
-        $routeEntity = new RouteEntity($routeModel);
+        $this->routesModelCollection = new EloquentCollection();
+        $this->routesLaravelCollection = new LaravelRouteCollection();
+        $this->routesFrameworkCollection = $this->getRoutesFrameworkCollection();
+    }
 
-        $route = $this->addRouteToRouter(
-            $routeEntity->getMethod(),
-            $routeEntity->getUri(),
-            $routeEntity->getRouteAction()
-        );
+    public function getRoutesModelCollection() : EloquentCollection
+    {
+        return $this->routesModelCollection;
+    }
 
-        $routeEntity->setRoute($route);
-        $routeEntity->addRouteMiddleware("router.middleware");
-
-        return $routeEntity;
+    public function getRoutesFrameworkCollection() : RouteCollectionInterface
+    {
+        return $this->routesFrameworkCollection = \Illuminate\Support\Facades\Route::getRoutes();
     }
 
 
-    public function addRouteToRouter(string $method, string $uri, array $routeAction): LaravelRoute
+    public function getRoutesLaravelCollection() : LaravelRouteCollectionInterface
+    {
+        return $this->routesLaravelCollection;
+    }
+
+
+
+    public function getLaravelRoute() : ?LaravelRoute
+    {
+        return is_null(request()) ? null :  request()->route();
+    }
+
+
+    public function getRouteModel(): ?RouteModel
+    {
+        $route = $this->getLaravelRoute();
+        if(is_null($route))
+        {
+            return null;
+        }
+        $routeModels = $this->routesModelCollection->all();
+
+        foreach ($routeModels as $routeModel) {
+            if ($routeModel->uri == '/' . $route->uri()) {
+                return $routeModel;
+            }
+        }
+        return null;
+    }
+
+    public function getPageModel() : ?PageModel
+    {
+        $route = $this->getRouteModel();
+        if(is_null($route))
+        {
+            return null;
+        }
+        return $route->page();
+    }
+
+    public function getPageContentModels() : ?EloquentCollection
+    {
+        $page = $this->getPageModel();
+        if(is_null($page))
+        {
+            return null;
+        }
+
+        return is_null($page->pageContents()) ? null : $page->pageContents();
+    }
+
+
+    public function getPageContentModelByName(string $name) : ?PageContentModel
+    {
+        $items = $this->getPageContentModels();
+        if(is_null($items) || empty($items))
+        {
+            return null;
+        }
+
+        $items = $items->filter(function($item) use($name) {
+            return ($item->name == $name);
+        });
+        return $items->first();
+    }
+
+    // -----------------creation des routes et du router de laravel-------------------------------------------------------
+
+
+    public function initCollections(): void
+    {
+        $this->routesModelCollection = new EloquentCollection(RouteModel::all());
+
+        $this->routesModelCollection->each(function ($routeModel) {
+            $route = $this->addRouteToRouter(
+                strtoupper($routeModel->method),
+                $routeModel->uri,
+                $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
+                $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
+            );
+
+            $this->routesLaravelCollection->add($route);
+        });
+    }
+
+    private function addRouteToRouter(string $method, string $uri, string $controllerName, string $controllerAction): LaravelRoute
     {
         switch ($method) {
             case 'GET':
-                return RouterFacade::get($uri, $routeAction);
+                return RouterFacade::get($uri, [$controllerName, $controllerAction]);
             case 'POST':
-                return RouterFacade::post($uri, $routeAction);
+                return RouterFacade::post($uri, [$controllerName, $controllerAction]);
             case 'PUT':
-                return RouterFacade::put($uri, $routeAction);
+                return RouterFacade::put($uri, [$controllerName, $controllerAction]);
             case 'PATCH':
-                return RouterFacade::patch($uri, $routeAction);
+                return RouterFacade::patch($uri, [$controllerName, $controllerAction]);
             case 'DELETE':
-                return RouterFacade::delete($uri, $routeAction);
+                return RouterFacade::delete($uri, [$controllerName, $controllerAction]);
         }
     }
 
+    public function debug()
+    {
+
+        $request = request();
+
+        $routesModelsCollection = \MbcApiContent\Facades\RouterFacade::getRoutesModelCollection();
+        $routesLaravelCollection = RouterFacade::getRoutesLaravelCollection();
+        $routesFrameworkCollection = RouterFacade::getRoutesFrameworkCollection();
+
+
+        $laravelRoute = RouterFacade::getLaravelRoute();
+        $routeModel = RouterFacade::getRouteModel();
+        $pageModel = RouterFacade::getPageModel();
+
+        $pageContents = RouterFacade::getPageContentModels();
+        $pageContent = RouterFacade::getPageContentModelByName('content_no_1');
+
+
+        $result = [
+            'TestController::any'       => 'TestController::any',
+            '---------ROUTES---------'  => '---------ROUTES---------',
+            '$routesModelsCollection'   => $routesModelsCollection->all(),
+            '$routesLaravelCollection'   => $routesLaravelCollection->all(),
+            '$routesFrameworkCollection'  => $routesFrameworkCollection->getRoutes(),
+            '---------REQUEST---------' => '---------REQUEST---------',
+            '$request'                  => $request,
+            '$laravelRoute'             => $laravelRoute,
+            '---------MODELS---------'  => '---------MODELS---------',
+            '$routeModel'               => $routeModel,
+            '$pageModel'                => $pageModel,
+            '$pageContents'   => $pageContents,
+            '$pageContent'   => $pageContent
+        ];
+
+        return $result;
+    }
 }

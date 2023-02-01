@@ -4,10 +4,10 @@ namespace MbcApiContent\Models;
 
 
 
-use MbcApiContent\Models\Factories\PageContentFactory;
-use MbcApiContent\Models\Factories\PageFactory;
+use MbcApiContent\Models\Factory\PageContentFactory;
+use MbcApiContent\Models\Interfaces\AbstractModel;
 
-class PageContent extends BaseModel
+class PageContent extends AbstractModel
 {
 
     protected $table = 'page_content';
@@ -27,9 +27,8 @@ class PageContent extends BaseModel
 
     public function page()
     {
-        return $this->belongsTo(Page::class, 'page_id', 'id');
+        return $this->belongsTo(Page::class, 'page_id', 'id')->getResults();
     }
-
 
 
     protected static function newFactory()

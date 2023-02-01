@@ -1,9 +1,10 @@
 <?php
 
-namespace MbcApiContent\Models\Factories;
+namespace MbcApiContent\Models\Factory;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use MbcApiContent\Http\Controllers\Rendering\TestController;
 use MbcApiContent\Models\Route;
 
 /**
@@ -54,16 +55,14 @@ class RouteFactory extends Factory
     public function getDefinitions(array $definitions = []): array
     {
         $id = fake()->numberBetween(1, 9);
-        $name = Str::slug(fake()->name());
-        $url = fake()->url();
-        $domainName = fake()->domainName();// carroll.com
         $domainWord = fake()->domainWord();// carroll
-
 
         $definitions['name'] = 'route-' . $domainWord . '-' . $id;
         $definitions['uri'] = "/" . $domainWord;
         $definitions['static_uri'] = "/" . $domainWord . "/index.html";
         $definitions['static_doc_name'] = "index.html";
+        $definitions['controller_name'] = TestController::class;
+        $definitions['controller_action'] = 'debug';
 
         return $definitions;
     }

@@ -2,14 +2,22 @@
 
 namespace MbcApiContent\Models;
 
-use MbcApiContent\Models\Factories\RouteFactory;
+use MbcApiContent\Http\Controllers\Rendering\MainController;
+use MbcApiContent\Models\Factory\RouteFactory;
+use MbcApiContent\Models\Interfaces\AbstractModel;
 
-class Route  extends BaseModel
+class Route  extends AbstractModel
 {
 
     protected $table = 'route';
 
     protected $connection = "mysql";
+
+
+    public const DEFAULT_CONTROLLER_NAME = MainController::class;
+
+    public const DEFAULT_CONTROLLER_ACTION = "any";
+
 
     protected $fillable = [
         "method",
@@ -42,15 +50,11 @@ class Route  extends BaseModel
     }
 
 
-    public function page()
+    public function page() : ?Page
     {
         return $this->hasOne(Page::class)->getResults();
     }
 
 
-
-    public function index(){
-        $route = Route::with('page')->get();
-    }
 }
 
