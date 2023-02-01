@@ -151,7 +151,7 @@ class RouterService implements RouterServiceInterface
     }
 
 
-    public function routesModelsCollectionToArray() : array
+    public function getRoutesModelCollectionToArray() : array
     {
         $routesModelsCollectionAsArray = [];
         $this->routesModelCollection->each(function($item) use(&$routesModelsCollectionAsArray) {
@@ -177,6 +177,18 @@ class RouterService implements RouterServiceInterface
             );
 
             $this->routesLaravelCollection->add($route);
+
+            $route = $this->addRouteToRouter(
+                strtoupper($routeModel->method),
+                $routeModel->static_uri,
+                $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
+                $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
+            );
+
+            $this->routesLaravelCollection->add($route);
+
+
+
         });
     }
 
