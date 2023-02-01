@@ -358,17 +358,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "description": "Delete new Route",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Route"
-                            }
-                        }
-                    },
-                    "required": true
-                },
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -697,17 +686,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "description": "Delete new Page",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Page"
-                            }
-                        }
-                    },
-                    "required": true
-                },
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -1037,17 +1015,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "description": "Delete new PageContent",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/PageContent"
-                            }
-                        }
-                    },
-                    "required": true
-                },
                 "responses": {
                     "200": {
                         "description": "successful operation",
