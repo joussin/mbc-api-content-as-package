@@ -5,7 +5,8 @@ namespace MbcApiContent\Services;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
-use Illuminate\Support\Facades\Route as RouterFacade;
+use Illuminate\Support\Facades\Route as LaravelRouterFacade;
+use MbcApiContent\Facades\RouterFacade;
 use MbcApiContent\Models\Collections\LaravelRouteCollection;
 use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
@@ -149,6 +150,17 @@ class RouterService implements RouterServiceInterface
         return $items->first();
     }
 
+
+    public function routesModelsCollectionToArray() : array
+    {
+        $routesModelsCollectionAsArray = [];
+        $this->routesModelCollection->each(function($item) use(&$routesModelsCollectionAsArray) {
+            $routesModelsCollectionAsArray[] =  $item->toArray();
+        });
+
+        return $routesModelsCollectionAsArray;
+    }
+
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 
 
@@ -172,15 +184,15 @@ class RouterService implements RouterServiceInterface
     {
         switch ($method) {
             case 'GET':
-                return RouterFacade::get($uri, [$controllerName, $controllerAction]);
+                return LaravelRouterFacade::get($uri, [$controllerName, $controllerAction]);
             case 'POST':
-                return RouterFacade::post($uri, [$controllerName, $controllerAction]);
+                return LaravelRouterFacade::post($uri, [$controllerName, $controllerAction]);
             case 'PUT':
-                return RouterFacade::put($uri, [$controllerName, $controllerAction]);
+                return LaravelRouterFacade::put($uri, [$controllerName, $controllerAction]);
             case 'PATCH':
-                return RouterFacade::patch($uri, [$controllerName, $controllerAction]);
+                return LaravelRouterFacade::patch($uri, [$controllerName, $controllerAction]);
             case 'DELETE':
-                return RouterFacade::delete($uri, [$controllerName, $controllerAction]);
+                return LaravelRouterFacade::delete($uri, [$controllerName, $controllerAction]);
         }
     }
 
@@ -189,7 +201,7 @@ class RouterService implements RouterServiceInterface
 
         $request = request();
 
-        $routesModelsCollection = \MbcApiContent\Facades\RouterFacade::getRoutesModelCollection();
+        $routesModelsCollection = RouterFacade::getRoutesModelCollection();
         $routesLaravelCollection = RouterFacade::getRoutesLaravelCollection();
         $routesFrameworkCollection = RouterFacade::getRoutesFrameworkCollection();
 
