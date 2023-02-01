@@ -11,7 +11,6 @@ use MbcApiContent\Models\Collections\LaravelRouteCollection;
 use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
-use MbcApiContent\Models\Route;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -136,7 +135,7 @@ class RouterService implements RouterServiceInterface
         return is_null($page->pageContents()) ? null : $page->pageContents();
     }
 
-
+    // pour recupérer un PageContent par son nom
     public function getPageContentModelByName(string $name) : ?PageContentModel
     {
         $items = $this->getPageContentModels();
@@ -152,22 +151,27 @@ class RouterService implements RouterServiceInterface
     }
 
 
-    public function getRoutesModelCollectionToArray() : array
-    {
-        $routesModelsCollectionAsArray = [];
-        $this->routesModelCollection->each(function($item) use(&$routesModelsCollectionAsArray) {
-            $routesModelsCollectionAsArray[] =  $item->toArray();
-        });
-
-        return $routesModelsCollectionAsArray;
-    }
-    public function getStaticRoutesCollection() : array
+    // liste des urls statics
+    public function getStaticRoutesCollection(string $basepath_static_dir = '/static') : array
     {
         $staticRoutesCollection = [];
-        $this->routesModelCollection->each(function($item) use(&$staticRoutesCollection) {
-            $staticRoutesCollection[] =  Route::DEFAULT_STATIC_DIR . $item->toArray()['static_uri'];
-        });
 
+        $this->routesModelCollection->each(function ($item) use (&$staticRoutesCollection, $basepath_static_dir) {
+
+            $prtcl = $item->toArray()['protocol'] . '://';
+            $http_host = request()->server()['HTTP_HOST'] ?? '';
+            $prf = $basepath_static_dir;
+            $stc_uri = $item->toArray()['static_uri'];
+            $uri = $item->toArray()['uri'];
+
+            $staticRoutesCollection[] = [
+                'prefix'                      => $prf,
+                'static_uri'                  => $stc_uri,
+                'prefix_static_uri'           => $prf . $stc_uri,
+                'http_host_prefix_static_uri' => $prtcl . $http_host . $prf . $stc_uri,
+                'original_uri'                => $uri,
+            ];
+        });
         return $staticRoutesCollection;
     }
 
@@ -185,7 +189,15 @@ class RouterService implements RouterServiceInterface
                 $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
                 $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
             );
-
+            $route->name($routeModel->name);
+            $route->setDefaults([
+                'export' => [
+                    'id'              => $routeModel->id,
+                    'uri'             => $routeModel->uri,
+                    'static_uri'      => $routeModel->static_uri,
+                    'static_doc_name' => $routeModel->static_doc_name,
+                ]
+            ]);
             $this->routesLaravelCollection->add($route);
         });
     }

@@ -43,6 +43,21 @@ class LaravelRouteCollection extends Collection implements LaravelRouteCollectio
         parent::__construct($items);
     }
 
+    public function getDefaults() : array
+    {
+        $routes = $this->all();
+
+        array_walk($routes, function  (&$route, $key)
+        {
+            $route = $route->defaults['export'];
+        });
+
+        return $routes;
+    }
+
+
+
+
     /**
      * Add an item to the collection.
      *

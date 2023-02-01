@@ -13,6 +13,7 @@ use Illuminate\Routing\RouteCollectionInterface;
 
 interface RouterServiceInterface
 {
+    public function initCollections(): void;
 
     public function getRoutesModelCollection(): EloquentCollection;
 
@@ -30,9 +31,10 @@ interface RouterServiceInterface
 
     public function getPageContentModelByName(string $name) : ?PageContentModel;
 
-    public function getRoutesModelCollectionToArray() : array;
 
-    public function getStaticRoutesCollection() : array;
 
-    public function initCollections(): void;
+
+    public function getStaticRoutesCollection(string $basepath_static_dir = '/static') : array;
+
+
 }

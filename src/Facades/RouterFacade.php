@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 /**
  *
  * @method static void initCollections()
+ *
  * @method static array getRoutesModelCollectionToArray()
  * @method static array getStaticRoutesCollection()
  * @method static null|PageContentModel getPageContentModelByName(string $name)
