@@ -57,16 +57,6 @@ class MainServiceProvider extends ServiceProvider
 
         $this->app->singleton(RouterServiceInterface::class, RouterService::class);
 
-//        // RenderFacade::
-//        $this->app->singleton('render_service_facade_accessor', function ($app) {
-//            return app()->make(RenderServiceInterface::class);
-//        });
-
-//        $this->app->singleton(RenderServiceInterface::class, function() {
-//            return new RenderService(
-//                app()->make(RouterServiceInterface::class)
-//            );
-//        });
 
 
         $this->mergeConfigFrom(

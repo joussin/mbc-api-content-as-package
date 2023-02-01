@@ -24,15 +24,16 @@ class Route  extends AbstractModel
     {
         parent::__construct($attributes);
 
-
-        if (is_null($this->controller_action)) {
-            $this->controller_action = self::DEFAULT_CONTROLLER_ACTION;
-        }
-        if (is_null($this->controller_name)) {
-            $this->controller_name = self::DEFAULT_CONTROLLER_NAME;
-        }
-
         $this->method = strtoupper($this->method);
+
+
+//        if (is_null($this->controller_action)) {
+//            $this->controller_action = self::DEFAULT_CONTROLLER_ACTION;
+//        }
+//        if (is_null($this->controller_name)) {
+//            $this->controller_name = self::DEFAULT_CONTROLLER_NAME;
+//        }
+
     }
 
     protected $fillable = [

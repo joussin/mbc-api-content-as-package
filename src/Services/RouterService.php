@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Routing\Route as LaravelRoute;
 use Illuminate\Routing\RouteCollectionInterface;
 use Illuminate\Support\Facades\Route as RouterFacade;
+use MbcApiContent\Models\Collections\LaravelRouteCollection;
+use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
@@ -59,12 +61,15 @@ class RouterService implements RouterServiceInterface
 
     public EloquentCollection $routesModelCollection;
 
-    public RouteCollectionInterface $routesLaravelCollection;
+    public RouteCollectionInterface $routesFrameworkCollection;
+
+    public  LaravelRouteCollectionInterface $routesLaravelCollection;
 
     public function __construct()
     {
         $this->routesModelCollection = new EloquentCollection();
-        $this->routesLaravelCollection = $this->getRoutesLaravelCollection();
+        $this->routesLaravelCollection = new LaravelRouteCollection();
+        $this->routesFrameworkCollection = $this->getRoutesFrameworkCollection();
     }
 
     public function getRoutesModelCollection() : EloquentCollection
@@ -72,10 +77,17 @@ class RouterService implements RouterServiceInterface
         return $this->routesModelCollection;
     }
 
-    public function getRoutesLaravelCollection() : RouteCollectionInterface
+    public function getRoutesFrameworkCollection() : RouteCollectionInterface
     {
-        return $this->routesLaravelCollection = \Illuminate\Support\Facades\Route::getRoutes();
+        return $this->routesFrameworkCollection = \Illuminate\Support\Facades\Route::getRoutes();
     }
+
+
+    public function getRoutesLaravelCollection() : LaravelRouteCollectionInterface
+    {
+        return $this->routesLaravelCollection;
+    }
+
 
 
     public function getLaravelRoute() : ?LaravelRoute
@@ -151,6 +163,8 @@ class RouterService implements RouterServiceInterface
                 $routeModel->controller_name,
                 $routeModel->controller_action,
             );
+
+            $this->routesLaravelCollection->add($route);
         });
     }
 

@@ -3,6 +3,7 @@
 namespace MbcApiContent\Services;
 
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
+use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
 use MbcApiContent\Models\Route as RouteModel;
@@ -15,7 +16,9 @@ interface RouterServiceInterface
 
     public function getRoutesModelCollection(): EloquentCollection;
 
-    public function getRoutesLaravelCollection() : RouteCollectionInterface;
+    public function getRoutesFrameworkCollection() : RouteCollectionInterface;
+
+    public function getRoutesLaravelCollection() : LaravelRouteCollectionInterface;
 
     public function getLaravelRoute() : ?LaravelRoute;
 
