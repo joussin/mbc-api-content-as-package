@@ -31,10 +31,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix($apiPrefix)
                 ->group(__DIR__.'/../../'  . 'routes/api.php');
 
-            Route::middleware('api')
-                ->prefix($apiPrefix)
-                ->group(__DIR__.'/../../'  . 'routes/rest.php');
-
 
             Route::middleware('web')
                 ->prefix($backofficePrefix)
