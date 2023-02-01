@@ -23,6 +23,7 @@ Route::get('page/full', [\MbcApiContent\Http\Controllers\Api\PageController::cla
 
 Route::get('page-content/{page_content}/full', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'showComplete']);
 Route::get('page-content/full', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'indexComplete']);
+Route::get('page-content/search', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'search']);
 
 
 Route::apiResource('route', \MbcApiContent\Http\Controllers\Api\RouteController::class);

@@ -33,6 +33,30 @@ class PageContentController extends Controller
     }
 
 
+    public function search(Request $request)
+    {
+
+        $name = $request->query->get('name');
+        $relations = $request->query->get('relations') ?? null;
+
+        $column = 'name';
+
+        if(!is_null($relations))
+        {
+            $pageContent = PageContent::where($column, $name)->first()->loadMissing(['page']);
+        }
+        else {
+            $pageContent = PageContent::where($column, $name)->first();
+        }
+
+        if($pageContent)
+        {
+            return new PageContentResource($pageContent);
+        } else {
+            return response()->json(null, 404);
+        }
+    }
+
     public function show(PageContent $pageContent)
     {
         return new PageContentResource($pageContent);

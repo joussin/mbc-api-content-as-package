@@ -72,6 +72,16 @@
                         }
                     },
                     {
+                        "name": "static_uri",
+                        "in": "query",
+                        "description": "Find by static_uri if set or uri if not",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "1"
+                        }
+                    },
+                    {
                         "name": "relations",
                         "in": "query",
                         "description": "Relations of Route to return",
@@ -913,6 +923,57 @@
                         "schema": {
                             "type": "integer",
                             "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PageContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "PageContent not found"
+                    }
+                }
+            }
+        },
+
+        "/page-content/search": {
+            "get": {
+                "tags": [
+                    "PageContent"
+                ],
+                "summary": "Find PageContent with filter",
+                "description": "Returns a single PageContent",
+                "operationId": "getPageContentByfilter",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of PageContent to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "content_no_1"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of PageContent to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "full"
                         }
                     }
                 ],

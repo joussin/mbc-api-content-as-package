@@ -38,13 +38,22 @@ class RouteController extends Controller
     {
         $uri = $request->query->get('uri');
         $relations = $request->query->get('relations') ?? null;
+        $static_uri = $request->query->get('static_uri') ?? null;
+
+        if(!is_null($static_uri))
+        {
+            $column = 'static_uri';
+        }
+        else {
+            $column = 'uri';
+        }
 
         if(!is_null($relations))
         {
-            $route = Route::where('uri', $uri)->first()->loadMissing(['page']);
+            $route = Route::where($column, $uri)->first()->loadMissing(['page']);
         }
         else {
-            $route = Route::where('uri', $uri)->first();
+            $route = Route::where($column, $uri)->first();
         }
 
         if($route)
