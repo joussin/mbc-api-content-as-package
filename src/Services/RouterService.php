@@ -171,6 +171,7 @@ class RouterService implements RouterServiceInterface
                 $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
                 $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
             );
+
             $route->name($routeModel->name);
             $route->setDefaults([
                 'export' => [
@@ -178,7 +179,8 @@ class RouterService implements RouterServiceInterface
                     'uri'             => $routeModel->uri,
                     'static_uri'      => $routeModel->static_uri,
                     'static_doc_name' => $routeModel->static_doc_name,
-                ]
+                ],
+                'extractPathParameters' => $route->extractPathParameters()
             ]);
             $this->routesLaravelCollection->add($route);
         });

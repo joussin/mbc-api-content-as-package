@@ -54,6 +54,28 @@ class Route  extends AbstractModel
         return $this->hasOne(Page::class)->getResults();
     }
 
+    // to test : $routeModel = RouterFacade::getRouteModel()->extractPathParameters()
+    //         $pattern = '/route/dynamic/{id}/{dept}/{name}';
+    // $pattern = '\/route\/dynamic\/(?P<id>\d+)';
+//         $uri = '/route/dynamic/7/88/eure';
+    public function extractPathParameters() : ?array
+    {
+        $pattern = $this->pattern;
+        $uri = $this->uri;
+
+        if(is_null($pattern))
+            return null;
+
+        $pattern = str_replace('/', '\/', $pattern);
+        $pattern = str_replace('{', '(?P<', $pattern);
+        $pattern = str_replace('}', '>\w+)', $pattern);
+
+        $regex = '/^'.$pattern.'$/';
+
+        preg_match_all($regex,$uri,$matches);
+
+        return $matches;
+    }
 
 }
 
