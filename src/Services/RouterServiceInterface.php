@@ -30,7 +30,7 @@ interface RouterServiceInterface
 
     public function getPageContentModelByName(string $name) : ?PageContentModel;
 
-    public function routesModelsCollectionToArray() : array;
+    public function getRoutesModelCollectionToArray() : array;
 
     public function initCollections(): void;
 }
