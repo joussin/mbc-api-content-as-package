@@ -28,21 +28,6 @@ class Route  extends AbstractModel
     }
 
 
-    public function getControllerName()
-    {
-        if (is_null($this->controller_name)) {
-            $this->controller_name = self::DEFAULT_CONTROLLER_NAME;
-        }
-    }
-
-
-    public function getControllerAction()
-    {
-        if (is_null($this->controller_action)) {
-            $this->controller_action = self::DEFAULT_CONTROLLER_ACTION;
-        }
-    }
-
     protected $fillable = [
         "method",
         "protocol",

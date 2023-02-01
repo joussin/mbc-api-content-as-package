@@ -160,8 +160,8 @@ class RouterService implements RouterServiceInterface
             $route = $this->addRouteToRouter(
                 $routeModel->method,
                 $routeModel->uri,
-                $routeModel->getControllerName(),
-                $routeModel->getControllerAction(),
+                $routeModel->controller_name ?? RouteModel::DEFAULT_CONTROLLER_NAME,
+                $routeModel->controller_action ?? RouteModel::DEFAULT_CONTROLLER_ACTION
             );
 
             $this->routesLaravelCollection->add($route);
