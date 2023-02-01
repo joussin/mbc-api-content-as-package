@@ -52,6 +52,47 @@
     "paths": {
 
 
+        "/route/uri" : {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Find Route by uri",
+                "description": "Returns a single Route",
+                "operationId": "getRouteByUri",
+                "parameters": [
+                    {
+                        "name": "uri",
+                        "in": "query",
+                        "description": "Uri of Route to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "/kreiger"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Route"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Route not found"
+                    }
+                }
+            }
+        },
+
         "/route" : {
             "get": {
                 "tags": [

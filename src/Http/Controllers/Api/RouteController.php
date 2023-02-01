@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MbcApiContent\Http\Resources\RouteResource;
 use MbcApiContent\Models\Route;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class RouteController extends Controller
 {
@@ -33,6 +34,19 @@ class RouteController extends Controller
         return new RouteResource($route);
     }
 
+    public function showByUri(Request $request)
+    {
+        $uri = $request->query->get('uri');
+
+        $route = Route::where('uri', $uri)->first();
+
+        if($route)
+        {
+            return new RouteResource($route);
+        } else {
+            return response()->json(null, 404);
+        }
+    }
 
     public function show(Route $route)
     {
