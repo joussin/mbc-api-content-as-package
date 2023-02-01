@@ -156,12 +156,12 @@ class RouterService implements RouterServiceInterface
     {
         $this->routesModelCollection = new EloquentCollection(RouteModel::all());
 
-        $this->routesModelCollection->each(function ($routeModel, $index) {
+        $this->routesModelCollection->each(function ($routeModel) {
             $route = $this->addRouteToRouter(
                 $routeModel->method,
                 $routeModel->uri,
-                $routeModel->controller_name,
-                $routeModel->controller_action,
+                $routeModel->getControllerName(),
+                $routeModel->getControllerAction(),
             );
 
             $this->routesLaravelCollection->add($route);
