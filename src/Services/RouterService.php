@@ -150,6 +150,12 @@ class RouterService implements RouterServiceInterface
         return $items->first();
     }
 
+    public function getRoutesDatasForExporter() : array
+    {
+        return $this->routesLaravelCollection->getDefaults();
+    }
+
+
 
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 

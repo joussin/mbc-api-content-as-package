@@ -73,16 +73,14 @@ use Illuminate\Support\ServiceProvider;
     
     class AppServiceProvider extends ServiceProvider
     {
-        public function boot(Bootstrap $bootstrapMbcApiContent)
+        public function boot(Bootstrap $bootstrap)
         {
        
-            $bootstrapMbcApiContent->init();
+            $bootstrap->init();
             
-            // $routesEntityCollection as RouteEntityCollection
-            $routesEntityCollection = $bootstrapMbcApiContent->getRoutesEntityCollection();
-            
-            // $routesEntityCollection as MbcApiContent\Entity\Route[]  to export
-            $routesEntityCollectionAsArray = $routesEntityCollection->all();
+            $paths = RouterFacade::getRoutesDatasForExporter();
+        
+            $exporter->paths($paths);
 
         }
     }

@@ -31,5 +31,5 @@ interface RouterServiceInterface
 
     public function getPageContentModelByName(string $name) : ?PageContentModel;
 
-
+    public function getRoutesDatasForExporter() : array;
 }
