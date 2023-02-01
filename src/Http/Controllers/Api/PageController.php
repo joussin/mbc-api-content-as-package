@@ -24,11 +24,6 @@ class PageController extends Controller
         return PageResource::collection($page);
     }
 
-    public function indexWithRelations()
-    {
-        return PageResource::collection(Page::all()->loadMissing(['pageContents', 'route']));
-    }
-
 
     public function store(Request $request)
     {
@@ -75,11 +70,6 @@ class PageController extends Controller
             $page = $page->loadMissing(['pageContents', 'route']);
         }
         return new PageResource($page);
-    }
-
-    public function showWithRelations(Page $page)
-    {
-        return new PageResource($page->loadMissing(['pageContents', 'route']));
     }
 
 

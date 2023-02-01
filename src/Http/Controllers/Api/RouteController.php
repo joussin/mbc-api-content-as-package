@@ -22,13 +22,13 @@ class RouteController extends Controller
             $route = Route::all();
         }
 
-        return RouteResource::collection($route);
-    }
+        $routeResource = RouteResource::collection($route);
 
+        if (!is_null($relations)) {
+            $routeResource->load();
+        }
 
-    public function indexWithRelations()
-    {
-        return RouteResource::collection(Route::all()->loadMissing(['page']));
+        return $routeResource;
     }
 
 
@@ -92,14 +92,11 @@ class RouteController extends Controller
             $route = $route->loadMissing(['page']);
         }
 
-        return new RouteResource($route);
-    }
+        $routeResource = new RouteResource($route);
 
-    public function showWithRelations(Route $route)
-    {
-        $routeResource = new RouteResource($route->loadMissing(['page']));
-
-        $routeResource->load();
+        if (!is_null($relations)) {
+            $routeResource->load();
+        }
 
         return $routeResource;
     }

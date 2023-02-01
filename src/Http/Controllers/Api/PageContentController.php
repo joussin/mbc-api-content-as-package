@@ -24,12 +24,6 @@ class PageContentController extends Controller
         return PageContentResource::collection($pageContent);
     }
 
-    public function indexWithRelations()
-    {
-        return PageContentResource::collection(PageContent::all()->loadMissing(['page']));
-    }
-
-
     public function store(Request $request)
     {
 //        $validated = $this->validate($request, ValidationRules::PAGE_CONTENT_RULES);
@@ -75,11 +69,6 @@ class PageContentController extends Controller
         }
 
         return new PageContentResource($pageContent);
-    }
-
-    public function showWithRelations(PageContent $pageContent)
-    {
-        return new PageContentResource($pageContent->loadMissing(['page']));
     }
 
     public function update(Request $request, PageContent $pageContent)
