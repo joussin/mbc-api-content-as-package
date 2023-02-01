@@ -32,6 +32,29 @@ class PageController extends Controller
         return new PageResource($page);
     }
 
+    public function search(Request $request)
+    {
+        $column = $request->query->get('column');
+        $column_value = $request->query->get('column_value');
+        $relations = $request->query->get('relations') ?? null;
+
+
+        if(!is_null($relations))
+        {
+            $page = Page::where($column, $column_value)->first()->loadMissing(['pageContents', 'route']);
+        }
+        else {
+            $page = Page::where($column, $column_value)->first();
+        }
+
+        if($page)
+        {
+            return new PageResource($page);
+        } else {
+            return response()->json(null, 404);
+        }
+    }
+
 
     public function show(Page $page)
     {

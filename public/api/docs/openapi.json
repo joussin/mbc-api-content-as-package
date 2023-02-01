@@ -52,33 +52,33 @@
     "paths": {
 
 
-        "/route/uri" : {
+        "/route/search" : {
             "get": {
                 "tags": [
                     "Route"
                 ],
-                "summary": "Find Route by uri",
+                "summary": "Find Route by filter",
                 "description": "Returns a single Route",
-                "operationId": "getRouteByUri",
+                "operationId": "getRouteByFilter",
                 "parameters": [
                     {
-                        "name": "uri",
+                        "name": "column",
                         "in": "query",
-                        "description": "Uri of Route to return",
+                        "description": "column of Route to filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "uri"
+                        }
+                    },
+                    {
+                        "name": "column_value",
+                        "in": "query",
+                        "description": "Column value of Route to return",
                         "required": true,
                         "schema": {
                             "type": "string",
                             "example": "/kreiger"
-                        }
-                    },
-                    {
-                        "name": "static_uri",
-                        "in": "query",
-                        "description": "Find by static_uri if set or uri if not",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "example": "1"
                         }
                     },
                     {
@@ -667,6 +667,66 @@
                 }
             }
         },
+        "/page/search": {
+            "get": {
+                "tags": [
+                    "Page"
+                ],
+                "summary": "Find Page by filter",
+                "description": "Returns a single Page by filter",
+                "operationId": "getPageByIdWithRelationsByfilter",
+                "parameters": [
+                    {
+                        "name": "column",
+                        "in": "query",
+                        "description": "column of Page to filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "template_name"
+                        }
+                    },
+                    {
+                        "name": "column_value",
+                        "in": "query",
+                        "description": "Column value of Page to return",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "simple-blade-template"
+                        }
+                    },
+                    {
+                        "name": "relations",
+                        "in": "query",
+                        "description": "Relations of Page to return",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "full"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Page"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Page not found"
+                    }
+                }
+            }
+        },
 
 
 
@@ -957,9 +1017,19 @@
                 "operationId": "getPageContentByfilter",
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "column",
                         "in": "query",
-                        "description": "Name of PageContent to return",
+                        "description": "column of PageContent to filter",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "name"
+                        }
+                    },
+                    {
+                        "name": "column_value",
+                        "in": "query",
+                        "description": "Column value of PageContent to return",
                         "required": true,
                         "schema": {
                             "type": "string",

@@ -34,26 +34,21 @@ class RouteController extends Controller
         return new RouteResource($route);
     }
 
-    public function showByUri(Request $request)
-    {
-        $uri = $request->query->get('uri');
-        $relations = $request->query->get('relations') ?? null;
-        $static_uri = $request->query->get('static_uri') ?? null;
 
-        if(!is_null($static_uri))
-        {
-            $column = 'static_uri';
-        }
-        else {
-            $column = 'uri';
-        }
+
+    public function search(Request $request)
+    {
+        $column = $request->query->get('column');
+        $column_value = $request->query->get('column_value');
+        $relations = $request->query->get('relations') ?? null;
+
 
         if(!is_null($relations))
         {
-            $route = Route::where($column, $uri)->first()->loadMissing(['page']);
+            $route = Route::where($column, $column_value)->first()->loadMissing(['page']);
         }
         else {
-            $route = Route::where($column, $uri)->first();
+            $route = Route::where($column, $column_value)->first();
         }
 
         if($route)

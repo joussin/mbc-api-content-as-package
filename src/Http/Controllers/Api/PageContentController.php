@@ -36,17 +36,17 @@ class PageContentController extends Controller
     public function search(Request $request)
     {
 
-        $name = $request->query->get('name');
+        $column = $request->query->get('column');
+        $column_value = $request->query->get('column_value');
         $relations = $request->query->get('relations') ?? null;
 
-        $column = 'name';
 
         if(!is_null($relations))
         {
-            $pageContent = PageContent::where($column, $name)->first()->loadMissing(['page']);
+            $pageContent = PageContent::where($column, $column_value)->first()->loadMissing(['page']);
         }
         else {
-            $pageContent = PageContent::where($column, $name)->first();
+            $pageContent = PageContent::where($column, $column_value)->first();
         }
 
         if($pageContent)
