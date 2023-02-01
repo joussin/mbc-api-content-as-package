@@ -113,7 +113,7 @@ class RouteController extends Controller
     }
 
 
-    public function destroy($route)
+    public function destroy(Route $route)
     {
         $route->delete();
 

@@ -364,7 +364,6 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Route"
                                 }
                             }
                         }
@@ -692,7 +691,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Page"
+
                                 }
                             }
                         }
@@ -1021,7 +1020,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PageContent"
+
                                 }
                             }
                         }
