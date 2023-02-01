@@ -128,6 +128,13 @@ php artisan migrate:rollback --step=1
 php artisan migrate:reset
 ```
 
+
+## Liste des routes:
+``` bash
+php artisan route:list  
+php artisan route:list --except-vendor
+```
+
 ## Test
 
 Launch server
