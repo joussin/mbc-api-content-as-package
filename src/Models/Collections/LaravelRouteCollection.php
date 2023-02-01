@@ -58,6 +58,9 @@ class LaravelRouteCollection extends Collection implements LaravelRouteCollectio
 
 
 
+
+
+
     /**
      * Add an item to the collection.
      *
