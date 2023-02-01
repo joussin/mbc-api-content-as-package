@@ -15,15 +15,15 @@
 // API
 
 Route::get('route/search', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'search']);
-Route::get('route/{route}/relations', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'showWithRelations']);
-Route::get('route/relations', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'indexWithRelations']);
+Route::get('route/{route}/with_relations', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'showWithRelations']);
+Route::get('route/with_relations', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'indexWithRelations']);
 
-Route::get('page/{page}/relations', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'showWithRelations']);
-Route::get('page/relations', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'indexWithRelations']);
+Route::get('page/{page}/with_relations', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'showWithRelations']);
+Route::get('page/with_relations', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'indexWithRelations']);
 Route::get('page/search', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'search']);
 
-Route::get('page-content/{page_content}/relations', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'showWithRelations']);
-Route::get('page-content/relations', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'indexWithRelations']);
+Route::get('page-content/{page_content}/with_relations', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'showWithRelations']);
+Route::get('page-content/with_relations', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'indexWithRelations']);
 Route::get('page-content/search', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'search']);
 
 

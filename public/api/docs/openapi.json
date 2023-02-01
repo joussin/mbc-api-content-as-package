@@ -180,7 +180,7 @@
                 }
             }
         },
-        "/route/relations" : {
+        "/route/with_relations" : {
             "get": {
                 "tags": [
                     "Route"
@@ -211,7 +211,7 @@
                 }
             }
         },
-        "/route/{id}/relations": {
+        "/route/{id}/with_relations": {
             "get": {
                 "tags": [
                     "Route"
@@ -507,7 +507,7 @@
                 }
             }
         },
-        "/page/relations" : {
+        "/page/with_relations" : {
             "get": {
                 "tags": [
                     "Page"
@@ -538,7 +538,7 @@
                 }
             }
         },
-        "/page/{id}/relations": {
+        "/page/{id}/with_relations": {
             "get": {
                 "tags": [
                     "Page"
@@ -835,7 +835,7 @@
                 }
             }
         },
-        "/page-content/{id}/relations": {
+        "/page-content/{id}/with_relations": {
             "get": {
                 "tags": [
                     "PageContent"
@@ -876,7 +876,7 @@
             }
         },
 
-        "/page-content/relations" : {
+        "/page-content/with_relations" : {
             "get": {
                 "tags": [
                     "PageContent"
