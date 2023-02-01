@@ -56,27 +56,19 @@ class RouteController extends Controller
         $column_value = $request->query->get('column_value');
         $relations = $request->query->get('relations') ?? null;
 
-
         if (!is_null($relations)) {
             $route = Route::where($column, $column_value)->get()->loadMissing(['page']);
         } else {
             $route = Route::where($column, $column_value)->get();
         }
 
-        if ($route && count($route) > 1) {
-            $routeResource = RouteResource::collection($route);
-            $routeResource->collection->each(function($res)
-            {
-                $res->load();
-            });
-            return $routeResource;
-        } elseif ($route && count($route) == 1) {
-            $routeResource = new RouteResource($route);
-            $routeResource->load();
-            return $routeResource;
-        } else {
-            return response()->json(null, 404);
-        }
+        $routeResource = RouteResource::collection($route);
+
+        $routeResource->collection->each(function($res)
+        {
+            $res->load();
+        });
+        return $routeResource;
     }
 
     public function show(Request $request, Route $route)
