@@ -4,7 +4,6 @@ namespace MbcApiContent\Models\Factory;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use MbcApiContent\Http\Controllers\Rendering\TestController;
 use MbcApiContent\Models\Route;
 
 /**
@@ -61,8 +60,6 @@ class RouteFactory extends Factory
         $definitions['uri'] = "/" . $domainWord;
         $definitions['static_uri'] =  "/" .$domainWord . "/index.html";
         $definitions['static_doc_name'] = "index.html";
-        $definitions['controller_name'] = TestController::class;
-        $definitions['controller_action'] = 'debug';
 
         return $definitions;
     }
