@@ -88,7 +88,10 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
                         }
                     }
 
@@ -208,7 +211,11 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
+
                         }
                     }
                 ],
@@ -358,7 +365,10 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
                         }
                     }
                 ],
@@ -476,7 +486,10 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
                         }
                     }
                 ],
@@ -627,7 +640,10 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
                         }
                     }
                 ],
@@ -745,7 +761,10 @@
                         "required": false,
                         "schema": {
                             "type": "string",
-                            "example": "true"
+                            "example": "",
+                            "enum": [
+                                "true"
+                            ]
                         }
                     }
                 ],
