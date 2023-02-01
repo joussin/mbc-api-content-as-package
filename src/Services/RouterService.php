@@ -11,6 +11,7 @@ use MbcApiContent\Models\Collections\LaravelRouteCollection;
 use MbcApiContent\Models\Collections\LaravelRouteCollectionInterface;
 use MbcApiContent\Models\Page as PageModel;
 use MbcApiContent\Models\PageContent as PageContentModel;
+use MbcApiContent\Models\Route;
 use MbcApiContent\Models\Route as RouteModel;
 
 class RouterService implements RouterServiceInterface
@@ -164,7 +165,7 @@ class RouterService implements RouterServiceInterface
     {
         $staticRoutesCollection = [];
         $this->routesModelCollection->each(function($item) use(&$staticRoutesCollection) {
-            $staticRoutesCollection[] =  $item->toArray()['static_uri'];
+            $staticRoutesCollection[] =  Route::DEFAULT_STATIC_DIR . $item->toArray()['static_uri'];
         });
 
         return $staticRoutesCollection;

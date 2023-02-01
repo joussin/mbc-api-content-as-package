@@ -51,7 +51,7 @@ class PageFactory extends Factory
         $uri = "/route/dynamic/";
         $path = $uri . '{id}';
         $pathWithId = $uri . "$id";
-        $staticPathWithId = $uri . "$id".'/index.html';
+        $staticPathWithId =  $uri . "$id".'/index.html';
 
         $routeData = [
             'name'            => $routeName,

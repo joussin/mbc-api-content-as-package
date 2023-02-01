@@ -14,6 +14,8 @@ class Route  extends AbstractModel
     protected $connection = "mysql";
 
 
+    public const DEFAULT_STATIC_DIR = '/static';
+
     public const DEFAULT_CONTROLLER_NAME = MainController::class;
 
     public const DEFAULT_CONTROLLER_ACTION = "any";
