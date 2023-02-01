@@ -62,6 +62,7 @@ class RouteFactory extends Factory
         $definitions['static_uri'] = "/" . $domainWord . "/index.html";
         $definitions['static_doc_name'] = "index.html";
         $definitions['controller_name'] = TestController::class;
+        $definitions['controller_action'] = 'debug';
 
         return $definitions;
     }

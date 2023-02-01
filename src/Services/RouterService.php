@@ -39,7 +39,7 @@ class RouterService implements RouterServiceInterface
      *  Router: laravel router Object : \Illuminate\Routing\Router
      *
      *  \Illuminate\Support\Facades\Route as RouterFacade: laravel router Object facade
-     *  \MbcApiContent\Services\RouterService as RouteFacade: custom router service Object facade
+     *  \MbcApiContent\Services\RouterService as RouterFacade: custom router service Object facade
      *
      *  Collection RouterService::routesModelCollection : RouteModel[] Collection
      *  Collection RouterService::routesEntityCollection : RouteEntity[] Collection
@@ -184,4 +184,40 @@ class RouterService implements RouterServiceInterface
         }
     }
 
+    public function debug()
+    {
+
+        $request = request();
+
+        $routesModelsCollection = \MbcApiContent\Facades\RouterFacade::getRoutesModelCollection();
+        $routesLaravelCollection = RouterFacade::getRoutesLaravelCollection();
+        $routesFrameworkCollection = RouterFacade::getRoutesFrameworkCollection();
+
+
+        $laravelRoute = RouterFacade::getLaravelRoute();
+        $routeModel = RouterFacade::getRouteModel();
+        $pageModel = RouterFacade::getPageModel();
+
+        $pageContents = RouterFacade::getPageContentModels();
+        $pageContent = RouterFacade::getPageContentModelByName('content_no_1');
+
+
+        $result = [
+            'TestController::any'       => 'TestController::any',
+            '---------ROUTES---------'  => '---------ROUTES---------',
+            '$routesModelsCollection'   => $routesModelsCollection->all(),
+            '$routesLaravelCollection'   => $routesLaravelCollection->all(),
+            '$routesFrameworkCollection'  => $routesFrameworkCollection->getRoutes(),
+            '---------REQUEST---------' => '---------REQUEST---------',
+            '$request'                  => $request,
+            '$laravelRoute'             => $laravelRoute,
+            '---------MODELS---------'  => '---------MODELS---------',
+            '$routeModel'               => $routeModel,
+            '$pageModel'                => $pageModel,
+            '$pageContents'   => $pageContents,
+            '$pageContent'   => $pageContent
+        ];
+
+        return $result;
+    }
 }
