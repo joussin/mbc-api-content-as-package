@@ -22,11 +22,17 @@ class RouteCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+
         return [
-            'data' => $this->collection,
-            'links' => [
-                'self' => 'link-value',
-            ],
+            $this->collection,
+            '1453636'
         ];
+
+//        return [
+//            'data' => $this->collection,
+//            'links' => [
+//                'self' => 'link-value',
+//            ],
+//        ];
     }
 }
