@@ -27,5 +27,11 @@ class MigrationService
             'page_id' => $page,
             'name' => 'content_no_1',
         ]);
+
+
+        $pageContents = PageContent::factory(1)->create([
+            'page_id' => 1,
+            'name' => 'content_h1',
+        ]);
     }
 }
