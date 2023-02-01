@@ -12,9 +12,11 @@ class MigrationService
 
     public function seed(string $type = 'all')
     {
-        $routes = Route::factory(3)->create([]);
+        $route = Route::factory(1)->create([]);
 
-        $pages = Page::factory(3)->create([]);
+        $page = Page::factory(1)->create([
+            'route_id' => $route
+        ]);
 
         $definitions = PageFactory::getDynamicDefinitions();
 
