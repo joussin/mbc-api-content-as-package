@@ -8,6 +8,8 @@ use Illuminate\Routing\Route;
 interface LaravelRouteCollectionInterface
 {
 
+    public function getDefaults() : array;
+
     /**
      * Get all of the routes in the collection.
      *

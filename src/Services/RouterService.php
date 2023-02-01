@@ -151,30 +151,6 @@ class RouterService implements RouterServiceInterface
     }
 
 
-    // liste des urls statics
-    public function getStaticRoutesCollection(string $basepath_static_dir = '/static') : array
-    {
-        $staticRoutesCollection = [];
-
-        $this->routesModelCollection->each(function ($item) use (&$staticRoutesCollection, $basepath_static_dir) {
-
-            $prtcl = $item->toArray()['protocol'] . '://';
-            $http_host = request()->server()['HTTP_HOST'] ?? '';
-            $prf = $basepath_static_dir;
-            $stc_uri = $item->toArray()['static_uri'];
-            $uri = $item->toArray()['uri'];
-
-            $staticRoutesCollection[] = [
-                'prefix'                      => $prf,
-                'static_uri'                  => $stc_uri,
-                'prefix_static_uri'           => $prf . $stc_uri,
-                'http_host_prefix_static_uri' => $prtcl . $http_host . $prf . $stc_uri,
-                'original_uri'                => $uri,
-            ];
-        });
-        return $staticRoutesCollection;
-    }
-
     // -----------------creation des routes et du router de laravel-------------------------------------------------------
 
 

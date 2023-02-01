@@ -32,9 +32,4 @@ interface RouterServiceInterface
     public function getPageContentModelByName(string $name) : ?PageContentModel;
 
 
-
-
-    public function getStaticRoutesCollection(string $basepath_static_dir = '/static') : array;
-
-
 }
