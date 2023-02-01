@@ -16,6 +16,12 @@ class RouteController extends Controller
     }
 
 
+    public function indexComplete()
+    {
+        return RouteResource::collection(Route::all()->loadMissing(['page']));
+    }
+
+
     public function store(Request $request)
     {
         $route = Route::create([

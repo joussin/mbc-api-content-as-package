@@ -15,6 +15,11 @@ class PageContentController extends Controller
         return PageContentResource::collection(PageContent::all());
     }
 
+    public function indexComplete()
+    {
+        return PageContentResource::collection(PageContent::all()->loadMissing(['page']));
+    }
+
 
     public function store(Request $request)
     {
