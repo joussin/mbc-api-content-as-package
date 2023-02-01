@@ -38,13 +38,11 @@ class PageContentController extends Controller
 
         $pageContent = PageContent::where($column, $column_value)->get();
 
-        $pageContentResource = PageContentResource::collection($pageContent);
-
         if (!is_null($relations)) {
-            $pageContentResource->collection->each(function ($res) {
-                $res->load();
-            });
+            $pageContent = $pageContent->loadMissing(['page']);
         }
+
+        $pageContentResource = PageContentResource::collection($pageContent);
 
         if(count($pageContent) > 1)
         {
