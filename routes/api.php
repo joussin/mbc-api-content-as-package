@@ -14,6 +14,11 @@
 
 // API
 
+Route::get('route/{route}/full', [\MbcApiContent\Http\Controllers\Api\RouteController::class, 'showComplete']);
+Route::get('page/{page}/full', [\MbcApiContent\Http\Controllers\Api\PageController::class, 'showComplete']);
+Route::get('page-content/{page-content}/full', [\MbcApiContent\Http\Controllers\Api\PageContentController::class, 'showComplete']);
+
+
 Route::apiResource('route', \MbcApiContent\Http\Controllers\Api\RouteController::class);
-Route::apiResource('page', \MbcApiContent\Http\Controllers\Api\PageController::class);
+Route::apiResource('page', \MbcApiContent\Http\Controllers\Api\PageController::class, ['showComplete']);
 Route::apiResource('page-content', \MbcApiContent\Http\Controllers\Api\PageContentController::class);

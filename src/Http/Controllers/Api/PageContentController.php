@@ -33,6 +33,10 @@ class PageContentController extends Controller
         return new PageContentResource($pageContent);
     }
 
+    public function showComplete(PageContent $pageContent)
+    {
+        return new PageContentResource($pageContent->loadMissing(['page']));
+    }
 
     public function update(Request $request, $pageContent)
     {

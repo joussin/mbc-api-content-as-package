@@ -22,6 +22,7 @@ class PageResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id'            => $this->id,
             'version'       => $this->version,
@@ -35,6 +36,8 @@ class PageResource extends JsonResource
             'updated_at'    => $this->updated_at,
 
             'pageContents' => PageContentResource::collection($this->whenLoaded('pageContents')),
+            'route' => new RouteResource($this->whenLoaded('route')),
         ];
     }
+
 }

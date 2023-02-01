@@ -33,6 +33,11 @@ class RouteController extends Controller
         return new RouteResource($route);
     }
 
+    public function showComplete(Route $route)
+    {
+        return new RouteResource($route->loadMissing(['page']));
+    }
+
 
     public function update(Request $request, $route)
     {

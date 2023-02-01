@@ -12,8 +12,7 @@ class PageController extends Controller
 
     public function index()
     {
-        $c = PageResource::collection(Page::all());
-        return $c;
+        return PageResource::collection(Page::all());
     }
 
 
@@ -33,6 +32,12 @@ class PageController extends Controller
     {
         return new PageResource($page);
     }
+
+    public function showComplete(Page $page)
+    {
+        return new PageResource($page->loadMissing(['pageContents', 'route']));
+    }
+
 
 
     public function update(Request $request, $page)
