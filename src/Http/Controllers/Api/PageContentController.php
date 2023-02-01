@@ -13,15 +13,7 @@ class PageContentController extends Controller
 
     public function index(Request $request)
     {
-        $relations = $request->query->get('relations') ?? null;
-
-        if (!is_null($relations)) {
-            $pageContent = PageContent::all()->loadMissing(['page']);
-        } else {
-            $pageContent = PageContent::all();
-        }
-
-        return PageContentResource::collection($pageContent);
+        return PageContentResource::collection(PageContent::all());
     }
 
     public function store(Request $request)

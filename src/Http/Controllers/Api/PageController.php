@@ -13,15 +13,7 @@ class PageController extends Controller
 
     public function index(Request $request)
     {
-        $relations = $request->query->get('relations') ?? null;
-
-        if (!is_null($relations)) {
-            $page = Page::all()->loadMissing(['pageContents', 'route']);
-        } else {
-            $page = Page::all();
-        }
-
-        return PageResource::collection($page);
+        return PageResource::collection(Page::all());
     }
 
 

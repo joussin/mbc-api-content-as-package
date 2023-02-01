@@ -14,19 +14,7 @@ class RouteController extends Controller
 
     public function index(Request $request)
     {
-        $relations = $request->query->get('relations') ?? null;
-
-        if (!is_null($relations)) {
-            $route = Route::all()->loadMissing(['page']);
-        } else {
-            $route = Route::all();
-        }
-
-        $routeResource = RouteResource::collection($route);
-
-        if (!is_null($relations)) {
-            $routeResource->load();
-        }
+        $routeResource = RouteResource::collection(Route::all());
 
         return $routeResource;
     }
@@ -76,9 +64,16 @@ class RouteController extends Controller
         }
 
         if ($route && count($route) > 1) {
-            return RouteResource::collection($route);
+            $routeResource = RouteResource::collection($route);
+            $routeResource->collection->each(function($res)
+            {
+                $res->load();
+            });
+            return $routeResource;
         } elseif ($route && count($route) == 1) {
-            return new RouteResource($route);
+            $routeResource = new RouteResource($route);
+            $routeResource->load();
+            return $routeResource;
         } else {
             return response()->json(null, 404);
         }
