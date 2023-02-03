@@ -2,7 +2,7 @@
 
 namespace MbcApiContent\Models;
 
-use MbcApiContent\Http\Controllers\Rendering\MainController;
+use MbcApiContent\Http\Controllers\Api\Test\TestController;
 use MbcApiContent\Models\Factory\RouteFactory;
 use MbcApiContent\Models\Interfaces\AbstractModel;
 
@@ -13,7 +13,7 @@ class Route  extends AbstractModel
 
     protected $connection = "mysql";
 
-    public const DEFAULT_CONTROLLER_NAME = MainController::class;
+    public const DEFAULT_CONTROLLER_NAME = TestController::class;
 
     public const DEFAULT_CONTROLLER_ACTION = "any";
 

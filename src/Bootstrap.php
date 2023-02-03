@@ -14,7 +14,7 @@ class Bootstrap
     public ApiContentModelsEventListener $apiContentModelsEventListener;
     public ApiContentMigrationsEventListener $apiContentMigrationsEventListener;
 
-    public const TABLES = ['page', 'route'];
+    public const TABLES = ['page', 'route', 'page_content'];
 
     public function __construct(ApiContentEventListener $apiContentEventListener,
                                 ApiContentModelsEventListener $apiContentModelsEventListener,

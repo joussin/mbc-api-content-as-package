@@ -1,13 +1,14 @@
 <?php
 
-namespace MbcApiContent\Http\Controllers\Rendering;
+namespace MbcApiContent\Http\Controllers\Api\Test;
 
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use MbcApiContent\Facades\RouterFacade;
-use App\Http\Controllers\Controller;
+use function MbcApiContent\Http\Controllers\Test\view;
 
-class MainController extends Controller
+class TestController extends Controller
 {
 
     public function any(Request $request)

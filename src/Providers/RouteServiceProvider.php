@@ -3,7 +3,6 @@
 namespace MbcApiContent\Providers;
 
 use Illuminate\Support\Facades\Route;
-use MbcApiContent\Http\Middleware\RouteMiddleware;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
@@ -16,10 +15,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // advanced.router
-        $router = $this->app->make(Router::class);
-        $router->aliasMiddleware('router.middleware', RouteMiddleware::class);
-
 
         $config = config('mbc_api_content_config');
 
